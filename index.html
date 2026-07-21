@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ayia Napa List · Vegard &amp; Hanne · 27 Jul to 3 Aug 2026</title>
+<style>
+  :root{
+    --sea:#0FA3B1; --deep:#0C7489; --coral:#FF6B57; --sun:#FFC94D;
+    --sand:#FBF3E4; --card:#FFFFFF; --ink:#1F3A4D; --soft:#5B7386;
+    --line:#EBDFC9; --green:#2FA36B; --amber:#F3B62E;
+    --c-beach:#0FA3B1; --c-water:#2A7DE1; --c-sight:#E07A3F; --c-boat:#0C7489;
+    --c-daytrip:#C99114; --c-food:#E85D4A; --c-night:#8757C9; --c-well:#4CAF8D;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{background:var(--sand); color:var(--ink);
+    font-family:'Avenir Next','Segoe UI','Helvetica Neue',system-ui,-apple-system,sans-serif; line-height:1.5;}
+  .wrap{max-width:1160px; margin:0 auto; padding:0 20px;}
+
+  header{position:relative; overflow:hidden; color:#fff;
+    background:linear-gradient(165deg,#FFDF9E 0%,#FFB36B 42%,#FF7E5F 100%);
+    padding:48px 0 92px;}
+  header::before{content:''; position:absolute; right:6%; top:26px; width:190px; height:190px; border-radius:50%;
+    background:radial-gradient(circle,#FFF6CE 0%,#FFD456 55%,rgba(255,212,86,0) 72%);}
+  header .wrap{position:relative; z-index:2;}
+  .kicker{display:inline-block; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    background:rgba(255,255,255,.28); padding:7px 14px; border-radius:999px; margin-bottom:18px;}
+  h1{font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:bold;
+    font-size:clamp(38px,6vw,60px); line-height:1.05; text-shadow:0 2px 12px rgba(180,70,30,.25);}
+  .sub{margin-top:12px; font-size:17px; max-width:760px; color:rgba(255,255,255,.94);}
+  .progress{margin-top:24px; max-width:640px;}
+  .progress .row{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .progress .nums{font-size:12.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.92);}
+  .progress .nums b{color:#fff; font-size:17px;}
+  .bar{height:10px; background:rgba(255,255,255,.35); border-radius:999px; position:relative; overflow:hidden;}
+  .bar i{position:absolute; left:0; top:0; bottom:0; border-radius:999px;
+    background:linear-gradient(90deg,var(--sun),var(--coral)); transition:width .4s;}
+  .wave{position:absolute; left:0; right:0; bottom:-1px; z-index:1; line-height:0;}
+  .wave svg{width:100%; height:64px; display:block;}
+
+  .sticky-bar{position:sticky; top:0; z-index:30; background:var(--sand);
+    padding:4px 0 10px; box-shadow:0 10px 14px -12px rgba(31,58,77,.28);}
+  .controls{display:flex; gap:8px; align-items:center; padding:8px 0 0; flex-wrap:wrap;}
+  .row-scroll{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:2px;}
+  .row-scroll::-webkit-scrollbar{display:none;}
+  @media(min-width:880px){
+    .row-scroll{flex-wrap:wrap; overflow-x:visible;}
+  }
+  .chip{font-size:13px; font-weight:700; background:var(--card); color:var(--soft); white-space:nowrap; flex:0 0 auto;
+    border:2px solid var(--line); padding:10px 15px; min-height:44px; border-radius:999px; cursor:pointer; transition:all .15s;}
+  .chip:hover{border-color:var(--sea); color:var(--sea);}
+  .chip.on{background:var(--deep); border-color:var(--deep); color:#fff;}
+  .chip.on[data-cat="beach"]{background:var(--c-beach); border-color:var(--c-beach);}
+  .chip.on[data-cat="water"]{background:var(--c-water); border-color:var(--c-water);}
+  .chip.on[data-cat="sight"]{background:var(--c-sight); border-color:var(--c-sight);}
+  .chip.on[data-cat="boat"]{background:var(--c-boat); border-color:var(--c-boat);}
+  .chip.on[data-cat="daytrip"]{background:var(--c-daytrip); border-color:var(--c-daytrip);}
+  .chip.on[data-cat="food"]{background:var(--c-food); border-color:var(--c-food);}
+  .chip.on[data-cat="night"]{background:var(--c-night); border-color:var(--c-night);}
+  .chip.on[data-cat="well"]{background:var(--c-well); border-color:var(--c-well);}
+  .chip.on[data-stat="want"]{background:var(--amber); border-color:var(--amber); color:#5C4300;}
+  .chip.on[data-stat="done"]{background:var(--green); border-color:var(--green);}
+  .controls .sep{width:2px; height:24px; background:var(--line); border-radius:2px; margin:0 4px; flex:0 0 auto;}
+  .search{flex:1 1 190px; min-width:150px;}
+  .search input{width:100%; background:var(--card); border:2px solid var(--line); color:var(--ink);
+    font:inherit; font-size:16px; padding:8px 16px; border-radius:999px; outline:none;}
+  .search input:focus{border-color:var(--sea);}
+  .search input::placeholder{color:#8298A8;}
+  .chip.surprise{background:var(--coral); border-color:var(--coral); color:#fff;}
+  .chip.surprise:hover{background:#E5533E; border-color:#E5533E; color:#fff;}
+
+  /* category tab rail (primary navigation) */
+  .cat-rail{border-bottom:2px solid var(--line); padding-bottom:0; gap:2px;}
+  .cat-rail .chip{background:none; border:none; border-radius:0; min-height:44px; padding:10px 13px;
+    font-size:14px; color:var(--soft); border-bottom:3px solid transparent;}
+  .cat-rail .chip:hover{color:var(--sea);}
+  .cat-rail .chip.on{background:none; color:var(--ink); font-weight:800; border-bottom-color:var(--coral);}
+
+  /* filters bottom sheet */
+  .fbackdrop{position:fixed; inset:0; background:rgba(12,40,60,.45); z-index:1090; display:none;}
+  .fbackdrop.open{display:block;}
+  .fsheet{position:fixed; left:0; right:0; bottom:0; z-index:1100; background:var(--card);
+    border-radius:22px 22px 0 0; box-shadow:0 -12px 44px rgba(10,30,45,.32);
+    max-height:78vh; overflow-y:auto; padding:16px 18px 14px; display:none;}
+  .fsheet.open{display:block;}
+  @media(min-width:880px){ .fsheet{left:50%; right:auto; transform:translateX(-50%); width:640px; border-radius:22px; bottom:24px;} }
+  .fhead{display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;}
+  .fhead span{font-family:Georgia,serif; font-style:italic; font-weight:bold; font-size:20px;}
+  .fhead .close{position:static; min-height:44px;}
+  .fgroup{margin:12px 0 0;}
+  .fgroup .glab{display:block; margin-bottom:7px;}
+  .fopts{display:flex; flex-wrap:wrap; gap:8px;}
+  .fapply{display:block; width:100%; margin-top:16px; position:sticky; bottom:0;}
+  .fcount{display:inline-block; background:var(--coral); color:#fff; border-radius:999px;
+    padding:1px 8px; margin-left:6px; font-size:11px; font-weight:800;}
+  #filtersBtn.hasfilters{background:var(--deep); border-color:var(--deep); color:#fff;}
+
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,310px),1fr)); gap:22px; padding:22px 0 46px;}
+  .card{background:var(--card); border-radius:18px; overflow:hidden; cursor:pointer; display:flex; flex-direction:column;
+    box-shadow:0 6px 18px rgba(31,58,77,.08); transition:transform .15s, box-shadow .15s; position:relative;}
+  .card:hover{transform:translateY(-4px); box-shadow:0 14px 30px rgba(31,58,77,.14);}
+  .card:focus-visible{outline:3px solid var(--sea); outline-offset:2px;}
+  .card.want{box-shadow:0 0 0 3px var(--amber), 0 10px 24px rgba(31,58,77,.12);}
+  .card.done{opacity:.68;}
+  .card.done .name{text-decoration:line-through; text-decoration-color:var(--green); text-decoration-thickness:2.5px;}
+  .media{position:relative; aspect-ratio:16/9.5; overflow:hidden; background:var(--deep);}
+  .media img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:2;}
+  .ph{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; z-index:1;
+    background:linear-gradient(160deg,var(--deep) 0%,var(--sea) 100%);}
+  [data-cat="beach"] .ph{background:linear-gradient(160deg,#0C8B97 0%,#39C4CF 100%);}
+  [data-cat="water"] .ph{background:linear-gradient(160deg,#1B62B5 0%,#55A2EE 100%);}
+  [data-cat="sight"] .ph{background:linear-gradient(160deg,#C2571C 0%,#F09B5F 100%);}
+  [data-cat="boat"] .ph{background:linear-gradient(160deg,#085566 0%,#2E9CB0 100%);}
+  [data-cat="daytrip"] .ph{background:linear-gradient(160deg,#A87A0B 0%,#E5B93F 100%);}
+  [data-cat="food"] .ph{background:linear-gradient(160deg,#C33A28 0%,#F98A75 100%);}
+  [data-cat="night"] .ph{background:linear-gradient(160deg,#5F35A0 0%,#A57DE3 100%);}
+  [data-cat="well"] .ph{background:linear-gradient(160deg,#2F8A66 0%,#6FCBA3 100%);}
+  .ph .letter{font-family:Georgia,serif; font-style:italic; font-size:66px; color:#fff; line-height:1;}
+  .ph .rule{width:52px; height:4px; border-radius:4px; background:rgba(255,255,255,.65);}
+  .ph .lab{font-size:11px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.85);}
+  .tag{position:absolute; z-index:3; top:12px; left:12px; background:var(--deep); color:#fff;
+    font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; padding:6px 12px; border-radius:999px;}
+  [data-cat="beach"] .tag{background:var(--c-beach);} [data-cat="water"] .tag{background:var(--c-water);}
+  [data-cat="sight"] .tag{background:var(--c-sight);} [data-cat="boat"] .tag{background:var(--c-boat);}
+  [data-cat="daytrip"] .tag{background:var(--c-daytrip);} [data-cat="food"] .tag{background:var(--c-food);}
+  [data-cat="night"] .tag{background:var(--c-night);} [data-cat="well"] .tag{background:var(--c-well);}
+  .flag{position:absolute; z-index:3; top:12px; right:12px; display:none;
+    font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:6px 11px;
+    border-radius:8px; transform:rotate(-7deg); background:rgba(255,255,255,.92);}
+  .flag.f-want{border:2.5px solid var(--amber); color:#8A6200;}
+  .flag.f-done{border:2.5px solid var(--green); color:var(--green);}
+  .card.want .flag.f-want{display:block;}
+  .card.done .flag.f-done{display:block;}
+  .card.done .flag.f-want{display:none;}
+  .body{padding:16px 18px 12px; display:flex; flex-direction:column; gap:8px; flex:1;}
+  .name{font-family:Georgia,serif; font-size:21px; font-weight:bold; line-height:1.15;}
+  .blurb{font-size:14px; line-height:1.5; color:var(--soft);}
+  .meta{font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:#62788A;
+    margin-top:auto; padding-top:10px; border-top:2px dashed var(--line); display:flex; gap:8px 12px; flex-wrap:wrap; align-items:center;}
+  .meta b{color:var(--ink);}
+  .mbadge{background:var(--sand); color:var(--deep); border-radius:999px; padding:3px 10px; font-weight:800;}
+  .tarate{color:#00AA6C; font-weight:800; letter-spacing:.02em;}
+  .tarank{font-size:12px; color:var(--soft); font-weight:normal; margin-top:2px;}
+  .acts{display:flex; gap:8px; padding:2px 14px 16px;}
+  .acts button{flex:1; background:var(--card); border:2px solid var(--line); border-radius:999px; padding:11px 8px; min-height:44px; cursor:pointer;
+    font:inherit; font-size:11.5px; font-weight:800; letter-spacing:.07em; text-transform:uppercase; color:#62788A; transition:all .15s;}
+  .acts button:hover{border-color:var(--sea); color:var(--sea);}
+  .card.want .bWant{background:var(--amber); border-color:var(--amber); color:#5C4300;}
+  .card.want .bWant:hover{background:var(--amber); color:#5C4300;}
+  .card.done .bDone{background:var(--green); border-color:var(--green); color:#fff;}
+  .card.done .bDone:hover{background:var(--green); color:#fff;}
+
+  .gnav{position:absolute; top:50%; transform:translateY(-50%); z-index:4; width:42px; height:42px; border-radius:50%;
+    border:none; background:rgba(255,255,255,.92); color:var(--ink); font-size:24px; line-height:1; cursor:pointer;
+    display:none; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,.22); padding-bottom:3px;}
+  .gnav:hover{background:var(--coral); color:#fff;}
+  .gnav.prev{left:12px;} .gnav.next{right:12px;}
+  .media.has-nav .gnav{display:flex;}
+  .gcount{position:absolute; bottom:10px; right:12px; z-index:4; background:rgba(16,40,60,.65); color:#fff;
+    font-size:11px; font-weight:700; letter-spacing:.08em; padding:4px 11px; border-radius:999px; display:none;}
+  .media.has-nav .gcount{display:block;}
+  .thumbs{display:flex; gap:6px; padding:10px 12px 0; background:var(--card);}
+  .thumbs:empty{display:none; padding:0;}
+  .thumbs img{width:19%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; cursor:pointer; border:3px solid transparent; flex:1 1 0;}
+  .thumbs img.sel{border-color:var(--coral);}
+  .gal-note{padding:9px 16px 0; font-size:11.5px; color:#64798C; background:var(--card);}
+
+
+  .wstrip{display:flex; gap:8px; overflow-x:auto; scrollbar-width:none; padding:8px 0 2px;}
+  .wstrip::-webkit-scrollbar{display:none;}
+  .wcell{flex:0 0 auto; background:var(--card); border:2px solid var(--line); border-radius:12px; padding:6px 12px; text-align:center;}
+  .wcell .wd{font-size:10.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--soft);}
+  .wcell .wt{font-size:15px; font-weight:800; color:var(--ink);}
+  .wcell .ws{font-size:10.5px; color:var(--soft);}
+  .wcell.today{border-color:var(--coral);}
+  .mapwrap{display:none; padding:14px 0 4px;}
+  .mapwrap.open{display:block;}
+  #mapEl{height:440px; border-radius:16px; border:2px solid var(--line); position:relative; z-index:1; isolation:isolate;}
+  .hotelTip{font-weight:800; font-size:12px; color:#5C4300; background:#FFF6DE; border:2px solid #FFC94D; border-radius:999px; padding:3px 10px; box-shadow:0 2px 8px rgba(0,0,0,.18);}
+  .hotelTip::before{border-top-color:#FFC94D;}
+  .glab{flex:0 0 auto; align-self:center; font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    color:#8A9BAA; padding:0 2px 0 4px;}
+  .daytag{position:absolute; bottom:10px; left:12px; z-index:3; background:var(--card); color:var(--deep);
+    font-size:10.5px; font-weight:800; letter-spacing:.1em; padding:4px 10px; border-radius:999px; text-transform:uppercase;}
+  .babadge{background:#FFF1D0; color:#8A6200; border-radius:999px; padding:3px 10px; font-weight:800;}
+  .memo{width:100%; border:2px solid var(--line); border-radius:12px; padding:10px 12px; font:inherit; font-size:16px;
+    margin-top:8px; background:var(--sand); color:var(--ink); resize:vertical; min-height:44px;}
+  .memo:focus{outline:none; border-color:var(--sea);}
+  .spentIn{width:120px; border:2px solid var(--line); border-radius:999px; padding:8px 12px; font:inherit; font-size:16px;
+    background:var(--sand); color:var(--ink); margin-left:8px;}
+  .mdays{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;}
+  .mdays .dchip{border:2px solid var(--line); background:var(--card); color:var(--soft); border-radius:999px;
+    padding:6px 11px; min-height:44px; font:inherit; font-size:12px; font-weight:800; cursor:pointer;}
+  .mdays .dchip.on{background:var(--deep); border-color:var(--deep); color:#fff;}
+  .wnItem{display:flex; justify-content:space-between; align-items:center; gap:10px; padding:14px 4px; border-bottom:2px dashed var(--line); cursor:pointer;}
+  .wnItem:hover .n{color:var(--coral);}
+  .wnItem .n{font-family:Georgia,serif; font-weight:bold; font-size:18px;}
+  .wnItem .m{font-size:12px; color:var(--soft); font-weight:700; text-transform:uppercase; letter-spacing:.06em; text-align:right;}
+  .wave path{fill:var(--sand);}
+  html[data-theme="dark"]{--sand:#0F1B28; --card:#17293C; --ink:#EAF1F7; --soft:#A5BACB; --line:#2A425C;}
+  html[data-theme="dark"] .m-sec p{color:#C9D7E3;}
+  html[data-theme="dark"] .meta{color:#8FA6B8;}
+  html[data-theme="dark"] .acts button{color:#8FA6B8;}
+  html[data-theme="dark"] .m-kick{background:#0F1B28; color:#7FC7D4;}
+  html[data-theme="dark"] .close{color:var(--ink);}
+  html[data-theme="dark"] .babadge{background:#3A2F10; color:#F3B62E;}
+  html[data-theme="dark"] .btn{background:var(--card); color:#9FD3DC; border-color:#2A5A6C;}
+  html[data-theme="dark"] .btn.solid{background:var(--coral); color:#fff; border-color:var(--coral);}
+  @media print{
+    header::before, .wave, .sticky-bar, .acts, .flag, .sync, .foot, .mapwrap, .wstrip, .empty, .fsheet, .fbackdrop, .loginOv{display:none !important;}
+    header{background:none; color:#000; padding:10px 0;}
+    header .kicker, header .sub, header .nums{color:#000; background:none;}
+    body{background:#fff; color:#000;}
+    .grid{display:block;}
+    .card{box-shadow:none; border:1px solid #ccc; page-break-inside:avoid; margin-bottom:10px;}
+    .media{display:none;}
+  }
+  .empty{padding:60px 0; text-align:center; color:var(--soft); font-style:italic; display:none;}
+
+  /* ---------- login gate ---------- */
+  .loginOv{position:fixed; inset:0; z-index:2000; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(165deg,#FFDF9E 0%,#FFB36B 42%,#FF7E5F 100%); padding:20px;}
+  .loginCard{background:var(--card); border-radius:22px; box-shadow:0 24px 60px rgba(10,30,45,.35);
+    padding:30px 26px 26px; width:100%; max-width:360px; text-align:center;}
+  .loginCard h2{font-family:Georgia,serif; font-style:italic; font-weight:bold; font-size:26px; margin-bottom:6px; color:var(--ink);}
+  .loginCard .sub2{font-size:13.5px; color:var(--soft); margin-bottom:20px;}
+  .whoPick{display:flex; gap:12px; justify-content:center;}
+  .whoPick button{flex:1; font:inherit; font-size:16px; font-weight:800; padding:10px 8px 12px; cursor:pointer;
+    border:2px solid var(--line); border-radius:16px; background:var(--sand); color:var(--ink); min-height:84px;}
+  .whoPick button .avi{display:block; font-size:30px; margin-bottom:4px;}
+  .whoPick button.sel{border-color:var(--sea); background:#E8F7F8;}
+  .pinArea{display:none; margin-top:18px;}
+  .pinArea.show{display:block;}
+  .pinArea .lab2{font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--soft); margin-bottom:8px;}
+  #pinIn{font:inherit; font-size:28px; letter-spacing:14px; text-align:center; width:190px; padding:10px 0 10px 14px;
+    border:2px solid var(--line); border-radius:14px; background:var(--sand); color:var(--ink); outline:none;}
+  #pinIn:focus{border-color:var(--sea);}
+  #pinErr{display:none; margin-top:10px; font-size:13px; font-weight:700; color:#C0392B;}
+  #pinErr.show{display:block; animation:shake .3s;}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
+  .loginNote{margin-top:18px; font-size:11.5px; color:var(--soft);}
+  html[data-theme="dark"] .whoPick button{background:#0F1B28;}
+  html[data-theme="dark"] .whoPick button.sel{background:#123A44;}
+
+  .overlay{position:fixed; inset:0; background:rgba(12,40,60,.6); z-index:1200; display:none; overflow-y:auto;
+    padding:30px 16px; overscroll-behavior:contain;}
+  .overlay.open{display:block;}
+  .modal{max-width:760px; margin:0 auto; background:var(--card); border-radius:22px; overflow:hidden; position:relative;
+    box-shadow:0 24px 60px rgba(10,30,45,.35);}
+  .modal .media{aspect-ratio:16/8;}
+  .close{position:absolute; top:14px; right:14px; z-index:5; background:var(--card); color:var(--ink); border:none;
+    font:inherit; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; padding:9px 15px;
+    border-radius:999px; cursor:pointer; box-shadow:0 4px 12px rgba(10,30,45,.25);}
+  .close:hover{background:var(--coral); color:#fff;}
+  .minner{padding:26px 30px 30px;}
+  .m-kick{display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    background:var(--sand); color:var(--deep); padding:6px 12px; border-radius:999px; margin-bottom:12px;}
+  .m-name{font-family:Georgia,serif; font-weight:bold; font-size:32px; line-height:1.1; margin-bottom:10px;}
+  .m-blurb{font-size:16px; font-style:italic; color:var(--soft); margin-bottom:18px;}
+  .m-sec{margin-top:16px;}
+  .m-sec .lab{font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--sea); margin-bottom:5px;}
+  .m-sec p{font-size:14.5px; line-height:1.6; color:#39566B;}
+  .m-facts{display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-top:20px; padding-top:16px; border-top:2px dashed var(--line);}
+  .m-facts .f .lab{font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--sea); margin-bottom:3px;}
+  .m-facts .f div{font-size:15px;}
+  .m-links{display:flex; gap:10px; margin-top:22px; flex-wrap:wrap;}
+  .btn{display:inline-block; text-decoration:none; font:inherit; font-size:12px; font-weight:800; letter-spacing:.08em;
+    text-transform:uppercase; padding:12px 20px; border-radius:999px; cursor:pointer; border:2px solid var(--deep);
+    color:var(--deep); background:var(--card); transition:all .15s;}
+  .btn.solid{background:var(--coral); border-color:var(--coral); color:#fff;}
+  .btn.solid:hover{background:#E5533E; border-color:#E5533E;}
+  .btn.line:hover{border-color:var(--coral); color:var(--coral);}
+  .m-acts{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap;}
+  .m-acts .btn.activeWant{background:var(--amber); border-color:var(--amber); color:#5C4300;}
+  .m-acts .btn.activeDone{background:var(--green); border-color:var(--green); color:#fff;}
+
+  .info{padding:16px 0 8px;}
+  .info h2{font-family:Georgia,serif; font-style:italic; font-weight:bold; font-size:30px; margin-bottom:18px;}
+  .info-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:16px; padding-bottom:26px;}
+  .info-grid .i{background:var(--card); border-radius:16px; padding:18px 18px 16px; box-shadow:0 4px 14px rgba(31,58,77,.07);
+    border-top:5px solid var(--sea);}
+  .info-grid .i:nth-child(2){border-top-color:var(--coral);}
+  .info-grid .i:nth-child(3){border-top-color:var(--sun);}
+  .info-grid .i:nth-child(4){border-top-color:var(--c-night);}
+  .info-grid .i:nth-child(5){border-top-color:var(--c-sight);}
+  .info-grid .i:nth-child(6){border-top-color:var(--c-water);}
+  .info-grid .i .lab{font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); margin-bottom:6px;}
+  .info-grid .i p{font-size:13.5px; color:var(--soft); line-height:1.55;}
+  .sync{padding:10px 0 40px;}
+  .sync .inner{background:var(--card); border-radius:16px; padding:20px 20px 18px; box-shadow:0 4px 14px rgba(31,58,77,.07);
+    border-top:5px solid var(--amber);}
+  .sync .lab{font-size:11px; font-weight:800; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); margin-bottom:6px;}
+  .sync p{font-size:13.5px; color:var(--soft); margin-bottom:12px; max-width:680px;}
+  .sync .row{display:flex; gap:8px; flex-wrap:wrap;}
+  .sync input{flex:1 1 220px; background:var(--sand); border:2px solid var(--line); color:var(--ink);
+    font-family:'Courier New',monospace; font-size:16px; padding:8px 14px; border-radius:999px; outline:none;}
+  .sync input:focus{border-color:var(--sea);}
+  .sync .btn{border-color:var(--deep); color:var(--deep);}
+  .sync .btn:hover{background:var(--deep); color:#fff;}
+  .sync .note{margin-top:10px; font-size:12.5px; color:var(--green); font-weight:700; display:none;}
+  .foot{padding:0 0 46px; font-size:11.5px; color:#64798C;}
+  @media(max-width:640px){ .m-facts{grid-template-columns:1fr;} .minner{padding:22px 18px 24px;} header{padding-bottom:84px;} }
+  @media(max-width:480px){ .wrap{padding:0 14px;} .grid{gap:16px;} }
+</style>
+</head>
+<body>
+
+<div class="loginOv" id="loginOv" style="display:none;">
+  <div class="loginCard">
+    <h2>The Ayia Napa List</h2>
+    <div class="sub2">Who's holding this phone?</div>
+    <div class="whoPick">
+      <button type="button" id="pickV"><span class="avi">🕶️</span>Vegard</button>
+      <button type="button" id="pickH"><span class="avi">🌸</span>Hanne</button>
+    </div>
+    <div class="pinArea" id="pinArea">
+      <div class="lab2">Enter your 4-digit PIN</div>
+      <input id="pinIn" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="4-digit PIN">
+      <div id="pinErr">Wrong PIN — try again</div>
+    </div>
+    <div class="loginNote">Your pick unlocks your own wish list and two-phone sync.</div>
+  </div>
+</div>
+
+<header>
+  <div class="wrap">
+    <div class="kicker">Ayia Napa · Cyprus · 27 July to 03 August 2026 · Base: Napa Plaza</div>
+    <h1>The Ayia Napa List</h1>
+    <div class="sub">Vegard &amp; Hanne. 51 things worth doing, all reachable without a car, each with distance from the hotel. Tap a card for photos and the full story, mark what you want, cross off what you have done.</div>
+    <div class="kicker" id="tripPhase" style="display:none; margin-bottom:12px;"></div>
+    <div class="progress">
+      <div class="row">
+        <span class="nums"><b id="nDone">0</b> done · <b id="nWant">0</b> on the wish list</span>
+        <span class="nums" id="nTotal"></span>
+      </div>
+      <div class="bar"><i id="barFill" style="width:0%"></i></div>
+      <div class="row" style="margin-top:8px;"><span class="nums" id="budgetLine"></span></div>
+    </div>
+  </div>
+  <div class="wave"><svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path fill="#FBF3E4" d="M0,48 C180,80 360,16 540,40 C720,64 900,8 1080,32 C1260,56 1380,40 1440,28 L1440,80 L0,80 Z"/></svg></div>
+</header>
+
+<div class="wrap">
+  <div class="sticky-bar">
+    <div class="controls row-scroll cat-rail" id="catChips" role="tablist" aria-label="Category"></div>
+    <div class="controls">
+      <div class="search"><input id="q" type="text" placeholder="Search the list&hellip;" aria-label="Search the list"></div>
+      <button class="chip" id="whatNowBtn" type="button">What now?</button>
+      <button class="chip" id="filtersBtn" type="button" aria-haspopup="dialog">Filters</button>
+      <button class="chip" id="mapBtn" type="button">Map</button>
+    </div>
+  </div>
+  <div class="fbackdrop" id="fBackdrop"></div>
+  <div class="fsheet" id="fSheet" role="dialog" aria-label="Filters and options">
+    <div class="fhead"><span>Filter &amp; sort</span><button class="close" id="fClose" type="button">Close ✕</button></div>
+    <div id="filterChips"></div>
+    <div class="fgroup"><div class="glab">More</div><div class="fopts">
+      <button class="chip surprise" id="surpriseBtn" type="button">Surprise us</button>
+      <button class="chip" id="themeBtn" type="button">Evening: auto</button>
+      <button class="chip" id="clearBtn" type="button">Reset filters</button>
+    </div></div>
+    <button class="btn solid fapply" id="fApply" type="button">Show all</button>
+  </div>
+  <div class="wstrip" id="wstrip"></div>
+  <div class="mapwrap" id="mapWrap"><div id="mapEl"></div><div class="gal-note" id="mapNote" style="background:none; padding-left:2px;">Tap a dot to open its card. Positions are approximate. Map data © OpenStreetMap contributors.</div></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">Nothing matches. Loosen the filters.<br><button class="btn line" type="button" style="margin-top:12px;" onclick="resetFilters()">Clear all filters</button></div>
+</div>
+
+<div class="wrap info">
+  <h2>Good to know</h2>
+  <div class="info-grid">
+    <div class="i"><div class="lab">Buses 101 / 102</div><p>Your car replacement. Every 15 to 20 minutes in summer between Ayia Napa, Cape Greco, Konnos and Protaras. €2 cash to the driver (€3 after 21:00) and strictly cash only: no cards, no phone pay, small notes. Doing three or more bus days? A day pass is €6, 5 days €20, a week €25 — but the driver sells only single tickets and day passes; buy the 5-day or weekly pass at an OSEA office or authorised kiosk (ask reception for the nearest). The OSEA stops are on Makariou Avenue 2 to 3 minutes up from the hotel; live times at osea.com.cy.</p></div>
+    <div class="i"><div class="lab">The harbour</div><p>A 10 minute downhill walk from Napa Plaza. All boat trips leave from here, and the kiosks on the quay often beat online prices if you book the evening before.</p></div>
+    <div class="i"><div class="lab">Sun hours</div><p>Sunrise about 05:50, sunset about 19:50 in late July, and the full moon rises on Wednesday 29 July. Midday is 33 to 35 degrees: beach, spa or museum then, cliffs and walks early or late.</p></div>
+    <div class="i"><div class="lab">Booking ahead</div><p>Late July is peak season. Book boat trips, Sage, Stamna and Vassos one or two days ahead, the Varosha tour and horse riding 2 to 3 days ahead. Everything else is walk-in.</p></div>
+    <div class="i"><div class="lab">Crossing north</div><p>Famagusta, Varosha and North Nicosia require your passport, or a Norwegian nasjonalt ID-kort med reiserett, at the Green Line; bring the passports anyway as the safest document at the checkpoints. Euros are accepted on the other side. Note that consular help north of the line is very limited, so keep your documents on you and safe.</p></div>
+    <div class="i"><div class="lab">Taxis</div><p>Short hops around town run €5 to €10, Nissi or the Marina €10 to €15. Agree the price before you get in, or ask the hotel to call one.</p></div>
+    <div class="i"><div class="lab">Street smarts</div><p>Bar Street PRs will offer you deals: never take the first one, the next bar beats it. Skip quad and buggy rentals that demand cash deposits, they are the classic holiday scam here. Prices at the quay kiosks usually beat Viator and other online platforms for the same boats.</p></div>
+  </div>
+</div>
+
+<div class="wrap sync">
+  <div class="inner">
+  <div class="lab">Keep your ticks in sync</div>
+  <p>You each sign in with your name and PIN, so this phone knows who it belongs to — each of you gets your own wish list, and the cards show V, H or V+H. To sync: press Share status (or Copy) and send the short code, then the other person pastes it below and presses Load. Your partner's code updates their wishes precisely, including things they removed and done-marks they corrected, and never touches yours.</p>
+  <div class="row" style="margin-bottom:10px; align-items:center;">
+    <span id="whoStatus" style="font-size:12.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--soft);"></span>
+    <button class="btn line" id="switchUser" type="button">Switch person</button>
+  </div>
+  <div class="row">
+    <button class="btn line" id="shareBtn" type="button">Share status</button>
+    <button class="btn line" id="copyBtn" type="button">Copy</button>
+    <input id="syncIn" type="text" placeholder="Paste a status code&hellip;" aria-label="Status code">
+    <button class="btn line" id="loadBtn" type="button">Load</button>
+  </div>
+  <div class="row" style="margin-top:10px;">
+    <button class="btn line" id="recapBtn" type="button">Trip so far</button>
+    <button class="btn line" id="printBtn" type="button">Print list</button>
+  </div>
+  <div class="note" id="syncNote"></div>
+  </div>
+</div>
+
+<div class="wrap foot">Photos load live from Wikimedia Commons and need an internet connection; where they cannot load, cards show their letter and the More photos button opens Google. Key prices and opening hours re-verified against official sources 20 July 2026 (WaterWorld, Thalassa, monastery, buses, moon calendar); the rest are guides, verify the flagged ones locally. Quay kiosks usually beat online prices.</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal" id="modal" role="dialog" aria-modal="true"></div>
+</div>
+
+<script>
+const DATA = [
+
+/* BEACHES */
+{id:"nissi",cat:"beach",name:"Nissi Beach",
+ blurb:"The postcard of Ayia Napa: shallow turquoise water, white sand and a tiny islet you wade out to. Loud, beautiful, unmissable at least once.",
+ details:"A 500 metre crescent of fine golden-white sand with knee-deep, bath-warm water stretching far out. The Nissi Bay end runs beach-bar DJs and foam-party energy from around noon, while the western end near Nissi Beach Resort stays calmer. In late July it packs out: arrive before 09:30 for front-row sunbeds, or come after 16:30 for a mellow golden-hour swim. Full facilities: lifeguards, showers, water sports and beach bars. Blue Flag awarded.",
+ price:"Free entry; private sunbed and umbrella €2.50 to 3.50 per piece, so about €7.50 to 10 for two", price_s:"Free · beds €2.50",
+ dur:"Half or full day",
+ getting:"Bus 102 toward the Waterpark from the stop 2 to 3 minutes from the hotel, a 10 to 12 minute ride, €2 cash. Buses every 15 to 20 minutes. Taxi €10 to 12.",
+ tips:"Wade out to Nissi islet and scramble to the top for the best photo in town. If the DJs get too much, walk ten minutes west to quieter Landa Beach.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Nissi%20Beach%20Ayia%20Napa", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/2022_03_Nissi_beach_1.jpg?width=900"},
+
+{id:"landa",cat:"beach",name:"Landa Beach",
+ blurb:"Nissi's mellow neighbour: the same caster-sugar sand and turquoise water without the party speakers. The locals' pick for a relaxed day for two.",
+ details:"A wide, gently shelving bay of golden sand between Nissi and Makronissos, Blue Flag awarded and noticeably more laid-back than Nissi. Expect families and couples rather than club crowds; even in late July you can usually find sunbeds after mid-morning. Lifeguards, showers, a beach kiosk and a water-sports station. The water is calm and shallow, lovely for long swims. Fewest people before 11:00 or from 16:00.",
+ price:"Free; sunbed and umbrella about €2.50 each", price_s:"Free · beds €2.50",
+ dur:"Half day",
+ getting:"Bus 102 toward the Waterpark, 13 to 15 minutes, €2. Get off one stop past Nissi at the Landa stop, then a short walk down to the sand. Taxi €11 to 13.",
+ tips:"Morning swim at Landa, then stroll the coast path east to Nissi for lunch and people-watching. Sunset from the western rocks is superb.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Landa%20Beach%20Ayia%20Napa", web:null, img:null},
+
+{id:"makronissos",cat:"beach",name:"Makronissos Beach",
+ blurb:"Three connected sandy coves around a low peninsula dotted with 2,000 year old rock tombs. Calm water, space to breathe, a proper beach restaurant.",
+ details:"The most westerly of the big beaches. Soft sand and very calm, shallow water on the main bay, with two smaller coves around the headland if you want near-privacy. Late July crowds are moderate: busy but rarely rammed. Lifeguards, sunbeds, showers, changing rooms, a water-sports hut and the Makronissos beach restaurant. Wander the free open-air tombs on the headland between swims. Mornings are glassy-calm.",
+ price:"Free; sunbed and umbrella about €2.50 each; tombs free", price_s:"Free · beds €2.50",
+ dur:"Half day",
+ getting:"Bus 102 toward the Waterpark, 15 to 18 minutes, €2, to the Makronissos stop, then a 5 minute walk. Taxi €12 to 15.",
+ tips:"Cross the little causeway to the islet at the tip for snorkelling off the rocks. The western cove catches the sunset: bring a drink from the bar and stay late.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Makronissos%20Beach%20Ayia%20Napa", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/03_Cyprus_beach_-_Makronissos_Beach_in_Ayia_Napa_-_sandy_Cyprus_beach_-_Zypern_Urlaubsgebiet.jpg?width=900"},
+
+{id:"pantachou",cat:"beach",name:"Pantachou / Limanaki Beach",
+ blurb:"Your ten-minute house beach: a kilometre of Blue Flag sand starting right at the fishing harbour. Made for first-evening swims and lazy mornings.",
+ details:"Pantachou runs east from the harbour breakwater: organised golden sand, calm shallow water and a relaxed mix of families and couples. It is the closest proper beach to Napa Plaza, ideal for a pre-breakfast dip or a sunset swim before dinner at the harbour tavernas. Busy by midday in late July, blissfully quiet early. Lifeguards, sunbeds, showers, cafes, and the MUSAN underwater sculpture museum lies just offshore.",
+ price:"Free; sunbed and umbrella about €2.50 each", price_s:"Free · 10 min walk",
+ dur:"1 to 3 hours, or a lazy day",
+ getting:"Walk 650 metres, 8 to 10 minutes downhill past the monastery square to the harbour. No bus needed.",
+ tips:"Swim before 09:00 and you share the bay with fishermen and joggers. Book a harbour fish taverna for sunset so beach day and dinner merge into one.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Pantachou%20Beach%20Ayia%20Napa", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Ayia_Napa_beach.JPG?width=900"},
+
+{id:"grecian",cat:"beach",name:"Grecian Bay Beach (Glyki Nero)",
+ blurb:"A wide, elegant sweep of sand east of the harbour with some of the clearest water in town. The classiest beach within walking distance.",
+ details:"Fronting the five-star Grecian Bay Hotel but fully public. Fine pale sand, gin-clear water and rock formations at the eastern end that are great for snorkelling. The crowd skews couples and hotel guests, so even in late July it feels less frantic than Nissi, though sunbeds near the hotel go early. Morning water clarity is exceptional. From here a scenic coastal path continues east toward the sea caves and Cape Greco.",
+ price:"Free; sunbed and umbrella about €2.50 each", price_s:"Free · 20 min walk",
+ dur:"Half day",
+ getting:"Walk 1.5 km, 18 to 20 minutes, via the harbour and Kryou Nerou Avenue. Taxi €8 to 10. A pleasant seafront stroll back.",
+ tips:"Bring snorkel gear for the rocks at the east end, then walk 20 more minutes along the clifftop path to the sea caves at golden hour.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Glyki%20Nero%20Beach%20Grecian%20Bay%20Ayia%20Napa", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Glyki_Nero_Beach%2C_Agia_Napa%2C_Cyprus.jpg?width=900"},
+
+{id:"konnos",cat:"beach",name:"Konnos Bay",
+ blurb:"A horseshoe cove wrapped in pine-covered cliffs on the edge of Cape Greco. Many call it the most beautiful bay in Cyprus.",
+ details:"Sheltered, impossibly turquoise and calm: ideal for swimming and snorkelling, with juniper slopes running down to the sand. It is small, so in late July it fills by 10:30. Go early morning for the best light, or after 16:00 when day-trippers thin out. Sunbeds, a snack bar, showers, lifeguard, and a kiosk renting kayaks and SUPs to explore the cliffs. Confident swimmers use the cliff-jump spots on the north side.",
+ price:"Free; sunbeds about €2.50 each; kayak or SUP €10 to 15 per hour", price_s:"Free · bus €2",
+ dur:"Half day",
+ getting:"Bus 101 toward Protaras from Makariou Avenue, 15 to 20 minutes, €2. Get off at the Konnos stop and walk 5 to 8 minutes down. The climb back up is sweaty; consider a taxi home, €15 to 18.",
+ tips:"Rent a kayak and paddle 15 minutes along the cliffs toward the Cape Greco grottoes: the same scenery as the paid tours for a fraction of the price. The Cliff Bar above the bay does a spectacular sunset cocktail.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Konnos%20Bay%20Cyprus", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Hotel_Grecian_Park_Konnos_Bay_Cyprus_%2843674776572%29.jpg?width=900"},
+
+/* WATER FUN */
+{id:"nissi-watersports",cat:"water",name:"Parasailing & Jet Skis at Nissi",
+ blurb:"The adrenaline hub of Nissi Bay: parasail a hundred metres above the turquoise, race jet skis, or get flung off a ringo. Book on the sand, no planning required.",
+ details:"Long-established operators run stations directly on Nissi Beach offering parasailing, jet skis, banana boats, ringos, wakeboarding and pedalos. Tandem parasailing is the couples' favourite: calm morning flights give glassy water and the best views over the islet and coves. Queues build from midday in late July, so book a morning slot. Life jackets, briefing and boat crew included. Roughly 09:00 to 18:00 daily.",
+ price:"Jet ski €50 to 60 per 15 min; tandem parasail €110 to 130; ringo €20 to 25 pp (verify on the beach)", price_s:"From €20 pp",
+ dur:"1 to 2 hours",
+ getting:"Same as Nissi Beach: bus 102, 10 to 12 minutes, €2, or taxi €10 to 12.",
+ tips:"Go before 11:00 for calmer sea and shorter queues. Haggle politely when booking two or more activities together; combo discounts are standard.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Nissi%20Watersports%20Ayia%20Napa", web:"https://nissiwatersports.com",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Nissi-Beach.jpg?width=900"},
+
+{id:"waterworld",cat:"water",name:"WaterWorld Waterpark",
+ blurb:"One of Europe's biggest themed waterparks: Ancient-Greece slides, a huge wave pool and a lazy river, twenty minutes away by bus.",
+ details:"A Greek-mythology park with more than 25 rides: the Fall of Icarus racing slides, Poseidon's wave pool, a lazy river, big drop slides and gentler options, so it works as a fun couples' day, not just for families. Open daily 10:00 to 18:00 in summer. Late July is peak: arrive at opening to bank the big slides before queues form, then retreat to the lazy river. Lockers, cabanas, restaurants and bars on site. Sundays host the Wave Fest music events (every Sunday to 30 August), and online tickets earn a FREE second visit on Wave Fest Sundays, or 50% off Mon to Sat. For your week that means: go early in the week with online tickets, then come back free on Sunday 2 August for Wave Fest.",
+ price:"€49 adult online, €52 at the gate. July promo: 50% off a second visit Mon to Sat", price_s:"€49 · full day",
+ dur:"Full day",
+ getting:"Bus 102 to its Waterpark terminus, about 20 minutes, €2; the park is the end of the line. Taxi €12 to 15.",
+ tips:"Buy tickets online for the discount and keep the receipt: the half-price second visit is the best deal in town. The concrete scorches by noon, bring water shoes.",
+ maps:"https://www.google.com/maps/search/?api=1&query=WaterWorld%20Waterpark%20Ayia%20Napa", web:"https://waterworldwaterpark.com", img:null},
+
+{id:"scuba",cat:"water",name:"Try Dive with Just Scuba",
+ blurb:"Your first breath underwater in some of the Mediterranean's clearest, warmest water, with the town's top-rated dive centre five minutes from the hotel.",
+ details:"Just Scuba on Tefkrou Anthia is Ayia Napa's favourite PADI centre, running beginner try dives: a pool-style briefing followed by a shallow guided sea dive. No experience needed beyond basic comfort in water. Late July gives 27 degree water and 20 metre visibility. Book one or two days ahead; morning slots have the calmest sea. The bucket-list upgrade is an intro dive at MUSAN, the underwater sculpture forest just off Pantachou beach.",
+ price:"Try dive €75 to 95 with all equipment; MUSAN intro dive €120 to 140", price_s:"From €75 pp",
+ dur:"Half day, about 3 hours",
+ getting:"Walk 5 minutes to the shop in the town centre; the centre arranges transport to the dive site.",
+ tips:"Book the first morning slot: flat sea, best visibility, back on a sunbed by lunch. If one of you dives, the other can usually snorkel above the same site.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Just%20Scuba%20Diving%20Centre%20Ayia%20Napa", web:"https://napadiving.com", img:null},
+
+{id:"kayak-caves",cat:"water",name:"Sea Caves by Kayak or SUP",
+ blurb:"Paddle into carved limestone grottoes beneath the cliffs of Cape Greco: echoing caves, turquoise water and snorkel stops you cannot reach on foot.",
+ details:"Guided kayak and SUP tours launch from coves around Konnos and hug the coastline past arches, blowholes and the sea caves, with snorkelling stops in glass-clear water, gear included. Group tours run 2 to 4 hours; premium half-day trips include hotel pickup, dry bags and a guide. Mornings are markedly better: afternoon winds chop up the sea and some operators cancel late departures. Late July sells out days ahead, book early in your week.",
+ price:"Group cave tours €30 to 45 pp; premium guided half day with pickup up to about €175 pp (verify); DIY kayak at Konnos €10 to 15 per hour", price_s:"From €30 pp",
+ dur:"Half day",
+ getting:"Most tours pick up at or near Napa Plaza. Otherwise bus 101 to Konnos, €2, or taxi €15 to 18.",
+ tips:"Book an 08:00 departure for mirror-calm water inside the caves. Budget option: rent a kayak off Konnos beach and self-paddle the nearer grottoes, staying close to the cliffs.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Cape%20Greco%20Sea%20Caves%20Cyprus", web:"https://www.getyourguide.com/ayia-napa-l124743/cave-tours-tc166/",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Sea_caves_Cape_Greco_9.jpg?width=900"},
+
+/* SIGHTS & NATURE */
+{id:"cape-greco",cat:"sight",name:"Cape Greco National Forest Park",
+ blurb:"The wild, juniper-scented headland where Cyprus meets its clearest blue sea. The best free show in the region, and THE sunrise spot.",
+ details:"A protected forest park east of town with marked nature trails, sea cliffs, a panoramic viewpoint and the famous coastal path. The full trail from the sea caves to Konnos Bay, about 5 km one way, is stunning but completely shadeless: in late July walk it at sunrise or after 17:00, never midday. As the easternmost tip of the island it owns the sunrise. Bring 1.5 litres of water each, hats and proper shoes.",
+ price:"Free", price_s:"Free · bus €2",
+ dur:"2 to 4 hours",
+ getting:"Bus 101 toward Paralimni to the Cape Greco or Sea Caves stops, 15 to 20 minutes, €2. Taxi €12 to 15. Many walk out along the coast and bus back.",
+ tips:"Sunrise is about 05:50 in late July and you will have the cape to yourselves. The buses run late, so you can also come back for sunset and stay for the stars.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Cape%20Greco%20National%20Forest%20Park", web:"https://www.visitcyprus.com",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Cyprus%2C_Cape_Greco_National_Forest_Park.jpg?width=900"},
+
+{id:"love-bridge",cat:"sight",name:"Sea Caves & the Love Bridge",
+ blurb:"Wave-carved caves and a natural rock arch straight out of a fantasy film. The most photographed stretch of coast in Ayia Napa.",
+ details:"On the western edge of Cape Greco the sea has sculpted caves, ledges and blowholes into the white limestone, and just east stands Kamara tou Koraka, the natural stone arch nicknamed the Love Bridge. Legend says couples who kiss beneath it stay together forever. The arch is fragile, so admire it from the viewpoint beside it rather than walking on top. Cliff jumping here is popular and risky; watch instead. Allow an hour or ninety minutes, ideally at golden hour when the cliffs glow.",
+ price:"Free", price_s:"Free",
+ dur:"1 to 1.5 hours",
+ getting:"Bus 101 to the Sea Caves stop, 10 to 15 minutes, then a short walk. Taxi €10 to 12. Or walk the coast path from the Sculpture Park, 30 to 40 minutes, sensible only early or late in July.",
+ tips:"Sunset beats sunrise here: the caves face west and the low light hits the cliff face directly. Wear grippy sandals, the rock shelf is sharp.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Sea%20Caves%20Cape%20Greco%20Ayia%20Napa", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Sea_caves_Cape_Greco_2.jpg?width=900"},
+
+{id:"blue-lagoon-chapel",cat:"sight",name:"Ayioi Anargyroi Chapel & Blue Lagoon",
+ blurb:"A tiny whitewashed chapel perched over a sea cave, with the turquoise Blue Lagoon swimming spot below. The most romantic corner of Cape Greco.",
+ details:"The blue-domed chapel sits on the cliffs on the eastern side of Cape Greco; steps lead down to a rocky cove and a holy-water sea cave. A few minutes along the coast is the Blue Lagoon, a sheltered inlet of impossibly clear water reached by ladder and rocks: a snorkelling dream with no sand, no facilities and no shade. Swim before 10:00 or after 16:00 in late July; by day the lagoon also fills with tour boats. Dress respectfully inside the chapel.",
+ price:"Free", price_s:"Free · bus €2",
+ dur:"2 to 3 hours",
+ getting:"Bus 101 toward Paralimni to the Ayioi Anargyroi or Konnos stops, about 20 minutes, €2, then 5 to 15 minutes on marked paths. Taxi €13 to 15.",
+ tips:"Bring water shoes and a mask: entry is over rocks and the fish life is the whole point. Weekday mornings are far quieter than weekends.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Agioi%20Anargyroi%20Chapel%20Cape%20Greco", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Agia_Napa_Kap_Greco_16.jpg?width=900"},
+
+{id:"monastery",cat:"sight",name:"Ayia Napa Monastery",
+ blurb:"A 500 year old Venetian monastery sitting serenely in the middle of party-town. A cool, shaded time capsule three minutes from your door.",
+ details:"Built around 1500 over a cave where an icon of the Virgin Mary was found. The stone courtyard, octagonal marble fountain and giant 600 year old sycamore fig are an oasis of calm, and the walls are beautifully lit in the evening while the square buzzes around them. Typical summer hours: weekdays 08:30 to 19:30, weekends from 11:00; the monastery says it opens daily, but verify times locally. Free entry via the south gate. Cover shoulders and knees inside the church. Half an hour is plenty, paired with dinner in the square.",
+ price:"Free", price_s:"Free · 3 min walk",
+ dur:"30 to 45 minutes",
+ getting:"Walk 3 to 5 minutes to the central square at the top of Makariou Avenue.",
+ tips:"Come twice: morning quiet for the courtyard light, then after dark when the illuminated monastery against the neon square makes a brilliant contrast photo.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Monastery", web:"https://ayianapamonastery.org.cy/",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Agia_Napa_Monastery_front.jpg?width=900"},
+
+{id:"thalassa",cat:"sight",name:"Thalassa Museum of the Sea",
+ blurb:"Home of the Kyrenia II, a full-size sailing replica of a 4th century BC Greek trading ship. The best air-conditioned hour in town.",
+ details:"The centrepiece is an exact replica of the ancient Kyrenia shipwreck, viewable from three levels, surrounded by amphorae, fossils and marine exhibits covering 8,000 years of Cypriot seafaring. Compact, well done and blissfully cool when the streets hit 35 degrees. Hours per the museum's own site, July 2026: Mon and Sat 09:00 to 14:00, Tue to Fri 09:00 to 17:00, closed Sunday.  On Kryou Nerou, between the square and the Sculpture Park.",
+ price:"€4 adults", price_s:"€4 · 1 hour",
+ dur:"45 minutes to 1 hour",
+ getting:"Walk 5 to 7 minutes: up Makariou to the square, then along Kryou Nerou.",
+ tips:"Slot it in between 12:00 and 14:00 when outdoor sightseeing is miserable anyway. Check the site for temporary exhibitions.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Thalassa%20Municipal%20Museum%20Ayia%20Napa", web:"https://www.thalassamuseum.org.cy/",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Treasures_of_THALASSA_Museum_Ayia_Napa_01.JPG?width=900"},
+
+{id:"sculpture-park",cat:"sight",name:"Sculpture Park & Cactus Park",
+ blurb:"An open-air gallery of 300+ marble and stone sculptures on a clifftop, next to a surreal garden of 10,000 cacti. Free, always open, made for golden hour.",
+ details:"On the eastern edge of town, international sculptors add new works every year to this hillside overlooking the sea; the adjacent Park of Mediterranean Plants, Cacti and Succulents is arguably even more photogenic. There is zero shade, so in late July this is strictly an early-morning or evening visit. Sunset here, with sculptures silhouetted over the bay, is superb. Allow an hour or ninety minutes for the pair.",
+ price:"Free", price_s:"Free · open 24/7",
+ dur:"1 to 1.5 hours",
+ getting:"Walk 25 to 30 minutes east, fine in the evening; any 101 bus two stops toward Paralimni; or taxi €6 to 8.",
+ tips:"Do it as a sunset combo: cactus park first, sculptures as the light goes orange, then walk back into town for dinner. It never closes, so it also works as a full-moon stroll.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Sculpture%20Park", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/2022_03_Ayia_Napa_Sculpture_Park_4_Aphrodite.jpg?width=900"},
+
+{id:"harbour",cat:"sight",name:"Limanaki Harbour Evenings",
+ blurb:"Ayia Napa's prettiest evening ritual: fishing boats, a palm-lined promenade and fish tavernas on the water, with the famous selfie sign on the way down.",
+ details:"Limanaki is where old Ayia Napa survives: working fishing boats beside excursion catamarans, a smart promenade and the town's best fish restaurants. It is also the departure point for all the cruises. The I Love Ayia Napa sign stands on Makariou Avenue, your own street, best photographed lit up at night. From about 18:30: stroll down, catch sunset from the pier, dinner at a taverna, gelato on the walk back.",
+ price:"Free; boat trips €20 to 50", price_s:"Free · 10 min walk",
+ dur:"2 to 3 hours, evening",
+ getting:"Walk 10 to 12 minutes downhill straight down Makariou Avenue to the sea.",
+ tips:"Book a morning Blue Lagoon cruise at the harbour kiosks the day before and haggle politely. For the sign photo without crowds, go before 09:00.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Harbour%20Limanaki", web:null, img:null},
+
+{id:"luna-park",cat:"sight",name:"Parko Paliatso Luna Park",
+ blurb:"A gloriously loud seaside funfair with one killer headline act: the 45-storey Sling Shot, the tallest of its kind in Europe. Pure holiday kitsch, best after dark.",
+ details:"A classic luna park on Nissi Avenue: ferris wheel, log flume, bumper cars, haunted house and the infamous Sling Shot that catapults riders skyward on camera. Entry is free; you pay per ride with tokens or buy an unlimited wristband. It only makes sense after sunset in July, when the neon-lit ferris wheel view over the coast is lovely. Ninety minutes covers it unless you are wristband-committed.",
+ price:"Free entry; rides €3 to 6 each or wristband about €25 to 40", price_s:"Rides from €3",
+ dur:"1.5 to 2 hours, evening",
+ getting:"Walk 12 to 15 minutes via the square onto Nissi Avenue, or a €5 taxi.",
+ tips:"Ride the ferris wheel right at sunset for the best view-per-euro in town. The Sling Shot video they sell afterwards is the ultimate souvenir and blackmail material.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Parko%20Paliatso%20Luna%20Park%20Ayia%20Napa", web:"https://www.parkopaliatsocy.com/",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vid%C3%A1mpark%2C_Ayia_Napa_-_Fun_Park_-_panoramio_%283%29.jpg?width=900"},
+
+{id:"marina",cat:"sight",name:"Ayia Napa Marina",
+ blurb:"Superyachts, twisting designer towers and a polished waterfront of restaurants and boutiques. The glamorous new side of town, lovely for an evening promenade.",
+ details:"West of town near Ayia Thekla, the marina pairs a superyacht basin with a commercial village of upscale restaurants, cafes and shops beneath its landmark twisted towers. Strolling is free, and summer brings open-air events, live music and pop-up markets. Treat it as an evening destination: arrive around 19:00, wander the quays gawking at the yachts, stay for dinner with sunset over the water. Smart-casual by Ayia Napa standards.",
+ price:"Free to stroll; dinner extra", price_s:"Free · taxi €10",
+ dur:"2 to 3 hours, evening",
+ getting:"Too far to walk, about 6 km west. Taxi €10 to 13, ten minutes. Taxi ranks on site for the trip home.",
+ tips:"Check the events page before you go: summer weekends often have free live music. Combine with sunset at Ayia Thekla chapel, a 15 minute walk away.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Marina", web:"https://marinaayianapa.com/", img:null},
+
+{id:"tombs",cat:"sight",name:"Makronissos Tombs",
+ blurb:"A hauntingly quiet Hellenistic necropolis of 19 rock-cut tombs hiding behind one of the most popular beaches. Almost nobody visits.",
+ details:"Carved into the soft rock around the 3rd century BC and used into Roman times, the 19 chamber tombs are reached by stone stairways descending into the ground; a small quarry and ancient sanctuary adjoin them. The site is open, unfenced and free at all times, and you will likely have it to yourselves while hundreds sunbathe 200 metres away. No shade: visit before 10:00 or after 17:00 and combine with a swim.",
+ price:"Free", price_s:"Free",
+ dur:"30 to 45 minutes plus beach time",
+ getting:"Bus 102 along Nissi Avenue to Makronissos Beach, 15 to 20 minutes, then a 5 minute walk inland. Taxi €8 to 10.",
+ tips:"Go late afternoon: tombs in the softening light, then the quieter west side of Makronissos Beach for the last swim of the day. Shoot down the tomb stairways, the geometry is striking.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Makronissos%20Tombs%20Ayia%20Napa", web:null,
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/Makronissos_Tombs_in_Ayia_Napa_21.JPG?width=900"},
+
+{id:"ayia-thekla",cat:"sight",name:"Ayia Thekla Chapel & Coast",
+ blurb:"A tiny blue-and-white chapel on a low headland facing its own islet: the postcard sunset spot of the coast, with an ancient cave church hidden beside it.",
+ details:"West of Makronissos near the marina, the little chapel of Ayia Thekla stands by the sea next to an early-Christian cave chapel cut into the rock, with steps leading down to icons and candles. The setting of white chapel, turquoise shallows and islet offshore is made for photographs, and the small sandy beach beside it is calmer and more local than the town beaches. Best in the last two hours before sunset. Bring modest cover-ups for the cave chapel.",
+ price:"Free", price_s:"Free · taxi €12",
+ dur:"1 to 1.5 hours",
+ getting:"Taxi €12 to 15, about 12 minutes. Or bus 102 toward the Waterpark end and walk 25 minutes along the coast path. Combines with the marina, a 15 minute walk away.",
+ tips:"This is the sunset counterpart to Cape Greco's sunrise: chapel silhouette, islet, often not another tourist in sight. Stroll to the marina for dinner afterwards so the taxi does double duty.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Thekla%20Chapel%20Ayia%20Napa", web:null, img:null},
+
+/* BOAT TRIPS */
+{id:"blue-lagoon-cruise",cat:"boat",name:"Blue Lagoon & Cape Greco Cruise",
+ blurb:"The classic Ayia Napa boat trip: sail past the sea caves to swim in the electric-turquoise Blue Lagoon. The best-value way to see coastline you cannot reach on foot.",
+ details:"Boats leave the harbour, cruise east past the sea caves and the Cape Greco headland, then anchor in the Blue Lagoon and Konnos Bay for swimming and snorkelling, gear usually provided. Options range from a quick 2.5 hour morning lagoon run to 4.5 hour cruises with lunch on board. Late July water is 27 to 28 degrees and gin-clear, but boats fill up: book a day or two ahead and take the morning departure before the midday heat. Some operators run glass-bottom vessels.",
+ price:"From about €23 to 35 pp for the short run; €35 to 50 with lunch on board. Quay kiosks beat online prices", price_s:"From €23 pp",
+ dur:"2.5 to 4.5 hours",
+ getting:"Walk 10 minutes down Makariou Avenue to the harbour. Tickets at the quay kiosks or online.",
+ tips:"Grab a spot on the bow, left side, for the best sea-cave views on the way out. Bring water shoes, the lagoon rocks are sharp if you swim to shore.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Harbour", web:"https://famagustanapaboat.com/en-gb/",
+ img:"https://commons.wikimedia.org/wiki/Special:FilePath/FamagustaDistrict_01-2017_img10_Cape_Greco.jpg?width=900"},
+
+{id:"black-pearl",cat:"boat",name:"Black Pearl Pirate Cruise",
+ blurb:"A full-size replica pirate galleon with Jack Sparrow characters, cannon battles and walk-the-plank antics. Pure theatre, and entertaining for adults too.",
+ details:"The famous black-sailed galleon sails from the harbour along the Cape Greco coast with live pirate shows, a cannon-fire display and two swim stops in crystal-clear bays; lunch is served on board. About 4 hours, and the most-booked cruise in town, so in late July reserve 2 to 3 days ahead. It is family-oriented rather than a party boat, which makes it a relaxed pick for a couple who want a show with their swimming. The upper deck scorches in July: claim shade early.",
+ price:"About €45 to 55 adult, €25 to 30 child at the quay; online platforms (Viator etc.) charge more", price_s:"€45-55 pp",
+ dur:"About 4 hours",
+ getting:"Walk 10 minutes to the harbour; the black galleon is impossible to miss. Book at the quay booths a day or two ahead; online booking sites run pricier.",
+ tips:"It does not sail every day in 2026 and never on Mondays, so confirm the sailing days for your week when you book. Take the daytime family sailing, not the evening party version, for the full cannon-show theatrics. It is loud, kid-heavy theatre: brilliant if you are in the mood, skip it if you want a quiet romantic sail. Photos with the Jack Sparrow lookalike are free; the printed ones cost extra.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Harbour", web:"https://blackpearlayianapa.com/", img:null},
+
+{id:"ghost-cruise",cat:"boat",name:"Famagusta Ghost Town Cruise",
+ blurb:"Sail north past Protaras to the eerie skyline of Varosha, the abandoned 1974 ghost town, seen from the sea. No border, no passport.",
+ details:"A laid-back 4 hour cruise, daily 10:30 to 14:30, running the full coastline up to the Famagusta viewpoint, where you drift offshore looking at the fenced-off, crumbling hotel towers of Varosha: a haunting sight. On the way back there are swim stops at the Blue Lagoon and Konnos Bay, and lunch is included; a full bar operates on board. You never leave Republic of Cyprus waters, so no passport is needed. Book a day ahead and board by 10:00; the shaded lower deck is the smart choice.",
+ price:"€35 adult, €20 child", price_s:"€35 pp",
+ dur:"4 hours",
+ getting:"Walk 10 minutes to the harbour; board by 10:00. Book online with CyCruises or at the quay.",
+ tips:"Bring binoculars or a zoom lens for Varosha, the boat keeps a legal distance from shore, and some find the view from that distance underwhelming: if seeing Varosha up close matters, do the land tour or the Deryneia viewpoint instead. Cash is preferred at the on-board bar.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Harbour", web:"https://cycruises.com/ayia-napa-boat-trips/", img:null},
+
+{id:"sunset-cruise",cat:"boat",name:"Sunset Cruise",
+ blurb:"Golden-hour sailing past the sea caves, the Love Bridge and Cape Greco with a swim as the sun drops. The most romantic €30 of the week.",
+ details:"Evening cruises leave around 16:30 and return between 19:30 and 21:00, taking in the Blue Lagoon, the sea caves and the Love Bridge in soft evening light, with a sunset swim stop when the sea is calm. The standard 3.5 hour trip starts at €30; the Blue Star Sunday version at €50 adds a champagne welcome and live violin. Sunset falls around 19:50 in late July, and the evening breeze is blissful after a 33 degree day. Book ahead for the front-of-boat seats.",
+ price:"From €30 pp; champagne and violin version €50 pp", price_s:"From €30 pp",
+ dur:"3.5 to 4 hours",
+ getting:"Walk 10 minutes to the harbour; boarding usually 40 minutes before departure.",
+ tips:"Take a light cover-up, it cools fast on the water after sunset. Time dinner afterwards at one of the fish tavernas ringing the harbour.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Harbour", web:"https://famagustanapaboat.com/en-gb/", img:null},
+
+/* DAY TRIPS */
+{id:"fig-tree",cat:"daytrip",name:"Fig Tree Bay & Protaras",
+ blurb:"Cyprus's most photographed beach: soft sand, a swimmable islet and calm shallow water, a €2 bus ride from your hotel.",
+ details:"Buses 101 and 102 loop between Ayia Napa and Paralimni through Protaras every 15 to 20 minutes in summer, so there is no timetable stress. Hop off at the Protaras strip and walk down to Fig Tree Bay: Blue Flag sand and a tiny rocky islet you can swim or wade out to. The seafront promenade runs for kilometres if you fancy a stroll to Pernera and lunch with a sea view. Arrive before 10:00 for front-row sunbeds; the shallow water stays warm into the evening.",
+ price:"€2 pp each way, cash to the driver; €3 after 21:00", price_s:"Bus €2 · full day",
+ dur:"25 to 35 minutes each way; make it a beach day",
+ getting:"Walk 2 to 3 minutes to the 101/102 stop on Makariou Avenue or by the monastery; pay the driver. Get off at Fig Tree Bay or Protaras centre.",
+ tips:"Take the 101 outbound, it winds via scenic Cape Greco, and the faster inland 102 back. Swim out to the islet early, by noon it is a queue of selfie-takers.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Fig%20Tree%20Bay%20Protaras", web:"https://osea.com.cy/en/bus-routes/", img:null},
+
+{id:"larnaca",cat:"daytrip",name:"Larnaca by Intercity Bus",
+ blurb:"Palm-lined Finikoudes promenade, the Byzantine church of Saint Lazarus and a proper Cypriot-city feel. 75 minutes and €9 return.",
+ details:"Intercity buses run 18 times on weekdays, 05:55 to 21:30, roughly 1 hour 15 to Larnaca's seafront. Start with coffee under the palms on Finikoudes, then walk five minutes inland to the 9th century Church of Saint Lazarus, built over the tomb of the biblical Lazarus. A short taxi reaches Hala Sultan Tekke, the Ottoman mosque on the salt lake, a shimmering white crust in July. The city is hot and slow midday: sights in the morning, long shaded taverna lunch, seafront swim, afternoon bus home.",
+ price:"€5 single, about €9 return (verify on board), cash to the driver", price_s:"Bus €5 each way",
+ dur:"Full day; 1h15 each way",
+ getting:"Catch the Intercity bus at the stop by the monastery on Makariou Avenue, 3 to 5 minutes from the hotel. No booking, pay the driver.",
+ tips:"Covered shoulders and knees inside Saint Lazarus, bring a light scarf. Aim for the 08:00 or 09:30 bus out; the 15:00 to 16:00 returns are least crowded.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Finikoudes%20Promenade%20Larnaca", web:"https://intercity-buses.com/en/routes/larnaca-ayia-napa-paralimni-paralimni-ayia-napa-larnaca/", img:null},
+
+{id:"varosha",cat:"daytrip",name:"Famagusta & Varosha Ghost Town",
+ blurb:"Cross the Green Line to walled Famagusta and walk the reopened streets of Varosha, a resort town frozen in 1974. The most extraordinary day trip in this corner of Cyprus.",
+ details:"Small-group tours (often a shared minibus or private-hire car for up to 8, not a big coach) with hotel pickup cross the UN buffer zone into North Cyprus; bring your passport, or for Norwegians a nasjonalt ID-kort med reiserett, non-negotiable. Half-day tours of about 5 hours visit the Gothic St Nicholas Cathedral, now a mosque, inside Famagusta's Venetian walls, then Varosha itself, where you walk or cycle streets of hotels and shops untouched for 50 years; full-day versions add the ancient ruins of Salamis. Late July is brutally hot on Varosha's shadeless streets: water, hat and sunscreen are essential. Euros work everywhere on the north side.",
+ price:"Roughly €63 to 110 pp for a half-day small-group tour with pickup depending on operator and group size; local agencies beat the big online platforms; lunch extra", price_s:"From €63 pp",
+ dur:"5 hours to a full day",
+ getting:"Coach pickup at or near Napa Plaza; confirm the exact point when booking. Book at least 48 hours ahead. Passports required.",
+ tips:"No tour? Bus 101 to Paralimni plus a short taxi reaches the Deryneia viewpoint, with rooftop telescopes looking straight into Varosha from the south, no border crossing needed. In Varosha, rent one of the cheap bikes at the entrance, the zone is bigger than it looks.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Varosha%20Famagusta", web:"https://www.getyourguide.com/ayia-napa-l124743/from-ayia-napa-famagusta-salamis-full-day-tour-t787347/", img:null},
+
+{id:"nicosia",cat:"daytrip",name:"Nicosia, the Divided Capital",
+ blurb:"Walk a capital split in two: Venetian walls, the Ledra Street crossing, and Ottoman caravanserais on the far side of the Green Line. €11 return by bus.",
+ details:"Intercity buses link Ayia Napa with Nicosia roughly hourly on weekdays, about 2 hours each way. Wander inside the star-shaped Venetian walls, browse Ledra Street, then cross the pedestrian checkpoint with your passport into North Nicosia for the Selimiye Mosque, a converted Gothic cathedral, and the restored Büyük Han caravanserai, where lunch costs pocket change. Nicosia is inland and often past 37 degrees in late July: treat it as a morning-heavy day with a long shaded lunch. The Cyprus Museum is an excellent air-conditioned escape.",
+ price:"€6 single, about €11 return (verify on board), cash to the driver", price_s:"Bus €6 each way",
+ dur:"Full day; 2h each way",
+ getting:"Board the Nicosia bus at the Makariou Avenue and monastery stops, 3 to 5 minutes from the hotel. Passport needed only to cross at Ledra Street.",
+ tips:"Take the earliest bus you can face: by 08:30 you have the old town almost to yourselves. Climb the Shacolas Tower observatory on Ledra Street for a view across the divided city.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ledra%20Street%20Nicosia", web:"https://intercity-buses.com/en/routes/nicosia-ayia-napa-paralimni-ayia-napa-paralimni-nicosia/", img:null},
+
+/* FOOD & DRINK */
+{id:"vassos",cat:"food",name:"Vassos Fish Harbour Tavern",
+ blurb:"The harbour classic since 1962: pick your fish from the ice display and eat it grilled metres from the boats that landed it.",
+ details:"Family-run tavern right on the harbour, going strong for over sixty years. Go for the fresh whole sea bream or sea bass, calamari, or commit to the full fish meze; there is a sushi counter these days, and lobster pasta for a splurge. White-tablecloth-meets-fishing-port, lovely at sunset with harbour views. In late July, book a day or two ahead and ask for a front-row sea-view table. Fish is priced by weight, so confirm the price before it hits the grill.",
+ price:"Fish mains €18 to 30; fish meze about €28 pp", price_s:"€€€ · seafood",
+ dur:"Dinner, or a long lazy lunch",
+ getting:"Walk 10 to 12 minutes downhill via Makariou Avenue to the harbour.",
+ tips:"Book the terrace for sunset; the walk back up is a gentle ten minutes, perfect for a gelato stop on Makariou.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Vassos%20Psarolimano%20Fish%20Tavern%20Ayia%20Napa", web:"https://vassosfishtavern.com/", img:null},
+
+{id:"sage",cat:"food",name:"Sage Restaurant & Wine Bar",
+ blurb:"The grown-up dinner: candlelit garden terrace, a serious wine cellar, and cooking reviewers compare to starred kitchens. The special-occasion table.",
+ details:"A long-running fine-dining institution on Kryou Nerou. Beautifully executed steaks, fresh fish, risottos and Mediterranean plates, plus one of the best wine lists in town: ask the sommelier to pair Cypriot labels like Xynisteri and Maratheftiko. The atmosphere is romantic and calm, a world away from the strip. Booking is essential in late July, several days ahead, and request the garden terrace.",
+ price:"Mains €20 to 35; tasting menus higher", price_s:"€€€ · book ahead",
+ dur:"Dinner, 2 to 3 hours",
+ getting:"Walk 8 to 10 minutes east along Kryou Nerou.",
+ tips:"Book the garden terrace and go around 20:30 for full candlelit effect. Leave room for the dessert trolley.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Sage%20Restaurant%20Wine%20Bar%20Ayia%20Napa", web:"https://sagerest.com/", img:null},
+
+{id:"stamna",cat:"food",name:"Stamna Taverna",
+ blurb:"Traditional Cypriot meze in the oldest house in Ayia Napa, family-run since 1982. Eat like a local, five minutes from your door.",
+ details:"A restored old stone house near the monastery quarter serving the meze crawl you came to Cyprus for: taramosalata, grilled halloumi, afelia, slow-baked kleftiko and a parade of fifteen-plus small plates, with owner Andreas often working the room. Consistently rated the best meze in town. Open 17:00 to 23:00 daily and full every night in season, so book a day or two ahead. Warm, unhurried and authentic: plan two-plus hours and arrive hungry.",
+ price:"Full meze €22 to 28 pp; mains €12 to 18", price_s:"€€ · meze",
+ dur:"Dinner, 2+ hours",
+ getting:"Walk 4 to 5 minutes, just behind the monastery square.",
+ tips:"Order the meat meze for two rather than a la carte, it is the whole point. Skip lunch that day.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Stamna%20Taverna%20Ayia%20Napa", web:"https://stamnatavern.com/", img:null},
+
+{id:"kota",cat:"food",name:"Kota Greek Souvlaki",
+ blurb:"The best gyros and souvlaki in town, char-grilled Greek-style and cheap as chips. The low-key night or post-beach refuel.",
+ details:"A casual Greek grill near the centre that reviewers keep calling the best gyros in Ayia Napa. Pork and chicken skewers, gyros wrapped in warm pita with tzatziki, Greek salads and proper hand-cut chips: simple things done properly. Counter-casual with a few tables, no booking needed, takeaway if you fancy eating on your balcony. Gluten-free pita available, a rarity in town.",
+ price:"Gyros pita €5 to 7; souvlaki plates €10 to 14", price_s:"€ · casual",
+ dur:"Quick lunch or dinner",
+ getting:"Walk 4 to 5 minutes, near the Square area.",
+ tips:"Go before 20:00 in peak season to beat the queue. The mixed souvlaki plate for two plus a cold KEO beer is the move.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Kota%20Greek%20Souvlaki%20Ayia%20Napa", web:null, img:null},
+
+{id:"mexicanos",cat:"food",name:"Los Mexicanos",
+ blurb:"The fun night out: proper Mexican food, festive staff and margaritas in the middle of Ayia Napa. A lively dinner that is not a tourist trap.",
+ details:"Rated among the town's best restaurants in local guides, Los Mexicanos does good tacos, burritos, fajitas and nachos rather than watered-down Tex-Mex. The room is colourful and buzzy with music and theatrical staff: great energy without the 18-30 chaos. Margaritas and Mexican beers flow and portions are generous. Book a table in high season or arrive before 19:30; popular with couples and families alike.",
+ price:"Mains €12 to 20; margaritas €7 to 9", price_s:"€€ · lively",
+ dur:"Dinner, 1.5 to 2 hours",
+ getting:"Walk about 5 minutes into central Ayia Napa.",
+ tips:"Tell them if it is a birthday or anniversary, the staff make a show of it. The fajitas for two sizzle impressively.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Los%20Mexicanos%20Ayia%20Napa", web:null, img:null},
+
+{id:"bakery",cat:"food",name:"The Bakery Co.",
+ blurb:"Your morning HQ: proper flat whites, fresh pastries and cooked breakfasts two minutes from the hotel, plus house-made gelato for later.",
+ details:"A modern bakery-cafe on Makariou Avenue praised for its morning coffee, breakfast plates, sandwiches and homemade cakes. It opens early and has shaded outdoor seating for people-watching on the main street. The counter is dangerous: croissants, baklava and their own gelato, which some reviewers call the smoothest in Cyprus. Drop in, no booking. Ideal before a boat trip or a Nissi day.",
+ price:"Coffee €3 to 4.50; breakfast €6 to 12", price_s:"€ · breakfast",
+ dur:"Breakfast or coffee, 30 to 60 minutes",
+ getting:"Walk 2 to 3 minutes on Makariou Avenue.",
+ tips:"Go before 09:30 in peak season for a shaded table. Grab picnic pastries here before beach days.",
+ maps:"https://www.google.com/maps/search/?api=1&query=The%20Bakery%20Co%20Ayia%20Napa", web:null, img:null},
+
+{id:"napolea",cat:"food",name:"Napolea Artisan Ice Cream",
+ blurb:"French-technique ice cream that regulars call the best in Ayia Napa. The mandatory stop on the evening stroll between the square and the harbour.",
+ details:"A small artisan parlour making its own ice cream and sorbets in-house, with a loyal repeat crowd. Flavours rotate but the pistachio, salted caramel and fresh fruit sorbets are standouts, and there are crepes and waffles if you want to sit in. Open late, glowing on the walk down Makariou: perfect after dinner at Vassos or Stamna. No booking, just join the fast-moving queue.",
+ price:"Scoops €2.50 to 4; waffles and crepes €6 to 9", price_s:"€ · dessert",
+ dur:"15 to 30 minutes",
+ getting:"Walk 5 to 7 minutes, on the way down toward the harbour.",
+ tips:"Make it your nightly ritual on the harbour walk and try a different pairing each evening. The sorbets are as good as the creams.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Napolea%20French%20Ice%20Cream%20Ayia%20Napa", web:null, img:null},
+
+/* NIGHTLIFE */
+{id:"isola",cat:"night",name:"Isola Beach Bar, Nissi",
+ blurb:"Golden-hour cocktails with your feet in Nissi sand while a DJ eases in at five and the whole bay turns amber. The classiest sunset session in town.",
+ details:"Right on the central stretch of Nissi Beach, Isola shifts from beach cafe by day to stylish sunset bar by evening. Cocktails run €9 to 14, the frozen margaritas and Aperol Spritz are the go-tos, and the kitchen is a cut above beach-bar standard, so drinks can turn into dinner with shared Mediterranean plates. The 17:30 to 19:00 golden hour is the sweet spot: lively but not rowdy, very couple-friendly. Arrive by 17:00 for a front-row spot.",
+ price:"Cocktails €9 to 14; beer €4 to 6; plates €10 to 18", price_s:"Cocktails €9+",
+ dur:"Sunset and early evening",
+ getting:"Taxi 8 to 10 minutes, €5 to 8, or the Nissi Avenue bus 102.",
+ tips:"Swim first, then claim a bar-side sunbed as the day crowd leaves. Time it for 17:30 and stay through sunset.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Isola%20Beach%20Bar%20Nissi%20Beach%20Ayia%20Napa", web:"https://www.isolabeachbar.com/", img:null},
+
+{id:"river-rock",cat:"night",name:"River Rock Cocktail Bar",
+ blurb:"A leafy, waterfall-backed cocktail garden near the square: grown-up drinks, low lighting and actual conversation. The antidote to Bar Street.",
+ details:"Tucked into a tropical garden near central Ayia Napa, this is where thirty-and-forty-somethings go for well-made cocktails without the strip's chaos. Classics done properly, fruity signatures, and optional shisha in a chilled lounge setting with rock and water features. Music stays at talking volume and service is warm. No reservation needed most nights; an ideal first stop before dinner or a nightcap after.",
+ price:"Cocktails €7 to 10; happy-hour deals early evening", price_s:"Cocktails €7+",
+ dur:"Evening drinks, 1 to 2 hours",
+ getting:"Walk 6 to 8 minutes, near Ayia Napa Square.",
+ tips:"Come before 22:00 for the quietest garden tables. Ask the bartender for an off-menu twist, they enjoy the challenge.",
+ maps:"https://www.google.com/maps/search/?api=1&query=River%20Rock%20Cocktail%20Bar%20Ayia%20Napa", web:null, img:null},
+
+{id:"bedrock",cat:"night",name:"Bedrock Inn, Bar Street",
+ blurb:"The Flintstones-themed institution: caveman staff, fire shows and cocktails in stone-age mugs. Gloriously silly and fun at any age.",
+ details:"A Bar Street landmark and pure theatre: Flintstones decor, Yabba Dabba Doo toasts, nightly fire-and-dance shows and staff in caveman furs. It draws a mixed-age crowd, plenty of couples and returning forty-somethings on nostalgia trips alongside younger groups. Cheerfully priced cocktails, fishbowls and beers; the show kicks off late evening. No booking: grab a roadside table around 21:30 to catch the entertainment before Bar Street peaks.",
+ price:"Cocktails €6 to 9; beers €4 to 5; fishbowls about €15", price_s:"Cocktails €6+",
+ dur:"Evening, 1 to 2 hours",
+ getting:"Walk about 5 minutes to Bar Street.",
+ tips:"Go before midnight, after that Bar Street tips into full 18-30 mode. The fire show is the highlight, ask the staff when it starts.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Bedrock%20Inn%20Bar%20Ayia%20Napa", web:"http://www.bedrock-inn.com/", img:null},
+
+{id:"carwash",cat:"night",name:"Carwash Disco",
+ blurb:"The beloved retro disco: seventies-to-noughties anthems, zero pretension and a dancefloor of every age. The one club in town a couple will love.",
+ details:"Running for decades, Carwash swaps EDM for disco, funk, Motown and classic party anthems, ABBA to Daft Punk. The crowd is famously mixed-age, from honeymooners to fifty-something regulars, and the staff keep it friendly rather than rowdy. Drinks are refreshingly cheap at €2 to 9 and entry runs free to about €15 depending on the night. Doors open around midnight (check locally): no booking, just turn up after your cocktails, and it is an easy stroll home.",
+ price:"Entry free to €15; drinks €2 to 9", price_s:"Entry €0 to 15",
+ dur:"Late evening, midnight onward",
+ getting:"Walk 5 to 6 minutes, central Ayia Napa near the Square.",
+ tips:"Arrive right at opening to skip queues and grab a spot by the dancefloor. Request a song, the DJs actually play them.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Carwash%20Disco%20Ayia%20Napa", web:null, img:null}];
+
+/* ---------- new activities ---------- */
+DATA.push(
+{id:"musan-snorkel",cat:"water",name:"Snorkel the MUSAN Underwater Museum",
+ blurb:"Swim over a submerged forest of 93 sculptures right off your house beach. Licensed operators run guided snorkel visits, no diving certificate needed.",
+ details:"MUSAN, the Museum of Underwater Sculpture Ayia Napa, sits about 200 metres off Pantachou beach at 8 to 10 metres depth: trees, human figures and children at play, slowly turning into living reef. Licensed centres run guided snorkelling and freediving visits with briefing, gear and a surface guide; you float above the sculptures while divers wander below. Book a day ahead; morning visits get the calmest, clearest water. About an hour in the water, fine for any confident swimmer.",
+ price:"Guided snorkel visit €40 to 55 pp (verify with the operator)", price_s:"From €40 pp",
+ dur:"About 2 hours door to door",
+ getting:"Walk 8 to 10 minutes to the harbour end of Pantachou beach; the operator confirms the exact meeting point when you book.",
+ tips:"If one of you would rather dive it, the centres run snorkellers and divers on the same trip. Never touch the sculptures, they are growing living reef, and wear reef-safe sunscreen, it is a protected site. Glass-bottom boat tours run over the same site if one of you prefers to stay dry.",
+ maps:"https://www.google.com/maps/search/?api=1&query=MUSAN%20Underwater%20Museum%20Ayia%20Napa", web:"https://musan.com.cy/",
+ img:null, d:700, s:"M", m:"walk"},
+
+{id:"spa",cat:"well",name:"Spa Afternoon at Napa Plaza",
+ blurb:"Your own hotel opened a new spa in 2026: treatments, saunas, ice shower, heated indoor pool and a relax lounge. Zero metres of travel.",
+ details:"Napa Plaza renovated its wellness floor in 2026: a 180 square metre spa with treatment rooms, several sauna types, ice shower, jacuzzi, heated indoor pool and a relax area, plus a Technogym training room. Book a couples treatment for the hottest hours, 13:00 to 16:00, when the beach is punishing anyway. Spa access is charged separately from the room and treatment slots go fast in peak weeks, so reserve at reception on day one.",
+ price:"Entry and treatments priced at reception; verify on arrival", price_s:"Priced on site",
+ dur:"2 to 3 hours",
+ getting:"The lift. It is inside your hotel.",
+ tips:"Reserve on your first evening for a mid-week slot. Pair a treatment with the indoor pool and you have a complete heat-escape afternoon.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Napa%20Plaza%20Hotel%20Ayia%20Napa", web:null,
+ img:null, d:0, s:"D", m:"walk"},
+
+{id:"cyprus-night",cat:"food",name:"Cypriot Wine & Meze Night",
+ blurb:"Commandaria, Xynisteri and a table full of small plates, ideally with live bouzouki. The island's food culture in one sitting.",
+ details:"Cyprus makes serious wine, and Commandaria is the world's oldest named dessert wine still in production. Tavernas and hotels around Ayia Napa run Cyprus nights in season: a meze parade, live music, sometimes traditional dancing. Or build your own version: ask Stamna or Sage for a flight of Cypriot labels alongside a meze. Ask reception or the harbour noticeboards which venue hosts a Cyprus night during your week.",
+ price:"Cyprus night with dinner typically €30 to 45 pp (verify locally)", price_s:"€€ · verify",
+ dur:"Evening",
+ getting:"Central venues are a 3 to 10 minute walk; reception can point you to this week's host.",
+ tips:"Drink Xynisteri cold with fish and Maratheftiko with grilled meat, then finish with a small Commandaria. If dancing starts, join in, resistance is futile.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Square", web:null,
+ img:null, d:500, s:"E", m:"walk"},
+
+{id:"potamos",cat:"food",name:"Potamos Liopetriou Fishing Harbour",
+ blurb:"A working fishing river lined with wooden boats and waterside fish tavernas. Old Cyprus, fifteen minutes away.",
+ details:"Potamos tou Liopetri is a narrow river inlet where fishermen still land their catch every morning, painted boats moored stem to stern under the trees. Come for a long fish lunch at one of the waterside tavernas, then walk the short path to the little chapel and the sea at the river mouth. It is the antidote to the strip: slow, photogenic and full of locals at weekends. Weekday lunches are quietest.",
+ price:"Fish lunch €15 to 25 pp; taxi €12 to 15 each way", price_s:"€€ · taxi",
+ dur:"Half a day with lunch",
+ getting:"Taxi 12 to 15 minutes west. No direct bus; agree a pickup time with the driver or ask the taverna to call your return taxi.",
+ tips:"Order whatever was landed that morning, just ask the waiter. Golden hour turns the river to glass, stay for it if you can.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Potamos%20Liopetriou", web:null,
+ img:null, d:9000, s:"D", m:"taxi"},
+
+{id:"horse-riding",cat:"daytrip",name:"Sunset Horse Ride by Cape Greco",
+ blurb:"Ride through juniper scrub to a clifftop as the sun drops. Moonshine Ranch runs evening hacks with transfers from Ayia Napa.",
+ details:"Moonshine Ranch, between Paralimni and Cape Greco, takes small groups on evening rides suited to beginners: helmets, briefing and calm horses, ending with sea views in the low light. In high summer rides run in the cooler hours only, so evening slots go first; book 2 to 3 days ahead and confirm the 2026 price and whether pickup from Napa Plaza is included. Long trousers and closed shoes required.",
+ price:"About €40 to 60 pp for 1 to 1.5 hours in the saddle (verify when booking)", price_s:"From €40 pp",
+ dur:"Evening, about 3 hours with transfer",
+ getting:"Ranch transfer or taxi, about 15 minutes; confirm the pickup when you book.",
+ tips:"Ask for the clifftop route if you both feel steady after the first stretch. Bring a light layer, it cools fast after sunset in the saddle.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Moonshine%20Ranch%20Cyprus", web:null,
+ img:null, d:8000, s:"E", m:"pickup"},
+
+{id:"full-moon",cat:"sight",name:"Full Moon Rise, Wednesday 29 July",
+ blurb:"Mid-trip, the full moon lifts out of the sea on your Wednesday night. Claim a clifftop and watch it happen.",
+ details:"The July 2026 full moon falls on Wednesday 29 July, right in the middle of your week. Moonrise over open sea is best from the east-facing cliffs: the Sculpture Park is a 25 minute walk from the hotel, Cape Greco wilder still by bus or taxi. Take a blanket and something cold, and time it for just after sunset, when the sky is still deep blue and the moon comes up orange. Ask at the harbour kiosks early in the week whether any boat runs a moonlight cruise that night.",
+ price:"Free; optional moonlight cruise if offered (ask at the harbour)", price_s:"Free · 29 July",
+ dur:"Evening, 1 to 2 hours",
+ getting:"Sculpture Park: 25 minute walk or a €6 taxi. Cape Greco viewpoint: bus 101 or a €12 taxi.",
+ tips:"On full moon night the moon rises shortly after sunset; be in place by 19:45. The sculpture silhouettes make the best photo foreground.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Sculpture%20Park", web:null,
+ img:null, d:2000, s:"E", m:"walk"},
+
+{id:"square",cat:"night",name:"The Square Bar Crawl",
+ blurb:"The town's engine room: the old square around the monastery, ringed with bars of every flavour. Start here every night and see where it takes you.",
+ details:"Ayia Napa Square is where every evening begins: Irish pubs, karaoke joints, cocktail terraces and rooftop bars packed around the floodlit monastery. It gets going from 21:00, with happy hours running before 23:00 and the crowd young but mixed; early evening is relaxed and very couples-friendly, later it turns up. Even on a quiet night the people-watching alone is worth a drink. Everything is within a two minute stumble of everything else, and your hotel is 250 metres away.",
+ price:"Beers €4 to 5; cocktails €7 to 10; no entry fees", price_s:"€ · free entry",
+ dur:"Evening, as long as you like",
+ getting:"Walk 3 minutes up Makariou Avenue; the square is at the top.",
+ tips:"Grab a first-floor balcony table overlooking the square for the best people-watching seat in town. The lit monastery against the neon makes a surreal photo.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Square", web:null,
+ img:null, d:250, s:"E", m:"walk"},
+
+{id:"bar-street",cat:"night",name:"Bar Street (Ayias Mavris)",
+ blurb:"One neon strip of back-to-back party bars: fishbowls, karaoke, shot bars and fire shows. Not refined, extremely Ayia Napa.",
+ details:"The strip behind the square is wall-to-wall bars that come alive from 22:00 and peak between midnight and 02:00. PRs outside every door offer drink deals, so a polite haggle is part of the game, and the Bedrock Inn fire show lands mid-strip. It is loud, silly and pure holiday theatre; most couples do one lap and one bar, then retreat somewhere calmer with a story. Five minutes from your door, so leaving is always easy.",
+ price:"Free to wander; drink deals everywhere, fishbowls about €15", price_s:"€ · deals",
+ dur:"1 to 2 hours, evening",
+ getting:"Walk 5 minutes via the square; the strip runs along Ayias Mavris.",
+ tips:"Go for one silly hour before midnight, then escape to River Rock or Carwash. Never take the first PR offer, the next bar will beat it.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Bar%20Street%20Ayia%20Napa", web:null,
+ img:null, d:400, s:"E", m:"walk"},
+
+{id:"castle-club",cat:"night",name:"The Castle Club",
+ blurb:"Ayia Napa's biggest club: a mock castle with several rooms and an open-air courtyard, R&B to house until sunrise. The proper big night out.",
+ details:"A landmark on Grigori Afxentiou, the Castle runs multiple arenas playing different genres plus a courtyard under the stars, and pulls international DJs through the summer season. Doors open around 23:30 but nothing peaks before 01:30; entry usually includes a first drink. Dress code is relaxed, though not swimwear. It is the one full-scale club worth doing even if clubbing is not normally your thing: the building alone is a spectacle.",
+ price:"Entry €10 to 20 depending on the night, often with a drink included", price_s:"Entry €10+",
+ dur:"Late night",
+ getting:"Walk 7 to 8 minutes from the hotel via the square.",
+ tips:"Check the lineup posters around the square in the afternoon; big nights sell advance tickets that skip the queue. Pace yourselves, it runs until dawn.",
+ maps:"https://www.google.com/maps/search/?api=1&query=The%20Castle%20Club%20Ayia%20Napa", web:null,
+ img:null, d:600, s:"E", m:"walk"},
+
+{id:"river-reggae",cat:"night",name:"River Reggae Club",
+ blurb:"The legendary after-hours: an open-air club around a swimming pool, reggae and party classics until the sun comes up, swim included.",
+ details:"An Ayia Napa institution and the traditional final stop: River Reggae opens around 02:00 and is at its best from 03:00, an open-air garden club where the dancefloor wraps around a real pool you are welcome to swim in. The vibe is looser and friendlier than the big clubs, reggae and singalong classics rather than bangers. Its TripAdvisor page is quiet but the club runs strong every summer per its own site. Wear something that survives a dip.",
+ price:"Entry free early, up to about €10 late; drinks €5 to 9", price_s:"Entry €0 to 10",
+ dur:"Very late night",
+ getting:"Walk about 15 minutes or a €5 taxi; it sits off the Ayia Thekla road west of the centre.",
+ tips:"This is the one you end the night at, not start. A late swim under the open sky is a core Ayia Napa memory, but only if you are still sober enough for it; skip the pool after a heavy night. Take the €5 taxi home together rather than the dark 15 minute walk.",
+ maps:"https://www.google.com/maps/search/?api=1&query=River%20Reggae%20Club%20Ayia%20Napa", web:"https://river-reggae.com/",
+ img:null, d:1200, s:"E", m:"walk"},
+
+{id:"ocean-queen",cat:"boat",name:"Ocean Queen Day Cruise",
+ blurb:"The biggest, plushest boat in the harbour: a 4 hour cruise past 13 coastal highlights with a buffet, swim stops and room to spread out.",
+ details:"Ocean Queen is the largest cruise vessel sailing out of Ayia Napa harbour, running a daily 4 hour day cruise along the coast: sea caves, Cape Greco, the Blue Lagoon and more, with a food buffet on board and swim and snorkel stops in the clearest bays. More space and shade than the small boats, so it suits a lazy, comfortable sea day rather than a party. A VIP jacuzzi-deck upgrade exists for those feeling flush. Book a day or two ahead in late July.",
+ price:"About €50 pp including buffet; VIP jacuzzi deck about €120 pp (verify at the quay)", price_s:"€50 pp · buffet",
+ dur:"About 4 hours",
+ getting:"Walk 10 minutes down Makariou Avenue to the harbour; the biggest boat at the quay. Tickets at the kiosks or online.",
+ tips:"Compare it with the Black Pearl before you choose: Ocean Queen is calm comfort and food, the Pearl is pirate theatre. Claim shaded seats on boarding; the open top deck bakes in July.",
+ maps:"https://www.google.com/maps/search/?api=1&query=Ayia%20Napa%20Harbour", web:"https://www.oceanqueenayianapa.com/",
+ img:null, d:800, s:"MD", m:"boat"}
+);
+
+/* ---------- distance, best time, transport for the original items ---------- */
+const EXTRA = {
+ "nissi":{d:3500,s:"MD",m:"bus",ml:"Bus 102"},
+ "landa":{d:4000,s:"MD",m:"bus",ml:"Bus 102"},
+ "makronissos":{d:4500,s:"MD",m:"bus",ml:"Bus 102"},
+ "pantachou":{d:650,s:"ME",m:"walk"},
+ "grecian":{d:1500,s:"MD",m:"walk"},
+ "konnos":{d:7000,s:"M",m:"bus",ml:"Bus 101"},
+ "nissi-watersports":{d:3500,s:"MD",m:"bus",ml:"Bus 102"},
+ "waterworld":{d:5000,s:"D",m:"bus",ml:"Bus 102"},
+ "scuba":{d:400,s:"M",m:"walk"},
+ "kayak-caves":{d:7000,s:"M",m:"pickup"},
+ "cape-greco":{d:6500,s:"ME",m:"bus",ml:"Bus 101"},
+ "love-bridge":{d:5000,s:"E",m:"bus",ml:"Bus 101"},
+ "blue-lagoon-chapel":{d:7500,s:"M",m:"bus",ml:"Bus 101"},
+ "monastery":{d:250,s:"ME",m:"walk"},
+ "thalassa":{d:500,s:"D",m:"walk"},
+ "sculpture-park":{d:2000,s:"ME",m:"walk"},
+ "harbour":{d:800,s:"E",m:"walk"},
+ "luna-park":{d:1000,s:"E",m:"walk"},
+ "marina":{d:6000,s:"E",m:"taxi"},
+ "tombs":{d:4500,s:"ME",m:"bus",ml:"Bus 102"},
+ "ayia-thekla":{d:7000,s:"E",m:"taxi"},
+ "blue-lagoon-cruise":{d:800,s:"MD",m:"boat"},
+ "black-pearl":{d:800,s:"D",m:"boat"},
+ "ghost-cruise":{d:800,s:"D",m:"boat"},
+ "sunset-cruise":{d:800,s:"E",m:"boat"},
+ "fig-tree":{d:9000,s:"MD",m:"bus",ml:"Bus 101/102"},
+ "larnaca":{d:42000,s:"MD",m:"bus",ml:"Intercity"},
+ "varosha":{d:15000,s:"MD",m:"pickup"},
+ "nicosia":{d:80000,s:"MD",m:"bus",ml:"Intercity"},
+ "vassos":{d:800,s:"E",m:"walk"},
+ "sage":{d:900,s:"E",m:"walk"},
+ "stamna":{d:300,s:"E",m:"walk"},
+ "kota":{d:350,s:"DE",m:"walk"},
+ "mexicanos":{d:400,s:"E",m:"walk"},
+ "bakery":{d:200,s:"M",m:"walk"},
+ "napolea":{d:500,s:"E",m:"walk"},
+ "isola":{d:3500,s:"E",m:"bus",ml:"Bus 102"},
+ "river-rock":{d:450,s:"E",m:"walk"},
+ "bedrock":{d:400,s:"E",m:"walk"},
+ "carwash":{d:350,s:"E",m:"walk"}
+};
+DATA.forEach(it=>{ const e=EXTRA[it.id]; if(e){ it.d=e.d; it.s=e.s; it.m=e.m; it.ml=e.ml||null; } });
+
+
+/* ---------- coordinates (approximate), cost estimates for two (EUR), book-ahead ---------- */
+const HOTEL_LL = [34.9885, 33.9986];
+const LL = {
+ "nissi":[34.9887,33.9646],"landa":[34.9868,33.9569],"makronissos":[34.9853,33.9503],
+ "pantachou":[34.9832,34.0002],"grecian":[34.9820,34.0080],"konnos":[34.9776,34.0755],
+ "nissi-watersports":[34.9889,33.9650],"waterworld":[34.9902,33.9483],"scuba":[34.9891,33.9973],
+ "kayak-caves":[34.9770,34.0740],"musan-snorkel":[34.9827,34.0033],"cape-greco":[34.9660,34.0660],
+ "love-bridge":[34.9705,34.0432],"blue-lagoon-chapel":[34.9689,34.0782],"monastery":[34.9887,34.0004],
+ "thalassa":[34.9868,34.0043],"sculpture-park":[34.9808,34.0195],"harbour":[34.9822,33.9994],
+ "luna-park":[34.9895,33.9926],"marina":[34.9772,33.9539],"tombs":[34.9868,33.9482],
+ "ayia-thekla":[34.9763,33.9436],"blue-lagoon-cruise":[34.9822,33.9990],"black-pearl":[34.9821,33.9996],
+ "ghost-cruise":[34.9823,33.9992],"sunset-cruise":[34.9820,33.9998],"ocean-queen":[34.9824,33.9988],"fig-tree":[35.0125,34.0583],
+ "larnaca":[34.9182,33.6201],"varosha":[35.1149,33.9578],"nicosia":[35.1725,33.3625],
+ "horse-riding":[35.0200,34.0100],"potamos":[34.9601,33.9013],"spa":[34.9885,33.9986],
+ "cyprus-night":[34.9887,34.0006],"full-moon":[34.9808,34.0195],"vassos":[34.9827,33.9989],
+ "sage":[34.9840,34.0070],"stamna":[34.9893,34.0009],"kota":[34.9886,33.9985],
+ "mexicanos":[34.9884,33.9993],"bakery":[34.9879,33.9989],"napolea":[34.9856,33.9996],
+ "isola":[34.9884,33.9648],"river-rock":[34.9886,34.0000],"bedrock":[34.9898,33.9995],
+ "carwash":[34.9893,33.9989],"square":[34.9888,34.0005],"bar-street":[34.9899,33.9998],
+ "castle-club":[34.9905,33.9955],"river-reggae":[34.9878,33.9903]
+};
+const COST = {
+ "nissi":8,"landa":5,"makronissos":5,"pantachou":5,"grecian":5,"konnos":9,
+ "nissi-watersports":120,"waterworld":98,"scuba":170,"kayak-caves":90,"musan-snorkel":100,
+ "cape-greco":4,"love-bridge":4,"blue-lagoon-chapel":4,"monastery":0,"thalassa":8,
+ "sculpture-park":0,"harbour":0,"luna-park":30,"marina":25,"tombs":4,"ayia-thekla":28,
+ "blue-lagoon-cruise":70,"black-pearl":90,"ghost-cruise":70,"sunset-cruise":60,
+ "fig-tree":8,"larnaca":18,"varosha":126,"nicosia":22,"horse-riding":100,"potamos":70,
+ "spa":80,"cyprus-night":80,"full-moon":0,"vassos":70,"sage":90,"stamna":55,"kota":25,
+ "mexicanos":50,"bakery":20,"napolea":8,"isola":30,"river-rock":25,"bedrock":25,
+ "carwash":20,"square":25,"bar-street":30,"castle-club":40,"river-reggae":25,"ocean-queen":100
+};
+const BOOK_AHEAD = ["sage","stamna","vassos","blue-lagoon-cruise","black-pearl","ghost-cruise","sunset-cruise","kayak-caves","musan-snorkel","scuba","varosha","horse-riding","spa","ocean-queen"];
+DATA.forEach(it=>{ it.ll = LL[it.id]||null; it.est = COST[it.id]!=null ? COST[it.id] : null; it.ba = BOOK_AHEAD.includes(it.id); });
+const TRIP_START = new Date(2026, 6, 27);
+const TRIP_LEN = 8;
+const DAY_LABELS = ["Mon 27","Tue 28","Wed 29","Thu 30","Fri 31","Sat 1","Sun 2","Mon 3"];
+const CAT_HEX = {beach:"#0FA3B1",water:"#2A7DE1",sight:"#E07A3F",boat:"#0C7489",daytrip:"#C99114",food:"#E85D4A",night:"#8757C9",well:"#4CAF8D"};
+
+/* ---------- TripAdvisor scores (checked July 2026) ---------- */
+const TA = {
+ "nissi":{r:4.3,n:7884,rank:"#15 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d1519581-Reviews-Nissi_Beach-Ayia_Napa_Famagusta_District.html"},
+ "landa":{r:4.6,n:730,rank:"#6 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6680620-Reviews-Landa_Beach-Ayia_Napa_Famagusta_District.html"},
+ "makronissos":{r:4.6,n:1808,rank:"#7 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3393632-Reviews-Makronissos_Beach-Ayia_Napa_Famagusta_District.html"},
+ "pantachou":{r:4.1,n:261,rank:"#24 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d1519586-Reviews-Pantachou_Beach-Ayia_Napa_Famagusta_District.html"},
+ "grecian":{r:4.5,n:186,rank:"#21 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3587670-Reviews-Glyki_Nero_Beach-Ayia_Napa_Famagusta_District.html"},
+ "konnos":{r:4.6,n:1910,rank:"#9 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d2365027-Reviews-Konnos_Bay-Ayia_Napa_Famagusta_District.html"},
+ "nissi-watersports":{r:3.9,n:92,rank:"#42 of 72 boat tours & water sports in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d4404225-Reviews-Nissi_Watersports-Ayia_Napa_Famagusta_District.html"},
+ "waterworld":{r:4.3,n:4319,rank:"#8 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d669359-Reviews-WaterWorld_Themed_WaterPark-Ayia_Napa_Famagusta_District.html"},
+ "scuba":{r:5.0,n:465,rank:"#6 of 111 tours & activities in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d2225640-Reviews-Just_Scuba_Diving_Centre-Ayia_Napa_Famagusta_District.html"},
+ "kayak-caves":{r:4.9,n:7,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g262055-d19886865-3_hour_guided_kayaking_to_Cape_Greko_Sea_Caves_cove-Ayia_Napa_Famagusta_District.html"},
+ "musan-snorkel":{r:4.9,n:7,rank:"#41 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d23611643-Reviews-Museum_Of_Underwater_Sculpture-Ayia_Napa_Famagusta_District.html"},
+ "cape-greco":{r:4.6,n:838,rank:"#4 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3533888-Reviews-Cape_Greco_National_Forest_Park-Ayia_Napa_Famagusta_District.html"},
+ "love-bridge":{r:4.4,n:273,rank:"#17 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6677240-Reviews-Kamara_Tou_Koraka-Ayia_Napa_Famagusta_District.html"},
+ "blue-lagoon-chapel":{r:4.6,n:109,rank:"#25 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6701324-Reviews-Agioi_Anargyroi_Chapel-Ayia_Napa_Famagusta_District.html"},
+ "monastery":{r:4.4,n:1582,rank:"#12 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d1519576-Reviews-Ayia_Napa_Monastery-Ayia_Napa_Famagusta_District.html"},
+ "thalassa":{r:4.1,n:253,rank:"#22 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d4549746-Reviews-Thalassa_Municipal_Museum-Ayia_Napa_Famagusta_District.html"},
+ "sculpture-park":{r:4.5,n:879,rank:"#5 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6826137-Reviews-Ayia_Napa_Sculpture_Park-Ayia_Napa_Famagusta_District.html"},
+ "harbour":{r:4.4,n:817,rank:"#11 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6487751-Reviews-Ayia_Napa_Harbour-Ayia_Napa_Famagusta_District.html"},
+ "luna-park":{r:4.1,n:791,rank:"#19 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3511557-Reviews-Parko_Paliatso_Luna_Park-Ayia_Napa_Famagusta_District.html"},
+ "marina":{r:null,n:0,rank:null,url:"https://www.tripadvisor.com/Attraction_Review-g262055-d33019951-Reviews-Ayia_Napa_Marina-Ayia_Napa_Famagusta_District.html"},
+ "tombs":{r:3.9,n:113,rank:"#30 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6680625-Reviews-Makronissos_Tombs-Ayia_Napa_Famagusta_District.html"},
+ "ayia-thekla":{r:4.5,n:190,rank:"#18 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d7935967-Reviews-Ayia_Thekla_Chapel-Ayia_Napa_Famagusta_District.html"},
+ "blue-lagoon-cruise":{r:4.9,n:1363,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g262055-d23403478-APHRODITE_II_LAZY_DAY_CRUISE_BLUE_LAGOON_TURTLE_COVE_with_LUNCH-Ayia_Napa_Famagust.html"},
+ "black-pearl":{r:4.5,n:229,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g262055-d12470008-Black_Pearl_Pirate_Cruise_from_Ayia_Napa-Ayia_Napa_Famagusta_District.html"},
+ "ghost-cruise":{r:2.9,n:138,rank:"#39 of 72 boat tours & water sports in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d10486767-Reviews-Famagusta_Napa_Boat-Ayia_Napa_Famagusta_District.html"},
+ "sunset-cruise":{r:4.4,n:1510,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g667803-d12566483-Mediterraneo_Catamaran_Sunset_Cruise_from_Ayia_Napa-Protaras_Paralimni_Famagusta_D.html"},
+ "fig-tree":{r:4.5,n:5210,rank:"#4 of 21 things to do in Protaras",url:"https://www.tripadvisor.com/Attraction_Review-g667803-d1755105-Reviews-Fig_Tree_Bay_Beach-Protaras_Paralimni_Famagusta_District.html"},
+ "larnaca":{r:4.7,n:2677,rank:"Saint Lazarus Church: #5 of 70 things to do in Larnaca",url:"https://www.tripadvisor.com/Attraction_Review-g190379-d313644-Reviews-Saint_Lazarus_Church-Larnaca_Larnaka_District.html"},
+ "varosha":{r:4.4,n:1466,rank:"#1 of 35 things to do in Famagusta",url:"https://www.tripadvisor.com/Attraction_Review-g190375-d3587617-Reviews-Ghost_Town_Famagusta-Famagusta_Famagusta_District.html"},
+ "nicosia":{r:4.0,n:1629,rank:"Ledra Street crossing: #7 of 276 things to do in Nicosia",url:"https://www.tripadvisor.com/Attraction_Review-g190383-d2067161-Reviews-Ledra_Street_Crossing_Point-Nicosia_Nicosia_District.html"},
+ "horse-riding":{r:3.8,n:111,rank:"#12 of 21 things to do in Protaras",url:"https://www.tripadvisor.com/Attraction_Review-g667803-d2085956-Reviews-Moonshine_Ranch-Protaras_Paralimni_Famagusta_District.html"},
+ "potamos":{r:4.1,n:355,rank:"Potamos Fish Taverna: #2 of 5 restaurants in Liopetri",url:"https://www.tripadvisor.com/Restaurant_Review-g1759109-d2020463-Reviews-Potamos_Fish_Taverna-Liopetri_Famagusta_District.html"},
+ "vassos":{r:3.8,n:1512,rank:"#87 of 222 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d1101684-Reviews-Vassos_Psarolimano-Ayia_Napa_Famagusta_District.html"},
+ "sage":{r:4.7,n:2394,rank:"#33 of 221 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d1540324-Reviews-Sage_Restaurant_Wine_Bar-Ayia_Napa_Famagusta_District.html"},
+ "stamna":{r:4.7,n:902,rank:"#24 of 222 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d1860579-Reviews-Stamna_Taverna-Ayia_Napa_Famagusta_District.html"},
+ "kota":{r:4.6,n:214,rank:"#49 of 226 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d12679044-Reviews-Kota_Greek_Souvlaki-Ayia_Napa_Famagusta_District.html"},
+ "mexicanos":{r:4.9,n:943,rank:"#2 of 226 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d24107469-Reviews-Los_Mexicanos-Ayia_Napa_Famagusta_District.html"},
+ "bakery":{r:4.2,n:180,rank:"#95 of 238 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d8003591-Reviews-The_Bakery_Co-Ayia_Napa_Famagusta_District.html"},
+ "napolea":{r:4.2,n:51,rank:"#6 of 13 dessert spots in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d7711915-Reviews-Napolea_French_Ice_Cream-Ayia_Napa_Famagusta_District.html"},
+ "isola":{r:4.4,n:448,rank:"#43 of 226 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d15003710-Reviews-Isola_Beach_Bar-Ayia_Napa_Famagusta_District.html"},
+ "river-rock":{r:null,n:1,rank:null,url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d33235139-Reviews-River_Rock_Cocktail_Bar_and_Shisha_Lounge-Ayia_Napa_Famagusta_District.html"},
+ "bedrock":{r:3.9,n:180,rank:"#7 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d669363-Reviews-Bedrock_Inn_The_Bar_Barstreet-Ayia_Napa_Famagusta_District.html"},
+ "carwash":{r:3.2,n:46,rank:"#41 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6678261-Reviews-Car_Wash-Ayia_Napa_Famagusta_District.html"},
+ "spa":{r:4.6,n:3750,rank:"Napa Plaza hotel: #6 of 119 hotels in Ayia Napa",url:"https://www.tripadvisor.com/Hotel_Review-g262055-d530468-Reviews-Napa_Plaza_Hotel-Ayia_Napa_Famagusta_District.html"},
+ "square":{r:4.2,n:1027,rank:"#16 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6664377-Reviews-Ayia_Napa_Square-Ayia_Napa_Famagusta_District.html"},
+ "castle-club":{r:4.3,n:454,rank:"#2 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d669370-Reviews-The_Castle_Club-Ayia_Napa_Famagusta_District.html"},
+ "river-reggae":{r:3.5,n:16,rank:"#26 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d10424071-Reviews-River_Reggae_Club-Ayia_Napa_Famagusta_District.html"}
+};
+DATA.forEach(it=>{ it.ta = TA[it.id] || null; });
+function fmtN(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
+function taBadge(it){
+  if(!it.ta || !it.ta.r || it.ta.n < 10) return "";
+  return '<span class="tarate">&#9679; '+it.ta.r.toFixed(1)+' ('+fmtN(it.ta.n)+')</span>';
+}
+
+
+/* ---------- photo search queries ---------- */
+const QUERIES = {
+  "nissi":["Nissi Beach"],
+  "landa":["Landa Beach Ayia Napa","Landa beach","Nissi Beach Ayia Napa"],
+  "makronissos":["Makronissos Beach","Makronissos Ayia Napa"],
+  "pantachou":["Pantachou Ayia Napa","Ayia Napa beach"],
+  "grecian":["Glyki Nero Beach","Grecian Bay Ayia Napa"],
+  "konnos":["Konnos Bay"],
+  "nissi-watersports":["Nissi Beach watersports","parasailing","Nissi Beach"],
+  "waterworld":["WaterWorld Ayia Napa","waterpark slides","water park"],
+  "scuba":["scuba diving Mediterranean","MUSAN Ayia Napa","Cyprus diving"],
+  "kayak-caves":["Sea caves Cape Greco","Cape Greco caves"],
+  "cape-greco":["Cape Greco"],
+  "love-bridge":["Kamara tou Koraka","Sea caves Cape Greco"],
+  "blue-lagoon-chapel":["Agioi Anargyroi Cape Greco","Cape Greco chapel","Blue Lagoon Cape Greco"],
+  "monastery":["Ayia Napa Monastery"],
+  "thalassa":["Thalassa Museum Ayia Napa","Kyrenia II ship"],
+  "sculpture-park":["Ayia Napa Sculpture Park"],
+  "harbour":["Ayia Napa harbour","fishing boats harbour Cyprus"],
+  "luna-park":["Parko Paliatso","Ayia Napa fun park","ferris wheel night"],
+  "marina":["Ayia Napa Marina","marina yachts"],
+  "tombs":["Makronissos Tombs"],
+  "ayia-thekla":["Ayia Thekla Sotira","Agia Thekla chapel Cyprus","Agia Thekla","chapel Cyprus sea"],
+  "blue-lagoon-cruise":["Blue Lagoon Cape Greco","Ayia Napa harbour boats"],
+  "black-pearl":["Black Pearl Ayia Napa","pirate ship replica","Ayia Napa harbour","pirate galleon"],
+  "ghost-cruise":["Varosha","Famagusta coast"],
+  "sunset-cruise":["Cape Greco sunset","Ayia Napa sunset","Mediterranean sunset boat","sunset sea sailing"],
+  "fig-tree":["Fig Tree Bay","Protaras beach"],
+  "larnaca":["Finikoudes Larnaca","Church of Saint Lazarus Larnaca","Hala Sultan Tekke"],
+  "varosha":["Varosha Famagusta","Famagusta old town"],
+  "nicosia":["Ledra Street Nicosia","Nicosia old city","Selimiye Mosque Nicosia"],
+  "vassos":["Ayia Napa harbour","fish meze","grilled fish taverna"],
+  "sage":["Ayia Napa evening","wine glasses restaurant","Ayia Napa"],
+  "stamna":["Cypriot meze","kleftiko","halloumi"],
+  "kota":["souvlaki","gyros pita"],
+  "mexicanos":["fajitas","tacos","margarita cocktail"],
+  "bakery":["cappuccino","croissants bakery","coffee breakfast cafe"],
+  "napolea":["gelato","ice cream parlour"],
+  "isola":["Nissi Beach sunset","Nissi Beach bar","Aperol Spritz"],
+  "river-rock":["cocktail bar","cocktails","Ayia Napa square"],
+  "bedrock":["Ayia Napa nightlife","Ayia Napa square night","Ayia Napa bar street"],
+  "carwash":["disco ball","Ayia Napa nightlife"],
+  "musan-snorkel":["MUSAN Ayia Napa","underwater sculpture","snorkeling"],
+  "spa":["spa wellness sauna","massage spa"],
+  "cyprus-night":["Commandaria wine","Cypriot meze","bouzouki"],
+  "potamos":["Potamos Liopetriou","Liopetri"],
+  "horse-riding":["horse riding sunset","horseback riding beach"],
+  "full-moon":["full moon sea","moonrise sea"],
+  "square":["Ayia Napa square night","Ayia Napa nightlife","Ayia Napa Monastery"],
+  "bar-street":["Ayia Napa bar street","Ayia Napa night","neon bar"],
+  "castle-club":["nightclub dancefloor lights","disco lights","dj club"],
+  "river-reggae":["pool party night","reggae night","swimming pool night"],
+  "ocean-queen":["Ayia Napa harbour","cruise boat Mediterranean","Ayia Napa harbour boats"]
+};
+const CANDIDATES = {
+  "nissi":["2022 03 Nissi beach 1.jpg","2022 03 Nissi beach 2.jpg","2022 03 Nissi beach 3.jpg","Nissi-Beach.jpg","2022 03 Nissi beach 4.jpg"],
+  "makronissos":["03 Cyprus beach - Makronissos Beach in Ayia Napa - sandy Cyprus beach - Zypern Urlaubsgebiet.jpg"],
+  "pantachou":["Ayia Napa beach.JPG"],
+  "grecian":["Glyki Nero Beach, Agia Napa, Cyprus.jpg"],
+  "konnos":["Hotel Grecian Park Konnos Bay Cyprus (43674776572).jpg","Konnos Bay.jpg","Konnos Beach.jpg"],
+  "nissi-watersports":["Nissi-Beach.jpg","2022 03 Nissi beach 3.jpg","2022 03 Nissi beach 2.jpg"],
+  "kayak-caves":["Sea caves Cape Greco 9.jpg","Sea caves Cape Greco 2.jpg","Sea caves Cape Greco 5.jpg","Sea caves Cape Greco 7.jpg","Sea caves Cape Greco 3.jpg"],
+  "cape-greco":["Cyprus, Cape Greco National Forest Park.jpg","FamagustaDistrict 01-2017 img10 Cape Greco.jpg","Agia Napa Kap Greco 16.jpg","Agia Napa Kap Greco 12.jpg","Agia Napa Kap Greco 9.jpg"],
+  "love-bridge":["Sea caves Cape Greco 2.jpg","Sea caves Cape Greco 9.jpg","Sea caves Cape Greco 4.jpg","Sea caves Cape Greco 6.jpg","Sea caves Cape Greco 8.jpg"],
+  "blue-lagoon-chapel":["Agia Napa Kap Greco 16.jpg","Agia Napa Kap Greco 15.jpg","Agia Napa Kap Greco 14.jpg","Agia Napa Kap Greco 10.jpg"],
+  "monastery":["Agia Napa Monastery front.jpg","Agia Napa Monastery.jpg","Ayia Napa Monastery.jpg"],
+  "thalassa":["Treasures of THALASSA Museum Ayia Napa 01.JPG","Treasures of THALASSA Museum Ayia Napa 02.JPG","Treasures of THALASSA Museum Ayia Napa 03.JPG","Treasures of THALASSA Museum Ayia Napa 04.JPG"],
+  "sculpture-park":["2022 03 Ayia Napa Sculpture Park 4 Aphrodite.jpg","2022 03 Ayia Napa Sculpture Park 1.jpg","2022 03 Ayia Napa Sculpture Park 2.jpg","2022 03 Ayia Napa Sculpture Park 3.jpg"],
+  "harbour":["Ayia Napa harbour.jpg","Agia Napa harbour.jpg","Ayia Napa Harbour, Cyprus.jpg"],
+  "luna-park":["Vidámpark, Ayia Napa - Fun Park - panoramio (3).jpg","Vidámpark, Ayia Napa - Fun Park - panoramio (1).jpg","Vidámpark, Ayia Napa - Fun Park - panoramio (2).jpg","Vidámpark, Ayia Napa - Fun Park - panoramio (4).jpg"],
+  "tombs":["Makronissos Tombs in Ayia Napa 21.JPG","Makronissos Tombs in Ayia Napa 1.JPG","Makronissos Tombs in Ayia Napa 5.JPG","Makronissos Tombs in Ayia Napa 10.JPG","Makronissos Tombs in Ayia Napa 15.JPG"],
+  "blue-lagoon-cruise":["FamagustaDistrict 01-2017 img10 Cape Greco.jpg","Agia Napa Kap Greco 16.jpg","Sea caves Cape Greco 5.jpg"],
+  "black-pearl":["Ayia Napa harbour.jpg","Agia Napa harbour.jpg"],
+  "sunset-cruise":["Agia Napa Kap Greco 12.jpg","Sea caves Cape Greco 7.jpg","FamagustaDistrict 01-2017 img10 Cape Greco.jpg"],
+  "ghost-cruise":["Varosia2006.jpg","Varosha, Famagusta.jpg"],
+  "varosha":["Varosia2006.jpg","Varosha, Famagusta.jpg"],
+  "fig-tree":["Fig Tree Bay, Protaras.jpg","Fig Tree Bay.jpg","Protaras Fig Tree Bay.jpg"],
+  "larnaca":["Foinikoudes, Larnaca.jpg","Finikoudes, Larnaca, Cyprus.jpg","Larnaca Finikoudes.jpg","Church of Saint Lazarus, Larnaca.jpg"],
+  "nicosia":["Ledra Street, Nicosia.jpg","Ledra street Nicosia.jpg","Nicosia Ledra Street.jpg"],
+  "musan-snorkel":["Sea caves Cape Greco 3.jpg"]
+};
+
+/* ---------- storage (safely ignored where blocked) ---------- */
+function lsGet(k){ try{ return window.localStorage.getItem(k); }catch(e){ return null; } }
+function lsSet(k,v){ try{ window.localStorage.setItem(k,v); }catch(e){} }
+let storageOK = true;
+try{
+  window.localStorage.setItem("napaProbe","1");
+  storageOK = window.localStorage.getItem("napaProbe")==="1";
+  window.localStorage.removeItem("napaProbe");
+}catch(e){ storageOK = false; }
+
+/* ---------- state ---------- */
+let state = {};
+try{ state = JSON.parse(lsGet("napaState")||"{}") || {}; }catch(e){ state = {}; }
+const GAL_CACHE = {};
+try{ Object.assign(GAL_CACHE, JSON.parse(lsGet("napaGal")||"{}")||{}); }catch(e){}
+const GAL_PENDING = {};
+let extra = {days:{}, notes:{}, spent:{}, wantBy:{}, who:null, theme:"auto", sort:"wish"};
+try{ Object.assign(extra, JSON.parse(lsGet("napaExtra")||"{}")||{}); }catch(e){}
+extra.days=extra.days||{}; extra.notes=extra.notes||{}; extra.spent=extra.spent||{}; extra.wantBy=extra.wantBy||{}; extra.unDone=extra.unDone||{};
+/* migrate old single-status wants into per-person wants */
+Object.keys(state).forEach(id=>{ if(state[id]==="want" && !extra.wantBy[id]) extra.wantBy[id] = extra.who||"X"; });
+function wantOf(id){ return extra.wantBy[id]||""; }
+function wantTag(id){
+  const s = wantOf(id);
+  const v = s.includes("V"), h = s.includes("H");
+  if(v&&h) return " · V+H";
+  if(v) return " · V";
+  if(h) return " · H";
+  return "";
+}
+function saveExtra(){ lsSet("napaExtra", JSON.stringify(extra)); }
+let cat="all", stat="all", timeF="all", modeF="all", dayF="all", q="";
+
+const CATS = [
+  ["all","Everything"],["beach","Beaches"],["water","Water fun"],["sight","Sights & nature"],
+  ["boat","Boat trips"],["daytrip","Day trips"],["food","Food & drink"],["night","Nightlife"],["well","Wellness"]
+];
+const STATS = [["all","All"],["open","Undecided"],["want","Want to"],["both","Both want"],["done","Done"]];
+const TIMES = [["all","Any time"],["M","Morning"],["D","Midday"],["E","Evening"]];
+const MODES = [["all","Any way"],["walk","Walk"],["bus","Bus"],["boat","Boat"],["taxi","Taxi"],["pickup","Pickup"]];
+const CATLAB = {beach:"Beach",water:"Water fun",sight:"Sight",boat:"Boat trip",daytrip:"Day trip",food:"Food & drink",night:"Nightlife",well:"Wellness"};
+const ACS = ["thalassa","spa"]; /* air-conditioned midday escapes */
+const MODE_LAB = {walk:"Walk",bus:"Bus",taxi:"Taxi",boat:"Boat",pickup:"Pickup"};
+
+function esc(s){ return (""+(s==null?"":s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function saveState(){ lsSet("napaState", JSON.stringify(state)); }
+function distLabel(it){
+  if(it.d==null) return "";
+  if(it.d===0) return "In the hotel";
+  if(it.d<1000) return it.d+" m from hotel";
+  return (Math.round(it.d/100)/10).toString().replace(".",",")+" km from hotel";
+}
+
+function mediaHTML(it, tall){
+  const ph = '<div class="ph"><div class="letter">'+esc(it.name[0])+'</div><div class="rule"></div><div class="lab">'+CATLAB[it.cat]+'</div></div>';
+  const img = it.img ? '<img src="'+esc(it.img)+'" alt="'+esc(it.name)+'" loading="lazy" onerror="imgBroke(this,\''+it.id+'\')">' : '';
+  return '<div class="media">'+ph+img+
+    '<span class="tag">'+CATLAB[it.cat]+'</span>'+
+    (tall?'':'<span class="flag f-want">Want to'+esc(wantTag(it.id))+'</span><span class="flag f-done">✓ Done</span>')+
+  '</div>';
+}
+function imgBroke(el, id){
+  const it = DATA.find(x=>x.id===id);
+  if(it) it.imgFailed = true;
+  el.remove();
+}
+
+/* ---------- render ---------- */
+function matches(it){
+  if(cat!=="all" && it.cat!==cat) return false;
+  const st = state[it.id]||"";
+  if(stat==="open" && st!=="") return false;
+  if(stat==="want" && st!=="want") return false;
+  if(stat==="both" && !(st!=="done" && wantOf(it.id).includes("V") && wantOf(it.id).includes("H"))) return false;
+  if(stat==="done" && st!=="done") return false;
+  if(timeF!=="all" && !(it.s||"").includes(timeF)) return false;
+  if(modeF!=="all" && it.m!==modeF) return false;
+  if(dayF!=="all" && String(extra.days[it.id]||"")!==dayF) return false;
+  const qq = q.trim().toLowerCase();
+  if(qq && !(it.name+" "+it.blurb+" "+it.details).toLowerCase().includes(qq)) return false;
+  return true;
+}
+function render(){
+  const grid = document.getElementById("grid");
+  if(dayF!=="all"){
+    const daySet = new Set(Object.values(extra.days).map(String));
+    if(!daySet.has(dayF)) dayF = "all";
+  }
+  let items = DATA.filter(matches);
+  const w = it=>{ const st=state[it.id]||""; return st==="want"?0:(st==="done"?2:1); };
+  const sk = extra.sort||"wish";
+  const key = it=> sk==="near" ? (it.d==null?1e9:it.d)
+            : sk==="rated" ? -((it.ta&&it.ta.r&&it.ta.n>=10)? it.ta.r : 0)
+            : sk==="cheap" ? (it.est==null?1e9:it.est) : 0;
+  items = items.map((it,i)=>[it,i]).sort((A,B)=> sk==="wish"
+    ? ((w(A[0])-w(B[0])) || (A[1]-B[1]))
+    : ((key(A[0])-key(B[0])) || (w(A[0])-w(B[0])) || (A[1]-B[1]))
+  ).map(x=>x[0]);
+  grid.innerHTML = items.map(it=>{
+    const st = state[it.id]||"";
+    return '<div class="card '+st+'" data-id="'+it.id+'" data-cat="'+it.cat+'" role="button" tabindex="0" aria-label="'+esc(it.name)+'">'+
+      mediaHTML(it,false)+
+      (extra.days[it.id]? '<span class="daytag">'+DAY_LABELS[extra.days[it.id]-1]+'</span>':'')+
+      '<div class="body">'+
+        '<div class="name">'+esc(it.name)+'</div>'+
+        '<div class="blurb">'+esc(it.blurb)+'</div>'+
+        '<div class="meta"><span><b>'+esc(it.price_s)+'</b></span><span>'+distLabel(it)+'</span><span class="mbadge">'+esc(it.ml||MODE_LAB[it.m]||"")+'</span>'+taBadge(it)+(it.ba?'<span class="babadge">Book ahead</span>':'')+(ACS.includes(it.id)?'<span class="mbadge">A/C escape</span>':'')+'</div>'+
+      '</div>'+
+      '<div class="acts">'+
+        '<button class="bWant" data-act="want">'+(st==="want"?"On the list":"Want to")+'</button>'+
+        '<button class="bDone" data-act="done">'+(st==="done"?"✓ Done":"Mark done")+'</button>'+
+      '</div>'+
+    '</div>';
+  }).join("");
+  document.getElementById("empty").style.display = items.length? "none":"block";
+  if(mapObj && document.getElementById("mapWrap").classList.contains("open")) drawMapMarkers();
+  const done = DATA.filter(i=>state[i.id]==="done").length;
+  const want = DATA.filter(i=>state[i.id]==="want").length;
+  document.getElementById("nDone").textContent = done;
+  document.getElementById("nWant").textContent = want;
+  document.getElementById("nTotal").textContent = done+" / "+DATA.length;
+  document.getElementById("barFill").style.width = (100*done/DATA.length)+"%";
+  const wishSum = DATA.filter(i=>state[i.id]==="want" && i.est).reduce((a,i)=>a+i.est,0);
+  const spentSum = Object.entries(extra.spent).filter(([id])=>state[id]==="done").reduce((a,[,v])=>a+(parseFloat(v)||0),0);
+  document.getElementById("budgetLine").textContent =
+    (wishSum? "Wish list ≈ €"+wishSum+" for two" : "") + (wishSum&&spentSum? " · " : "") + (spentSum? "Spent €"+Math.round(spentSum) : "");
+  renderChips();
+}
+function renderChips(){
+  document.getElementById("catChips").innerHTML = CATS.map(c=>
+    '<button class="chip'+(cat===c[0]?" on":"")+'" role="tab" aria-selected="'+(cat===c[0])+'" data-cat="'+c[0]+'">'+esc(c[1])+'</button>').join("");
+  const done = DATA.filter(i=>state[i.id]==="done").length;
+  const want = DATA.filter(i=>state[i.id]==="want").length;
+  const both = DATA.filter(i=>state[i.id]!=="done" && wantOf(i.id).includes("V") && wantOf(i.id).includes("H")).length;
+  const open = DATA.length - done - want;
+  const cnt = {all:"", open:" · "+open, want:" · "+want, both:" · "+both, done:" · "+done};
+  const grp = (label, inner)=>'<div class="fgroup"><span class="glab">'+label+'</span><div class="fopts">'+inner+'</div></div>';
+  document.getElementById("filterChips").innerHTML =
+    grp("Show status", STATS.map(s=>'<button class="chip'+(stat===s[0]?" on":"")+'" data-stat="'+s[0]+'">'+s[1]+cnt[s[0]]+'</button>').join(""))+
+    grp("Time of day", TIMES.map(t=>'<button class="chip'+(timeF===t[0]?" on":"")+'" data-time="'+t[0]+'">'+t[1]+'</button>').join(""))+
+    grp("Getting there", MODES.map(mo=>'<button class="chip'+(modeF===mo[0]?" on":"")+'" data-mode="'+mo[0]+'">'+mo[1]+'</button>').join(""))+
+    grp("Sort by", [["wish","Wish first"],["near","Nearest"],["rated","Top rated"],["cheap","Cheapest"]].map(s=>
+      '<button class="chip'+((extra.sort||"wish")===s[0]?" on":"")+'" data-sort="'+s[0]+'">'+s[1]+'</button>').join(""))+
+    (Object.keys(extra.days).length ?
+      grp("Day plan", '<button class="chip'+(dayF==="all"?" on":"")+'" data-day="all">Any day</button>'+
+        [...new Set(Object.values(extra.days))].sort((a,b)=>a-b).map(d=>
+          '<button class="chip'+(dayF===String(d)?" on":"")+'" data-day="'+d+'">'+DAY_LABELS[d-1]+'</button>').join(""))
+    : "");
+  /* filters button badge + apply-button count (sort is not a filter) */
+  const active = (stat!=="all"?1:0)+(timeF!=="all"?1:0)+(modeF!=="all"?1:0)+(dayF!=="all"?1:0);
+  const fb = document.getElementById("filtersBtn");
+  if(fb){
+    fb.innerHTML = "Filters"+(active?'<span class="fcount">'+active+'</span>':"");
+    fb.classList.toggle("hasfilters", active>0);
+    fb.setAttribute("aria-label", "Filters, "+active+" active");
+  }
+  const fa = document.getElementById("fApply");
+  if(fa){
+    const n = DATA.filter(matches).length;
+    fa.textContent = "Show "+(n===DATA.length? "all "+n : n)+" place"+(n===1?"":"s");
+  }
+}
+
+/* ---------- scroll lock (iOS-safe) ---------- */
+let lockedY = 0;
+function lockScroll(){
+  lockedY = window.scrollY || 0;
+  document.body.style.position="fixed";
+  document.body.style.top=(-lockedY)+"px";
+  document.body.style.width="100%";
+}
+function unlockScroll(){
+  document.body.style.position="";
+  document.body.style.top="";
+  document.body.style.width="";
+  window.scrollTo(0, lockedY);
+}
+
+/* ---------- modal ---------- */
+let prevFocus = null;
+let modalPushed = false;
+function openModal(id){
+  const it = DATA.find(i=>i.id===id); if(!it) return;
+  const st = state[id]||"";
+  const m = document.getElementById("modal");
+  m.innerHTML =
+    '<button class="close" onclick="closeModal()" aria-label="Close details">Close ✕</button>'+
+    '<div id="galWrap">'+mediaHTML(it,true)+'</div>'+
+    '<div class="thumbs" id="thumbs"></div>'+
+    '<div class="gal-note" id="galNote">Finding photos&hellip;</div>'+
+    '<div class="minner">'+
+      '<div class="m-kick">'+CATLAB[it.cat]+' · '+esc(it.dur)+'</div>'+
+      '<div class="m-name">'+esc(it.name)+'</div>'+
+      '<div class="m-blurb">'+esc(it.blurb)+'</div>'+
+      '<div class="m-sec"><div class="lab">What to expect</div><p>'+esc(it.details)+'</p></div>'+
+      '<div class="m-sec"><div class="lab">Getting there from Napa Plaza</div><p>'+esc(it.getting)+'</p></div>'+
+      '<div class="m-sec"><div class="lab">Tips</div><p>'+esc(it.tips)+'</p></div>'+
+      '<div class="m-facts">'+
+        '<div class="f"><div class="lab">Price</div><div>'+esc(it.price)+'</div></div>'+
+        '<div class="f"><div class="lab">Time needed</div><div>'+esc(it.dur)+'</div></div>'+
+        '<div class="f"><div class="lab">From the hotel</div><div>'+distLabel(it)+' · '+esc(it.ml||MODE_LAB[it.m]||"")+'</div></div>'+
+        (it.ta && it.ta.r && it.ta.n>=10 ?
+          '<div class="f"><div class="lab">TripAdvisor</div><div>'+it.ta.r.toFixed(1)+' of 5 · '+fmtN(it.ta.n)+' reviews'+(it.ta.rank? '<div class="tarank">'+esc(it.ta.rank)+'</div>':'')+'</div></div>'
+        : (it.ta && it.ta.url ? '<div class="f"><div class="lab">TripAdvisor</div><div>Listed, few reviews yet'+(it.ta.rank? '<div class="tarank">'+esc(it.ta.rank)+'</div>':'')+'</div></div>' : ''))+
+      '</div>'+
+      '<div class="m-links">'+
+        '<a class="btn solid" href="'+esc(it.maps)+'" target="_blank" rel="noopener">Open in Google Maps</a>'+
+        (it.web? '<a class="btn line" href="'+esc(it.web)+'" target="_blank" rel="noopener">Website</a>':'')+
+        '<a class="btn line" href="https://www.google.com/search?udm=2&q='+encodeURIComponent(it.name+' Ayia Napa Cyprus')+'" target="_blank" rel="noopener">More photos</a>'+
+        (it.ta && it.ta.url ? '<a class="btn line" href="'+esc(it.ta.url)+'" target="_blank" rel="noopener">TripAdvisor</a>' : '')+
+      '</div>'+
+      '<div class="m-acts">'+
+        '<button class="btn line'+(st==="want"?" activeWant":"")+'" id="mWant" onclick="tickFromModal(\''+id+'\',\'want\')">'+(st==="want"?"On the wish list":"Want to do this")+'</button>'+
+        '<button class="btn line'+(st==="done"?" activeDone":"")+'" id="mDone" onclick="tickFromModal(\''+id+'\',\'done\')">'+(st==="done"?"✓ Done":"Mark as done")+'</button>'+
+        '<button class="btn line" onclick="shareCard(\''+id+'\')">Share this</button>'+
+      '</div>'+
+      '<div class="m-sec"><div class="lab">Plan it for a day</div><div class="mdays" id="mDays"></div></div>'+
+      '<div id="mExtras"></div>'+
+    '</div>';
+  m.setAttribute("data-cat", it.cat);
+  m.dataset.galFor = it.id;
+  m.setAttribute("aria-label", it.name);
+  renderDayPicker(id);
+  renderModalExtras(id);
+  loadGallery(it);
+  const wasOpen = document.getElementById("overlay").classList.contains("open");
+  document.getElementById("overlay").classList.add("open");
+  if(!wasOpen){
+    prevFocus = document.activeElement;
+    lockScroll();
+    if(!modalPushed){ try{ history.pushState({napaModal:1},""); modalPushed = true; }catch(e){} }
+  }
+  const cb = m.querySelector(".close");
+  if(cb) cb.focus();
+}
+function closeModalInner(){
+  const ov = document.getElementById("overlay");
+  if(!ov.classList.contains("open")) return;
+  ov.classList.remove("open");
+  unlockScroll();
+  if(prevFocus && prevFocus.focus){ try{ prevFocus.focus(); }catch(e){} }
+  prevFocus = null;
+}
+function closeModal(){
+  if(modalPushed){ try{ history.back(); return; }catch(e){} }
+  closeModalInner();
+}
+window.addEventListener("popstate", ()=>{
+  if(document.getElementById("overlay").classList.contains("open")){
+    modalPushed = false;
+    closeModalInner();
+  }
+});
+function renderDayPicker(id){
+  const box = document.getElementById("mDays");
+  if(!box) return;
+  const cur = extra.days[id]||0;
+  box.innerHTML = DAY_LABELS.map((L,i)=>
+    '<button class="dchip'+(cur===i+1?" on":"")+'" data-d="'+(i+1)+'">'+L+'</button>').join("");
+  box.querySelectorAll(".dchip").forEach(b=>b.addEventListener("click", ()=>{
+    const v = parseInt(b.dataset.d,10);
+    if(extra.days[id]===v) delete extra.days[id]; else extra.days[id]=v;
+    saveExtra(); renderDayPicker(id); render();
+  }));
+}
+function renderModalExtras(id){
+  const box = document.getElementById("mExtras");
+  if(!box) return;
+  if(state[id]!=="done"){ box.innerHTML=""; return; }
+  const n = extra.notes[id]||{};
+  box.innerHTML =
+    '<div class="m-sec"><div class="lab">Done '+(n.dt? "on "+esc(n.dt):"")+' · your memory</div>'+
+    '<textarea class="memo" id="memoIn" placeholder="One line to remember it by&hellip;">'+esc(n.t||"")+'</textarea>'+
+    '<div style="margin-top:8px; font-size:13px; color:var(--soft); font-weight:700;">What did it cost?'+
+    '<input class="spentIn" id="spentIn" type="number" min="0" inputmode="decimal" placeholder="€" value="'+(extra.spent[id]!=null? esc(extra.spent[id]):"")+'"></div></div>';
+  document.getElementById("memoIn").addEventListener("input", e=>{
+    extra.notes[id] = extra.notes[id]||{};
+    extra.notes[id].t = e.target.value;
+    if(!extra.notes[id].dt) extra.notes[id].dt = dayLabelToday();
+    saveExtra();
+  });
+  document.getElementById("spentIn").addEventListener("input", e=>{
+    let v = e.target.value;
+    if(v!=="" && parseFloat(v) < 0){ v = ""; e.target.value = ""; } /* money spent cannot be negative */
+    if(v==="") delete extra.spent[id]; else extra.spent[id] = v;
+    saveExtra(); updateHeaderCounts();
+  });
+}
+function dayLabelToday(){
+  const now = new Date();
+  const di = Math.floor((now - TRIP_START)/86400000);
+  if(di>=0 && di<TRIP_LEN) return DAY_LABELS[di];
+  return now.getDate()+"/"+(now.getMonth()+1);
+}
+function shareCard(id){
+  const it = DATA.find(i=>i.id===id); if(!it) return;
+  const text = it.name+" · "+distLabel(it)+"\n"+it.blurb+"\nMap: "+it.maps+"\nIn our Ayia Napa list: open it and add #card="+id+" to the address to jump straight there.";
+  if(navigator.share){ navigator.share({title:it.name, text:text}).catch(()=>{}); }
+  else { try{ navigator.clipboard.writeText(text); }catch(e){} }
+}
+function tickFromModal(id, act){
+  toggle(id, act);
+  const st = state[id]||"";
+  const bw = document.getElementById("mWant"), bd = document.getElementById("mDone");
+  if(bw){ bw.className = "btn line"+(st==="want"?" activeWant":""); bw.textContent = st==="want"?("On the wish list"+wantTag(id)):"Want to do this"; }
+  if(bd){ bd.className = "btn line"+(st==="done"?" activeDone":""); bd.textContent = st==="done"?"✓ Done":"Mark as done"; }
+  renderModalExtras(id);
+}
+document.getElementById("overlay").addEventListener("click", e=>{ if(e.target.id==="overlay") closeModal(); });
+document.addEventListener("keydown", e=>{
+  const ov = document.getElementById("overlay");
+  if(!ov.classList.contains("open")) return;
+  if(e.key==="Escape"){ closeModal(); return; }
+  if(e.key==="Tab"){
+    const f = Array.from(document.getElementById("modal").querySelectorAll('button, a[href], [tabindex="0"]'))
+      .filter(el=>el.offsetParent!==null);
+    if(!f.length) return;
+    const first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+    else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+  }
+});
+
+/* ---------- live photo gallery ---------- */
+function fpUrl(name){ return "https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(name)+"?width=640"; }
+function parseCommons(j){
+  const pages = (j && j.query && j.query.pages) ? Object.values(j.query.pages) : [];
+  pages.sort((a,b)=>(a.index||99)-(b.index||99));
+  return pages.map(p=>p.imageinfo && p.imageinfo[0]).filter(Boolean)
+    .filter(ii=>/image\/(jpeg|png)/.test(ii.mime))
+    .map(ii=>ii.thumburl || ii.url);
+}
+function commonsApiUrl(q2, jsonpCb){
+  return "https://commons.wikimedia.org/w/api.php?action=query&format=json"+
+    (jsonpCb ? "&callback="+jsonpCb : "&origin=*")+
+    "&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch="+encodeURIComponent(q2)+
+    "&prop=imageinfo&iiprop=url%7Cmime&iiurlwidth=640";
+}
+async function fetchCommons(q2){
+  const r = await fetch(commonsApiUrl(q2));
+  return parseCommons(await r.json());
+}
+let jsonpN = 0;
+function jsonpCommons(q2){
+  return new Promise((res, rej)=>{
+    const cb = "napaCb"+(jsonpN++);
+    const s = document.createElement("script");
+    const t = setTimeout(()=>{
+      window[cb] = function(){ try{ delete window[cb]; }catch(e){} };
+      s.remove(); rej(new Error("timeout"));
+    }, 8000);
+    window[cb] = j=>{ clearTimeout(t); try{ delete window[cb]; }catch(e){} s.remove(); res(parseCommons(j)); };
+    s.onerror = ()=>{ clearTimeout(t); try{ delete window[cb]; }catch(e){} s.remove(); rej(new Error("jsonp failed")); };
+    s.src = commonsApiUrl(q2, cb);
+    document.head.appendChild(s);
+  });
+}
+function probeImages(names){
+  return new Promise(res=>{
+    const out = new Array(names.length);
+    let pending = names.length;
+    if(!pending) return res([]);
+    names.forEach((n,i)=>{
+      const url = fpUrl(n);
+      const im = new Image();
+      let called = false;
+      const done = ok=>{
+        if(called) return;
+        called = true;
+        im.onload = im.onerror = null;
+        if(ok) out[i] = url;
+        if(--pending===0) res(out.filter(Boolean));
+      };
+      const t = setTimeout(()=>done(false), 7000);
+      im.onload = ()=>{ clearTimeout(t); done(true); };
+      im.onerror = ()=>{ clearTimeout(t); done(false); };
+      im.src = url;
+    });
+  });
+}
+async function getGalleryUrls(it){
+  if(GAL_CACHE[it.id] && GAL_CACHE[it.id].length) return GAL_CACHE[it.id];
+  if(GAL_PENDING[it.id]) return GAL_PENDING[it.id];
+  const job = (async ()=>{
+    let urls = [];
+    const qs = QUERIES[it.id] || [it.name + " Cyprus"];
+    try{
+      for(const q2 of qs){
+        if(urls.length >= 5) break;
+        const got = await fetchCommons(q2);
+        for(const u of got){ if(urls.length < 5 && !urls.includes(u)) urls.push(u); }
+      }
+    }catch(e){}
+    if(!urls.length){
+      try{
+        for(const q2 of qs){
+          if(urls.length >= 5) break;
+          const got = await jsonpCommons(q2);
+          for(const u of got){ if(urls.length < 5 && !urls.includes(u)) urls.push(u); }
+        }
+      }catch(e){}
+    }
+    if(!urls.length && CANDIDATES[it.id]){
+      try{ urls = (await probeImages(CANDIDATES[it.id])).slice(0,5); }catch(e){}
+    }
+    if(!urls.length && it.img && !it.imgFailed) urls = [it.img];
+    return urls;
+  })();
+  GAL_PENDING[it.id] = job;
+  const urls = await job;
+  delete GAL_PENDING[it.id];
+  if(urls.length){
+    GAL_CACHE[it.id] = urls;
+    lsSet("napaGal", JSON.stringify(GAL_CACHE));
+  }
+  return urls;
+}
+function setMain(url){
+  const mm = document.querySelector("#galWrap .media");
+  if(!mm) return;
+  let img = mm.querySelector("img");
+  if(!img){
+    img = document.createElement("img");
+    img.onerror = ()=>img.remove();
+    mm.appendChild(img);
+  }
+  img.src = url;
+}
+function renderGallery(it, urls){
+  const mm = document.querySelector("#galWrap .media");
+  const tw = document.getElementById("thumbs");
+  if(!mm || !tw) return;
+  let idx = 0;
+  function show(i){
+    idx = (i + urls.length) % urls.length;
+    setMain(urls[idx]);
+    const c = mm.querySelector(".gcount");
+    if(c) c.textContent = (idx+1) + " / " + urls.length;
+    tw.querySelectorAll("img").forEach((x,k)=>x.classList.toggle("sel", k===idx));
+  }
+  tw.innerHTML = urls.map((u,i)=>'<img src="'+esc(u)+'" class="'+(i===0?"sel":"")+'" alt="" onerror="this.style.display=\'none\'">').join("");
+  tw.querySelectorAll("img").forEach((im,k)=>im.addEventListener("click", ev=>{ ev.stopPropagation(); show(k); }));
+  if(urls.length > 1){
+    mm.classList.add("has-nav");
+    if(!mm.querySelector(".gnav")){
+      const prev = document.createElement("button"); prev.className="gnav prev"; prev.innerHTML="&#8249;"; prev.setAttribute("aria-label","Previous photo");
+      const next = document.createElement("button"); next.className="gnav next"; next.innerHTML="&#8250;"; next.setAttribute("aria-label","Next photo");
+      const cnt = document.createElement("div"); cnt.className="gcount";
+      prev.addEventListener("click", ev=>{ ev.stopPropagation(); show(idx-1); });
+      next.addEventListener("click", ev=>{ ev.stopPropagation(); show(idx+1); });
+      mm.appendChild(prev); mm.appendChild(next); mm.appendChild(cnt);
+    }
+    if(!mm.dataset.touchBound){
+      mm.dataset.touchBound = "1";
+      let tx = null;
+      mm.addEventListener("touchstart", e=>{ tx = e.changedTouches[0].clientX; }, {passive:true});
+      mm.addEventListener("touchend", e=>{
+        if(tx===null) return;
+        const dx = e.changedTouches[0].clientX - tx; tx = null;
+        if(Math.abs(dx) > 40) show(idx + (dx<0 ? 1 : -1));
+      }, {passive:true});
+    }
+  }
+  show(0);
+}
+async function loadGallery(it){
+  if(!document.getElementById("galNote")) return;
+  const urls = await getGalleryUrls(it);
+  const m = document.getElementById("modal");
+  if(!m || m.dataset.galFor !== it.id) return;
+  const note = document.getElementById("galNote");
+  const tw = document.getElementById("thumbs");
+  if(!note || !tw) return;
+  if(!urls.length){
+    note.textContent = "Live photos could not load in this viewer. The More photos button below opens them in Google.";
+    return;
+  }
+  if(!it.img || it.imgFailed){ it.img = urls[0]; it.imgFailed = false; updateCardMedia(it); }
+  renderGallery(it, urls);
+  note.textContent = urls.length + (urls.length>1 ? " photos" : " photo") +
+    " via Wikimedia Commons for this spot and its surroundings. Use the arrows or swipe.";
+}
+function updateCardMedia(it){
+  const card = document.querySelector('.card[data-id="'+it.id+'"]');
+  if(!card) return;
+  const mm = card.querySelector(".media");
+  if(!mm) return;
+  let img = mm.querySelector("img");
+  if(!img){
+    img = document.createElement("img");
+    img.loading = "lazy";
+    img.alt = it.name;
+    img.onerror = ()=>{ it.imgFailed = true; img.remove(); };
+    mm.appendChild(img);
+  }
+  img.src = it.img;
+}
+async function prefetchCovers(){
+  for(let pass = 0; pass < 2; pass++){
+    let i = 0;
+    const items = DATA.filter(it=>!it.img || it.imgFailed);
+    if(!items.length) break;
+    await Promise.all(Array.from({length:2}, async ()=>{
+      while(i < items.length){
+        const it = items[i++];
+        try{
+          const urls = await getGalleryUrls(it);
+          if(urls.length && (!it.img || it.imgFailed)){
+            it.img = urls[0];
+            it.imgFailed = false;
+            updateCardMedia(it);
+          }
+        }catch(e){}
+      }
+    }));
+    if(pass===0) await new Promise(r=>setTimeout(r, 4000));
+  }
+}
+
+/* ---------- interactions ---------- */
+function toggle(id, act){
+  if(act==="done"){
+    if(state[id]==="done"){
+      state[id] = wantOf(id) ? "want" : "";
+      extra.unDone[id] = 1; /* remember the correction so it syncs to the partner */
+    } else {
+      state[id] = "done";
+      delete extra.unDone[id];
+      extra.notes[id] = extra.notes[id]||{};
+      const n = extra.notes[id];
+      /* refresh the date on redo ONLY when there is no real memory attached —
+         a note or a spent amount means the original date is part of the record */
+      if(!n.dt || !(n.t || extra.spent[id]!=null)) n.dt = dayLabelToday();
+    }
+  } else {
+    const p = extra.who || "X";
+    let s = wantOf(id);
+    s = s.includes(p) ? s.replace(p,"") : s + p;
+    if(s) extra.wantBy[id] = s; else delete extra.wantBy[id];
+    if(state[id]!=="done") state[id] = s ? "want" : "";
+  }
+  saveState(); saveExtra();
+  /* keep the grid steady under the user's finger: update the tapped card in
+     place and re-sort only on the next full render (filter change etc.) */
+  if(stat==="all"){ refreshCard(id); updateHeaderCounts(); }
+  else render();
+}
+function refreshCard(id){
+  const card = document.querySelector('.card[data-id="'+id+'"]');
+  if(!card){ render(); return; }
+  const st = state[id]||"";
+  card.className = "card "+st;
+  const fw = card.querySelector(".flag.f-want"); if(fw) fw.textContent = "Want to"+wantTag(id);
+  const bw = card.querySelector(".bWant"); if(bw) bw.textContent = st==="want" ? "On the list" : "Want to";
+  const bd = card.querySelector(".bDone"); if(bd) bd.textContent = st==="done" ? "✓ Done" : "Mark done";
+}
+function updateHeaderCounts(){
+  const done = DATA.filter(i=>state[i.id]==="done").length;
+  const want = DATA.filter(i=>state[i.id]==="want").length;
+  document.getElementById("nDone").textContent = done;
+  document.getElementById("nWant").textContent = want;
+  document.getElementById("nTotal").textContent = done+" / "+DATA.length;
+  document.getElementById("barFill").style.width = (100*done/DATA.length)+"%";
+  const wishSum = DATA.filter(i=>state[i.id]==="want" && i.est).reduce((a,i)=>a+i.est,0);
+  const spentSum = Object.entries(extra.spent).filter(([id])=>state[id]==="done").reduce((a,[,v])=>a+(parseFloat(v)||0),0);
+  document.getElementById("budgetLine").textContent =
+    (wishSum? "Wish list ≈ €"+wishSum+" for two" : "") + (wishSum&&spentSum? " · " : "") + (spentSum? "Spent €"+Math.round(spentSum) : "");
+  renderChips();
+  if(mapObj && document.getElementById("mapWrap").classList.contains("open")) drawMapMarkers();
+}
+document.getElementById("grid").addEventListener("click", e=>{
+  const btn = e.target.closest("button[data-act]");
+  const card = e.target.closest(".card");
+  if(!card) return;
+  if(btn){ toggle(card.dataset.id, btn.dataset.act); }
+  else { openModal(card.dataset.id); }
+});
+document.getElementById("grid").addEventListener("keydown", e=>{
+  if(e.key!=="Enter" && e.key!==" ") return;
+  const card = e.target.closest(".card");
+  if(!card || e.target!==card) return;
+  e.preventDefault();
+  openModal(card.dataset.id);
+});
+document.getElementById("catChips").addEventListener("click", e=>{
+  const c = e.target.closest("[data-cat]"); if(!c) return;
+  cat = c.dataset.cat; render();
+});
+document.getElementById("filterChips").addEventListener("click", e=>{
+  const s = e.target.closest("[data-stat]");
+  const t = e.target.closest("[data-time]");
+  const mo = e.target.closest("[data-mode]");
+  const so = e.target.closest("[data-sort]");
+  const dy = e.target.closest("[data-day]");
+  if(s) stat = s.dataset.stat;
+  else if(t) timeF = t.dataset.time;
+  else if(mo) modeF = mo.dataset.mode;
+  else if(so){ extra.sort = so.dataset.sort; saveExtra(); }
+  else if(dy) dayF = dy.dataset.day;
+  else return;
+  render();
+});
+function resetFilters(){
+  cat="all"; stat="all"; timeF="all"; modeF="all"; dayF="all"; q="";
+  const qi = document.getElementById("q"); if(qi) qi.value="";
+  render();
+}
+function resetSecondary(){
+  stat="all"; timeF="all"; modeF="all"; dayF="all"; extra.sort="wish"; saveExtra();
+  render();
+}
+function setSheet(open){
+  document.getElementById("fSheet").classList.toggle("open", open);
+  document.getElementById("fBackdrop").classList.toggle("open", open);
+}
+document.getElementById("filtersBtn").addEventListener("click", ()=>setSheet(!document.getElementById("fSheet").classList.contains("open")));
+document.getElementById("fClose").addEventListener("click", ()=>setSheet(false));
+document.getElementById("fBackdrop").addEventListener("click", ()=>setSheet(false));
+document.getElementById("fApply").addEventListener("click", ()=>setSheet(false));
+document.getElementById("clearBtn").addEventListener("click", resetSecondary);
+document.addEventListener("keydown", e=>{
+  if(e.key==="Escape" && document.getElementById("fSheet").classList.contains("open")
+     && !document.getElementById("overlay").classList.contains("open")) setSheet(false);
+});
+let qTimer = null;
+document.getElementById("q").addEventListener("input", e=>{
+  clearTimeout(qTimer);
+  const v = e.target.value;
+  qTimer = setTimeout(()=>{ q = v; render(); }, 160);
+});
+document.getElementById("surpriseBtn").addEventListener("click", ()=>{
+  const pool = DATA.filter(it=>matches(it) && state[it.id]!=="done");
+  const btn = document.getElementById("surpriseBtn");
+  if(!pool.length){ flashBtn(btn, "Nothing matches — loosen filters", "Surprise us"); return; }
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  openModal(pick.id);
+});
+
+/* ---------- sync codes ---------- */
+function chk36(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i))>>>0; }
+  return ("000000"+h.toString(36)).slice(-6);
+}
+function parse36(str){
+  let n = 0n;
+  for(const ch of str){
+    const v = parseInt(ch, 36);
+    if(isNaN(v)) throw new Error("bad char");
+    n = n*36n + BigInt(v);
+  }
+  return n;
+}
+function encodeState(){
+  if(extra.who==="V" || extra.who==="H"){
+    let d = 0n, v = 0n, hh = 0n, dy = 0n, u = 0n;
+    DATA.forEach((it,i)=>{
+      const bit = 1n << BigInt(i);
+      if(state[it.id]==="done") d |= bit;
+      if(extra.unDone[it.id]) u |= bit; /* corrections: "this was NOT done after all" */
+      const s = wantOf(it.id);
+      if(s.includes("V") || (extra.who==="V" && s.includes("X"))) v |= bit;
+      if(s.includes("H") || (extra.who==="H" && s.includes("X"))) hh |= bit;
+      dy |= (BigInt(extra.days[it.id]||0) << BigInt(4*i));
+    });
+    const payload = extra.who+"."+DATA.length.toString(36)+"."+d.toString(36)+"."+v.toString(36)+"."+hh.toString(36)+"."+dy.toString(36)+"."+u.toString(36);
+    return "NAPA5." + payload + "." + chk36(payload);
+  }
+  let w = 0n, d = 0n, dy = 0n;
+  DATA.forEach((it,i)=>{
+    const st = state[it.id];
+    if(st==="want") w |= (1n << BigInt(i));
+    if(st==="done") d |= (1n << BigInt(i));
+    const day = extra.days[it.id]||0;
+    dy |= (BigInt(day) << BigInt(4*i));
+  });
+  return "NAPA3." + w.toString(36) + "." + d.toString(36) + "." + dy.toString(36);
+}
+function decodeState(code){
+  try{
+    code = (code||"").trim();
+    /* be forgiving: extract the code from a pasted WhatsApp/SMS message */
+    const mx = code.match(/NAPA\d\.[0-9a-zA-Z.]+/);
+    if(mx) code = mx[0].replace(/\.+$/,"");
+    const incoming = {};
+    const incomingDays = {};
+    if(code.indexOf("NAPA5.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==8) return {ok:false};
+      const who = parts[0];
+      const payload = parts.slice(0,7).join(".");
+      if(chk36(payload)!==parts[7]) return {ok:false, bad:"That code has a typo in it, ask for a fresh one."};
+      if(parseInt(parts[1],36)!==DATA.length) return {ok:false, bad:"The other phone has a different version of the list, so nothing was merged."};
+      if(who!=="V" && who!=="H") return {ok:false};
+      const d = parse36(parts[2]), v = parse36(parts[3]), hh = parse36(parts[4]), dy = parse36(parts[5]), u = parse36(parts[6]);
+      let added = 0; const conflicts = [];
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if((d & bit) && state[it.id]!=="done"){ state[it.id] = "done"; delete extra.unDone[it.id]; added++; }
+        /* the sender corrected an accidental "done" — honour it here too */
+        if((u & bit) && state[it.id]==="done"){
+          state[it.id] = wantOf(it.id) ? "want" : "";
+          extra.unDone[it.id] = 1;
+          added++;
+        }
+        const senderWants = who==="V" ? !!(v & bit) : !!(hh & bit);
+        let s = wantOf(it.id);
+        const had = s.includes(who);
+        if(senderWants && !had){ s += who; added++; }
+        if(!senderWants && had){ s = s.replace(who,""); added++; }
+        if(s) extra.wantBy[it.id] = s; else delete extra.wantBy[it.id];
+        if(state[it.id]!=="done") state[it.id] = s ? "want" : "";
+        const day = Number((dy >> BigInt(4*i)) & 15n);
+        if(day>=1 && day<=TRIP_LEN){
+          if(!extra.days[it.id]){ extra.days[it.id] = day; added++; }
+          else if(extra.days[it.id]!==day) conflicts.push(it.name+": "+DAY_LABELS[extra.days[it.id]-1]+" on this phone, "+DAY_LABELS[day-1]+" in the code");
+        }
+      });
+      saveState(); saveExtra();
+      return {ok:true, added, conflicts};
+    }
+    if(code.indexOf("NAPA4.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==7) return {ok:false};
+      const who = parts[0];
+      const payload = parts.slice(0,6).join(".");
+      if(chk36(payload)!==parts[6]) return {ok:false, bad:"That code has a typo in it, ask for a fresh one."};
+      if(parseInt(parts[1],36)!==DATA.length) return {ok:false, bad:"The other phone has a different version of the list, so nothing was merged."};
+      if(who!=="V" && who!=="H") return {ok:false};
+      const d = parse36(parts[2]), v = parse36(parts[3]), hh = parse36(parts[4]), dy = parse36(parts[5]);
+      let added = 0; const conflicts = [];
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if((d & bit) && state[it.id]!=="done"){ state[it.id] = "done"; added++; }
+        const senderWants = who==="V" ? !!(v & bit) : !!(hh & bit);
+        let s = wantOf(it.id);
+        const had = s.includes(who);
+        if(senderWants && !had){ s += who; added++; }
+        if(!senderWants && had){ s = s.replace(who,""); added++; }
+        if(s) extra.wantBy[it.id] = s; else delete extra.wantBy[it.id];
+        if(state[it.id]!=="done") state[it.id] = s ? "want" : "";
+        const day = Number((dy >> BigInt(4*i)) & 15n);
+        if(day>=1 && day<=TRIP_LEN){
+          if(!extra.days[it.id]){ extra.days[it.id] = day; added++; }
+          else if(extra.days[it.id]!==day) conflicts.push(it.name+": "+DAY_LABELS[extra.days[it.id]-1]+" on this phone, "+DAY_LABELS[day-1]+" in the code");
+        }
+      });
+      saveState(); saveExtra();
+      return {ok:true, added, conflicts};
+    }
+    if(code.indexOf("NAPA3.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==3) return {ok:false};
+      const w = parse36(parts[0]), d = parse36(parts[1]), dy = parse36(parts[2]);
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if(d & bit) incoming[it.id] = "done";
+        else if(w & bit) incoming[it.id] = "want";
+        const day = Number((dy >> BigInt(4*i)) & 15n);
+        if(day>=1 && day<=TRIP_LEN) incomingDays[it.id] = day;
+      });
+    } else if(code.indexOf("NAPA2.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==2) return {ok:false};
+      const w = parse36(parts[0]), d = parse36(parts[1]);
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if(d & bit) incoming[it.id] = "done";
+        else if(w & bit) incoming[it.id] = "want";
+      });
+    } else if(code.indexOf("NAPA1.")===0){
+      const o = JSON.parse(atob(code.slice(6)));
+      (o.w||[]).forEach(id=>incoming[id]="want");
+      (o.d||[]).forEach(id=>incoming[id]="done");
+    } else return {ok:false};
+    let added = 0;
+    for(const id in incoming){
+      const cur = state[id]||"";
+      if(incoming[id]==="done" && cur!=="done"){ state[id]="done"; added++; }
+      else if(incoming[id]==="want" && cur===""){ state[id]="want"; added++; }
+      /* keep legacy wants inside the per-person model so they survive future exports */
+      if(incoming[id]==="want" && !wantOf(id)) extra.wantBy[id] = "X";
+    }
+    for(const id in incomingDays){
+      if(!extra.days[id]){ extra.days[id] = incomingDays[id]; added++; }
+    }
+    saveState(); saveExtra();
+    return {ok:true, added};
+  }catch(e){ return {ok:false}; }
+}
+function flashBtn(btn, text, revert){
+  btn.textContent = text;
+  setTimeout(()=>{ btn.textContent = revert; }, 1800);
+}
+function doCopy(code, btn, revert){
+  /* the paste-in field is for the PARTNER's code — only borrow it for the
+     manual fallback, never leave our own code sitting there */
+  const inp = document.getElementById("syncIn");
+  const ok = ()=>flashBtn(btn, "Copied", revert);
+  const manual = ()=>{
+    inp.value = code; inp.focus(); inp.select();
+    try{ document.execCommand("copy") ? ok() : flashBtn(btn, "Select & copy", revert); }catch(e){ flashBtn(btn, "Select & copy", revert); }
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(code).then(ok).catch(manual);
+  } else manual();
+}
+function setWho(p){
+  extra.who = p;
+  Object.keys(extra.wantBy).forEach(id=>{
+    let s = extra.wantBy[id];
+    if(s.includes("X")){ s = s.replace("X",""); if(!s.includes(p)) s += p; extra.wantBy[id] = s; }
+  });
+  saveExtra(); updateWhoBtns(); render();
+}
+function updateWhoBtns(){
+  const st = document.getElementById("whoStatus");
+  if(st) st.textContent = extra.who ? ("This phone: "+(extra.who==="V"?"Vegard":"Hanne")) : "Not signed in";
+}
+updateWhoBtns();
+function requireWho(btn, revert){
+  if(extra.who) return true;
+  const n = document.getElementById("syncNote");
+  n.textContent = "Sign in first (Switch person) so codes carry your own wish list precisely, including removals and corrections.";
+  n.style.display = "block";
+  flashBtn(btn, "Sign in first", revert);
+  showLogin();
+  return false;
+}
+
+/* ---------- login gate: name + 4-digit PIN per person ---------- */
+/* PINs are stored as salted hashes, not plain text. This is a family lock,
+   not encryption: it keeps the wrong phone from posting as the wrong person
+   and casual eyes out — a determined person with the file can get past it. */
+const PIN_HASH = { V:"vm6sv0", H:"zvaezz" };
+function pinOk(person, pin){ return chk36(person+":"+pin+":napa26") === PIN_HASH[person]; }
+let loginPick = null;
+function showLogin(){
+  const ov = document.getElementById("loginOv");
+  ov.style.display = "flex";
+  loginPick = null;
+  document.getElementById("pickV").classList.remove("sel");
+  document.getElementById("pickH").classList.remove("sel");
+  document.getElementById("pinArea").classList.remove("show");
+  document.getElementById("pinIn").value = "";
+  document.getElementById("pinErr").classList.remove("show");
+}
+function hideLogin(){ document.getElementById("loginOv").style.display = "none"; }
+function pickPerson(p){
+  loginPick = p;
+  document.getElementById("pickV").classList.toggle("sel", p==="V");
+  document.getElementById("pickH").classList.toggle("sel", p==="H");
+  document.getElementById("pinArea").classList.add("show");
+  document.getElementById("pinErr").classList.remove("show");
+  const pi = document.getElementById("pinIn");
+  pi.value = ""; pi.focus();
+}
+document.getElementById("pickV").addEventListener("click", ()=>pickPerson("V"));
+document.getElementById("pickH").addEventListener("click", ()=>pickPerson("H"));
+document.getElementById("pinIn").addEventListener("input", e=>{
+  const v = e.target.value.replace(/\D/g,"").slice(0,4);
+  e.target.value = v;
+  document.getElementById("pinErr").classList.remove("show");
+  if(v.length===4 && loginPick){
+    if(pinOk(loginPick, v)){
+      setWho(loginPick);
+      hideLogin();
+    } else {
+      e.target.value = "";
+      const err = document.getElementById("pinErr");
+      err.classList.remove("show"); void err.offsetWidth; /* restart the shake */
+      err.classList.add("show");
+    }
+  }
+});
+document.getElementById("switchUser").addEventListener("click", ()=>{
+  /* wishes and ticks stay on the phone; only the identity changes */
+  extra.who = null; saveExtra(); updateWhoBtns(); showLogin();
+});
+if(!extra.who) showLogin();
+document.getElementById("copyBtn").addEventListener("click", ()=>{
+  const cb = document.getElementById("copyBtn");
+  if(!requireWho(cb, "Copy")) return;
+  doCopy(encodeState(), cb, "Copy");
+});
+document.getElementById("shareBtn").addEventListener("click", ()=>{
+  const btn = document.getElementById("shareBtn");
+  if(!requireWho(btn, "Share status")) return;
+  const code = encodeState();
+  if(navigator.share){
+    navigator.share({title:"The Ayia Napa List", text:"Ayia Napa list status code, paste it in the sync box:\n"+code}).catch(()=>{});
+  } else {
+    doCopy(code, btn, "Share status");
+  }
+});
+document.getElementById("loadBtn").addEventListener("click", ()=>{
+  const r = decodeState(document.getElementById("syncIn").value);
+  const b = document.getElementById("loadBtn");
+  const n = document.getElementById("syncNote");
+  if(r.ok){
+    flashBtn(b, "Merged +"+r.added, "Load");
+    let msg = r.added ? "Merged "+r.added+" change"+(r.added===1?"":"s")+" into your list." : "Nothing new to merge, you were already in sync.";
+    if(r.conflicts && r.conflicts.length){
+      msg += " Day plans disagree on: "+r.conflicts.join("; ")+". Your own days were kept, talk it over.";
+    }
+    n.textContent = msg;
+    n.style.display = "block";
+    render();
+  } else {
+    flashBtn(b, "Bad code", "Load");
+    n.textContent = r.bad || "That code could not be read. Ask for a fresh one — and it is fine to paste the whole message, the code is picked out automatically.";
+    n.style.display = "block";
+  }
+});
+
+/* ---------- evening mode ---------- */
+function applyTheme(){
+  const pref = extra.theme||"auto";
+  const h = new Date().getHours() + new Date().getMinutes()/60;
+  const dark = pref==="on" || (pref==="auto" && (h>=19.75 || h<6));
+  document.documentElement.dataset.theme = dark? "dark" : "";
+  const b = document.getElementById("themeBtn");
+  if(b) b.textContent = "Evening: "+(pref==="auto"?"auto":(pref==="on"?"on":"off"));
+}
+document.getElementById("themeBtn").addEventListener("click", ()=>{
+  const order = {auto:"on", on:"off", off:"auto"};
+  extra.theme = order[extra.theme||"auto"];
+  saveExtra(); applyTheme();
+});
+setInterval(applyTheme, 5*60*1000);
+
+/* ---------- countdown / trip day ---------- */
+function tripPhase(){
+  const el = document.getElementById("tripPhase");
+  const now = new Date();
+  const di = Math.floor((now - TRIP_START)/86400000);
+  let txt = "";
+  if(di < 0) txt = (-di)+(di===-1?" day":" days")+" to Ayia Napa";
+  else if(di < TRIP_LEN){
+    txt = "Day "+(di+1)+" of "+TRIP_LEN+" · "+DAY_LABELS[di];
+    if(di===2) txt += " · Full moon tonight";
+  } else txt = "The trip is over. The list remembers.";
+  el.textContent = txt;
+  el.style.display = "inline-block";
+}
+tripPhase();
+
+/* ---------- weather strip (Open-Meteo, free, no key) ---------- */
+async function loadWeather(){
+  const strip = document.getElementById("wstrip");
+  if(!strip) return;
+  const codeWord = c => c<=1?"Sun" : c<=2?"Fair" : c<=3?"Cloud" : c<=48?"Mist" : c<=67?"Rain" : c<=82?"Showers" : c>=95?"Storm" : "Rain";
+  let wx = null;
+  try{ wx = JSON.parse(lsGet("napaWx")||"null"); }catch(e){}
+  const today = new Date().toISOString().slice(0,10);
+  const paint = ()=>{
+    if(!wx || !wx.days) return;
+    const todayIdx = Math.floor((new Date() - TRIP_START)/86400000);
+    const stale = wx.fetched !== today;
+    strip.innerHTML = wx.days.map((d,i)=>
+      '<div class="wcell'+(i===todayIdx?" today":"")+'">'+
+      '<div class="wd">'+DAY_LABELS[i]+'</div>'+
+      '<div class="wt">'+d.max+'°</div>'+
+      '<div class="ws">'+codeWord(d.code)+(d.sea? ' · sea '+d.sea+'°':'')+(d.wind>=30? ' · windy':'')+'</div></div>').join("")
+      + (stale ? '<div class="wcell"><div class="wd">Forecast</div><div class="ws">from '+esc(wx.fetched.slice(8,10)+"/"+wx.fetched.slice(5,7))+'<br>offline now</div></div>' : '');
+    strip.style.display = "";
+  };
+  paint(); /* show cached data immediately, even if stale */
+  if(!wx || wx.fetched !== today){
+    try{
+      const u = "https://api.open-meteo.com/v1/forecast?latitude=34.988&longitude=33.999"+
+        "&daily=weather_code,temperature_2m_max,wind_speed_10m_max&timezone=Asia%2FNicosia"+
+        "&start_date=2026-07-27&end_date=2026-08-03";
+      const r = await fetch(u); const j = await r.json();
+      if(!j.daily || !j.daily.time) throw new Error("no data");
+      let sea = null;
+      try{
+        const r2 = await fetch("https://marine-api.open-meteo.com/v1/marine?latitude=34.97&longitude=34.01&daily=sea_surface_temperature_max&timezone=Asia%2FNicosia&start_date=2026-07-27&end_date=2026-08-03");
+        const j2 = await r2.json();
+        sea = j2.daily && j2.daily.sea_surface_temperature_max || null;
+      }catch(e){}
+      wx = {fetched: today, days: j.daily.time.map((t,i)=>({
+        t: t,
+        code: j.daily.weather_code[i],
+        max: Math.round(j.daily.temperature_2m_max[i]),
+        wind: Math.round(j.daily.wind_speed_10m_max[i]),
+        sea: sea && sea[i]!=null ? Math.round(sea[i]) : null
+      }))};
+      lsSet("napaWx", JSON.stringify(wx));
+      paint();
+    }catch(e){
+      if(!wx || !wx.days) strip.style.display = "none"; /* keep stale data visible when offline */
+    }
+  }
+}
+loadWeather();
+
+/* ---------- What now? ---------- */
+/* latest hour at which starting still makes sense (approximate, late-July hours) */
+const LAST_START = {
+  "waterworld":13, "monastery":18.5, "tombs":18.5,
+  "blue-lagoon-cruise":14, "black-pearl":10.5, "ghost-cruise":9.7, "sunset-cruise":16.6, "ocean-queen":11,
+  "larnaca":11, "nicosia":10, "varosha":10, "fig-tree":15.5, "potamos":14,
+  "scuba":13, "kayak-caves":14, "musan-snorkel":15, "nissi-watersports":16.5, "horse-riding":17.5, "spa":16
+};
+function openWhatNow(){
+  const nowD = new Date();
+  const h = nowD.getHours() + nowD.getMinutes()/60;
+  const slot = h<11 ? "M" : h<16.5 ? "D" : "E";
+  const slotName = slot==="M"?"this morning":slot==="D"?"this afternoon":"tonight";
+  let pool = DATA.filter(it=> state[it.id]!=="done" && (it.s||"").includes(slot));
+  pool = pool.filter(it=> LAST_START[it.id]==null || h <= LAST_START[it.id]);
+  /* Thalassa museum: closed Sundays; Mon and Sat close 14:00, Tue-Fri 17:00 */
+  pool = pool.filter(it=>{
+    if(it.id!=="thalassa") return true;
+    const wd = nowD.getDay();
+    if(wd===0) return false;
+    return h <= ((wd===1||wd===6) ? 12.5 : 15.5);
+  });
+  /* Black Pearl sails only selected days in 2026, never Mondays */
+  pool = pool.filter(it=> !(it.id==="black-pearl" && [0,1,4].includes(nowD.getDay()) ));
+  pool.sort((a,b)=>{
+    const ws = it=> state[it.id]==="want"?0:1;
+    return (ws(a)-ws(b)) || ((a.d==null?1e9:a.d)-(b.d==null?1e9:b.d));
+  });
+  const picks = pool.slice(0,3);
+  const m = document.getElementById("modal");
+  m.dataset.galFor = "";
+  m.setAttribute("data-cat","");
+  m.innerHTML =
+    '<button class="close" onclick="closeModal()" aria-label="Close">Close ✕</button>'+
+    '<div class="minner">'+
+      '<div class="m-kick">'+new Date().toTimeString().slice(0,5)+' · best for '+slotName+' · filtered to what still fits the clock</div>'+
+      '<div class="m-name">What now?</div>'+
+      (picks.length ? picks.map(it=>
+        '<div class="wnItem" onclick="openModal(\''+it.id+'\')">'+
+          '<div><div class="n">'+esc(it.name)+'</div><div style="font-size:13px;color:var(--soft);">'+esc(it.blurb.split(". ")[0])+'.</div></div>'+
+          '<div class="m">'+distLabel(it)+'<br>'+esc(it.ml||MODE_LAB[it.m]||"")+(LAST_START[it.id]!=null?'<br>Still doable now':'')+(state[it.id]==="want"?"<br>On the wish list"+esc(wantTag(it.id)):"")+'</div>'+
+        '</div>').join("")
+      : '<p style="margin-top:10px;">Nothing left for '+slotName+'. You have done Ayia Napa proud.</p>')+
+    '</div>';
+  const wasOpen = document.getElementById("overlay").classList.contains("open");
+  document.getElementById("overlay").classList.add("open");
+  if(!wasOpen){
+    prevFocus = document.activeElement;
+    lockScroll();
+    if(!modalPushed){ try{ history.pushState({napaModal:1},""); modalPushed = true; }catch(e){} }
+  }
+}
+document.getElementById("whatNowBtn").addEventListener("click", openWhatNow);
+
+/* ---------- map (Leaflet + OpenStreetMap, loaded on demand) ---------- */
+let mapObj = null, mapLayer = null, leafletLoading = false;
+function initMap(){
+  if(typeof L === "undefined") return;
+  if(mapObj){ try{ mapObj.remove(); }catch(e){} mapObj = null; mapLayer = null; } /* rebuild so markers reflect current ticks */
+  const map = L.map("mapEl").setView([34.985, 34.01], 12);
+  mapObj = map;
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {maxZoom:18, attribution:"© OpenStreetMap"}).addTo(map);
+  const hotelIcon = L.divIcon({className:"", iconSize:[20,20], iconAnchor:[10,10],
+    html:'<div style="width:20px;height:20px;border-radius:50%;background:#FFC94D;border:3px solid #8A6200;box-shadow:0 0 0 5px rgba(255,201,77,.4);"></div>'});
+  L.marker(HOTEL_LL, {icon:hotelIcon, zIndexOffset:1000})
+    .addTo(map)
+    .bindTooltip("Napa Plaza · your hotel", {permanent:true, direction:"top", offset:[0,-12], className:"hotelTip"})
+    .bindPopup("<b>Napa Plaza</b><br>Home base — all distances measure from here");
+  mapLayer = L.layerGroup().addTo(map);
+  drawMapMarkers();
+}
+function drawMapMarkers(){
+  if(!mapObj || !mapLayer) return;
+  mapLayer.clearLayers();
+  const shown = DATA.filter(matches);
+  shown.forEach(it=>{
+    if(!it.ll) return;
+    const st = state[it.id]||"";
+    const mk = L.circleMarker(it.ll, {
+      radius:8, weight: st==="want"?3:1.5,
+      color: st==="want" ? "#8A6200" : "#ffffff",
+      fillColor: CAT_HEX[it.cat]||"#0C7489",
+      fillOpacity: st==="done"? .3 : .95
+    }).addTo(mapLayer);
+    mk.bindTooltip(it.name + (distLabel(it)? " · "+distLabel(it) : ""));
+    mk.on("click", ()=>openModal(it.id));
+  });
+  const note = document.getElementById("mapNote");
+  if(note) note.textContent = "Showing "+shown.length+" of "+DATA.length+" places (follows your filters). Tap a dot to open its card. Positions are approximate. Map data © OpenStreetMap contributors.";
+}
+document.getElementById("mapBtn").addEventListener("click", ()=>{
+  const wrapEl = document.getElementById("mapWrap");
+  wrapEl.classList.toggle("open");
+  if(!wrapEl.classList.contains("open")) return;
+  if(typeof L !== "undefined"){ initMap(); return; }
+  if(leafletLoading) return;
+  leafletLoading = true;
+  const lcss = document.createElement("link"); lcss.rel="stylesheet";
+  lcss.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+  document.head.appendChild(lcss);
+  const ls = document.createElement("script");
+  ls.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+  ls.onload = ()=>setTimeout(initMap, 100);
+  ls.onerror = ()=>{ leafletLoading = false; document.getElementById("mapNote").textContent = "The map could not load just now. Close and reopen Map to retry, or use the Google Maps buttons on each card."; };
+  document.head.appendChild(ls);
+});
+
+/* ---------- trip recap + print ---------- */
+document.getElementById("recapBtn").addEventListener("click", ()=>{
+  const now = new Date();
+  const di = Math.floor((now - TRIP_START)/86400000);
+  const doneItems = DATA.filter(i=>state[i.id]==="done");
+  const wants = DATA.filter(i=>state[i.id]==="want");
+  const spentSum = Object.entries(extra.spent).filter(([id])=>state[id]==="done").reduce((a,[,v])=>a+(parseFloat(v)||0),0);
+  let txt = "The Ayia Napa List · "+(di>=0&&di<TRIP_LEN ? "day "+(di+1)+" of "+TRIP_LEN : "our trip")+"\n";
+  txt += doneItems.length+" done · "+wants.length+" still on the wish list"+(spentSum? " · spent about €"+Math.round(spentSum):"")+"\n\n";
+  if(doneItems.length){
+    txt += "Done:\n"+doneItems.map(i=>{
+      const n = extra.notes[i.id]||{};
+      return "· "+i.name+(n.dt? " ("+n.dt+")":"")+(n.t? ": "+n.t : "");
+    }).join("\n")+"\n\n";
+  }
+  /* spentSum above counts only items still marked done */
+  if(wants.length) txt += "Next up: "+wants.slice(0,6).map(i=>i.name).join(", ")+(wants.length>6? " +"+(wants.length-6)+" more":"")+"\n";
+  const btn = document.getElementById("recapBtn");
+  if(navigator.share){ navigator.share({title:"The Ayia Napa List", text:txt}).catch(()=>{}); }
+  else { try{ navigator.clipboard.writeText(txt); flashBtn(btn,"Copied","Trip so far"); }catch(e){} }
+});
+document.getElementById("printBtn").addEventListener("click", ()=>window.print());
+
+/* ---------- init ---------- */
+applyTheme();
+render();
+if(location.hash && location.hash.indexOf("#card=")===0){
+  const cid = location.hash.slice(6);
+  if(DATA.some(i=>i.id===cid)) setTimeout(()=>openModal(cid), 300);
+} else if(location.hash && location.hash.indexOf("#NAPA")===0){
+  const r = decodeState(location.hash.slice(1));
+  if(r.ok){
+    const n = document.getElementById("syncNote");
+    n.textContent = "Loaded a shared status from the link: merged "+r.added+" tick"+(r.added===1?"":"s")+".";
+    n.style.display = "block";
+    render();
+  }
+}
+if(!storageOK){
+  const sb = document.querySelector(".sticky-bar");
+  if(sb){
+    const warn = document.createElement("div");
+    warn.style.cssText = "background:#C0392B; color:#fff; font-size:13px; font-weight:700; padding:8px 14px; border-radius:10px; margin:6px 0;";
+    warn.textContent = "Heads up: this browser is not saving your ticks. Open the file in Safari or Chrome (not a preview window) so nothing is lost.";
+    sb.prepend(warn);
+  }
+}
+setTimeout(prefetchCovers, 2500); /* let first paint and user taps win over photo prefetch */
+</script>
+</body>
+</html>
