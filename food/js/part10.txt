@@ -1,0 +1,594 @@
+[id]===v) delete extra.days[id]; else extra.days[id]=v;
+    saveExtra(); renderDayPicker(id); render();
+  }));
+}
+function renderModalExtras(id){
+  const box = document.getElementById("mExtras");
+  if(!box) return;
+  if(state[id]!=="done"){ box.innerHTML=""; return; }
+  const n = extra.notes[id]||{};
+  box.innerHTML =
+    '<div class="m-sec"><div class="lab">Done '+(n.dt? "on "+esc(n.dt):"")+' · your memory</div>'+
+    '<textarea class="memo" id="memoIn" placeholder="One line to remember it by&hellip;">'+esc(n.t||"")+'</textarea>'+
+    '<div style="margin-top:8px; font-size:13px; color:var(--soft); font-weight:700;">What did it cost?'+
+    '<input class="spentIn" id="spentIn" type="number" min="0" inputmode="decimal" placeholder="€" value="'+(extra.spent[id]!=null? esc(extra.spent[id]):"")+'"></div></div>';
+  document.getElementById("memoIn").addEventListener("input", e=>{
+    extra.notes[id] = extra.notes[id]||{};
+    extra.notes[id].t = e.target.value;
+    if(!extra.notes[id].dt) extra.notes[id].dt = dayLabelToday();
+    saveExtra();
+  });
+  document.getElementById("spentIn").addEventListener("input", e=>{
+    let v = e.target.value;
+    if(v!=="" && parseFloat(v) < 0){ v = ""; e.target.value = ""; } /* money spent cannot be negative */
+    if(v==="") delete extra.spent[id]; else extra.spent[id] = v;
+    saveExtra(); updateHeaderCounts();
+  });
+}
+function dayLabelToday(){
+  const now = new Date();
+  const di = Math.floor((now - TRIP_START)/86400000);
+  if(di>=0 && di<TRIP_LEN) return DAY_LABELS[di];
+  return now.getDate()+"/"+(now.getMonth()+1);
+}
+function shareCard(id){
+  const it = DATA.find(i=>i.id===id); if(!it) return;
+  const text = it.name+" · "+distLabel(it)+"\n"+it.blurb+"\nMap: "+it.maps+"\nIn our Ayia Napa list: open it and add #card="+id+" to the address to jump straight there.";
+  if(navigator.share){ navigator.share({title:it.name, text:text}).catch(()=>{}); }
+  else { try{ navigator.clipboard.writeText(text); }catch(e){} }
+}
+function tickFromModal(id, act){
+  toggle(id, act);
+  const st = state[id]||"";
+  const bw = document.getElementById("mWant"), bd = document.getElementById("mDone");
+  if(bw){ bw.className = "btn line"+(st==="want"?" activeWant":""); bw.textContent = st==="want"?("On the wish list"+wantTag(id)):"Want to do this"; }
+  if(bd){ bd.className = "btn line"+(st==="done"?" activeDone":""); bd.textContent = st==="done"?"✓ Done":"Mark as done"; }
+  renderModalExtras(id);
+}
+document.getElementById("overlay").addEventListener("click", e=>{ if(e.target.id==="overlay") closeModal(); });
+document.addEventListener("keydown", e=>{
+  const ov = document.getElementById("overlay");
+  if(!ov.classList.contains("open")) return;
+  if(e.key==="Escape"){ closeModal(); return; }
+  if(e.key==="Tab"){
+    const f = Array.from(document.getElementById("modal").querySelectorAll('button, a[href], [tabindex="0"]'))
+      .filter(el=>el.offsetParent!==null);
+    if(!f.length) return;
+    const first = f[0], last = f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+    else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+  }
+});
+
+/* ---------- live photo gallery ---------- */
+function fpUrl(name){ return "https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(name)+"?width=640"; }
+function parseCommons(j){
+  const pages = (j && j.query && j.query.pages) ? Object.values(j.query.pages) : [];
+  pages.sort((a,b)=>(a.index||99)-(b.index||99));
+  return pages.map(p=>p.imageinfo && p.imageinfo[0]).filter(Boolean)
+    .filter(ii=>/image\/(jpeg|png)/.test(ii.mime))
+    .map(ii=>ii.thumburl || ii.url);
+}
+function commonsApiUrl(q2, jsonpCb){
+  return "https://commons.wikimedia.org/w/api.php?action=query&format=json"+
+    (jsonpCb ? "&callback="+jsonpCb : "&origin=*")+
+    "&generator=search&gsrnamespace=6&gsrlimit=12&gsrsearch="+encodeURIComponent(q2)+
+    "&prop=imageinfo&iiprop=url%7Cmime&iiurlwidth=640";
+}
+async function fetchCommons(q2){
+  const r = await fetch(commonsApiUrl(q2));
+  return parseCommons(await r.json());
+}
+let jsonpN = 0;
+function jsonpCommons(q2){
+  return new Promise((res, rej)=>{
+    const cb = "napaCb"+(jsonpN++);
+    const s = document.createElement("script");
+    const t = setTimeout(()=>{
+      window[cb] = function(){ try{ delete window[cb]; }catch(e){} };
+      s.remove(); rej(new Error("timeout"));
+    }, 8000);
+    window[cb] = j=>{ clearTimeout(t); try{ delete window[cb]; }catch(e){} s.remove(); res(parseCommons(j)); };
+    s.onerror = ()=>{ clearTimeout(t); try{ delete window[cb]; }catch(e){} s.remove(); rej(new Error("jsonp failed")); };
+    s.src = commonsApiUrl(q2, cb);
+    document.head.appendChild(s);
+  });
+}
+function probeImages(names){
+  return new Promise(res=>{
+    const out = new Array(names.length);
+    let pending = names.length;
+    if(!pending) return res([]);
+    names.forEach((n,i)=>{
+      const url = fpUrl(n);
+      const im = new Image();
+      let called = false;
+      const done = ok=>{
+        if(called) return;
+        called = true;
+        im.onload = im.onerror = null;
+        if(ok) out[i] = url;
+        if(--pending===0) res(out.filter(Boolean));
+      };
+      const t = setTimeout(()=>done(false), 7000);
+      im.onload = ()=>{ clearTimeout(t); done(true); };
+      im.onerror = ()=>{ clearTimeout(t); done(false); };
+      im.src = url;
+    });
+  });
+}
+const GALLERY = {"cafe-central": ["https://media-cdn.tripadvisor.com/media/photo-s/1b/e9/7a/be/cafe-central.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/e9/7a/d3/cafe-central.jpg?w=900&h=500&s=1", "https://napaplaza.com/wp-content/uploads/2023/04/Pic_1.jpg", "https://napaplaza.com/wp-content/uploads/2023/04/Pic_2.jpg"], "garys-bar-grill": ["https://media-cdn.tripadvisor.com/media/photo-s/06/25/18/02/garys-bar.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0f/c1/a5/58/photo0jpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/ab/90/54/amazing-full-english.jpg?w=1200&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/fe/db/9a/guacamole-sandwich.jpg?w=1200&h=1200&s=1"], "liquid-cafe-bar": ["https://media-cdn.tripadvisor.com/media/photo-s/18/bf/41/49/new-design-same-values.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/a7/b7/88/liquid-cafe-bar.jpg?w=300&h=200&s=1", "https://liquidcafebar.com/wp-content/uploads/2014/09/Comfortable-atmosphere-358x539.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/4c/72/ef/creme-brulee.jpg?w=300&h=200&s=1"], "queen-vic-pub": ["https://media-cdn.tripadvisor.com/media/photo-s/08/95/3f/e9/queen-vic-pub.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/17/62/4f/eb/queen-vic-pub.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/62/4f/f3/queen-vic-pub.jpg?w=1200&h=1200&s=1"], "mon-roi-coffee": ["https://imageproxy.wolt.com/assets/683ffa9310dcc9d77bec0015", "https://media-cdn.tripadvisor.com/media/photo-s/2b/bf/f8/82/caption.jpg", "https://imageproxy.wolt.com/menu/menu-images/636b6a0321c1f0a14d7a54ae/bb52de06-6027-11ed-91fa-a252e47e54ba_mon_roi_product__21_.jpeg", "https://imageproxy.wolt.com/menu/menu-images/636b6a0321c1f0a14d7a54ae/bffd5a62-6027-11ed-9682-72aae2ef6908_mon_roi_product__22_.jpeg"], "napa-star-inn": ["https://www.loveayianapa.com/uploads/5/9/6/3/5963822/napa-star_orig.jpg", "https://www.loveayianapa.com/uploads/5/9/6/3/5963822/napa-star-inn-2.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/fa/f2/53/napa-star.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/ca/c5/69/napa-star.jpg?w=900&h=-1&s=1"], "the-bakery-co": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/1c/04/88/caption.jpg?w=900&h=-1&s=1", "https://melpoantia.com/Content/Images/the-bakery-co/bakery-3.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/fb/38/c1/the-bakery-co.jpg?w=900&h=-1&s=1", "https://imageproxy.wolt.com/assets/67331c6217e00e657c00aabe"], "molos-seaside": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/f7/5a/ea/molos-seaside.jpg?w=900&h=-1&s=1", "https://ak-d.tripcdn.com/images/1tx0k12000rvt7rz5C59B_D_2208_1242_R5.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/45/ab/90/molos-seaside.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/3b/8f/3c/caption.jpg?w=900&h=-1&s=1"], "napolea-ice-cream": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/7f/33/f1/napolea-french-ice-cream.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/3b/31/ac/caption.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/2f/ab/e6/caption.jpg?w=900&h=-1&s=1"], "zorbas-bakery": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/29/d5/3c/zorbas-bakery.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/14/63/2f/caption.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/14/63/2e/caption.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/cd/ca/52/20190602-175750-largejpg.jpg?w=900&h=-1&s=1"], "jello-cafe": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/4a/cf/e3/restuarant-ayia-nappa.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/33/c5/7e/20180605-193802-largejpg.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/c3/37/7d/sushilicous.jpg?w=1200&h=1200&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/58/80/ab/jello-cheese-cake.jpg?w=1200&h=1200&s=1"], "fresco-cafe": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/84/99/94/caption.jpg?w=1200&h=1200&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/84/99/96/caption.jpg?w=1200&h=1200&s=1", "https://imageproxy.wolt.com/assets/673312023c621863a19bef6f", "https://imageproxy.wolt.com/menu/menu-images/626fd1c6642f265b116f6067/2e616990-cd01-11ec-b4cd-7228466362ff_fresco_coffee_and_ice_cream_product_62.jpeg"], "my-cookie-dough": ["https://imageproxy.wolt.com/mes-image/e26719c2-19dc-44f9-86b8-b1969bd6a5aa/88afde1a-c2d8-410a-8b61-aa9c6426159e", "https://cdn.shopify.com/s/files/1/0271/4628/9239/files/IMG_7857_jpg_17fc036c-849a-483d-a462-d612273eb2a3.jpg?v=1630844631", "https://www.mycookiedough.com/cdn/shop/files/main-home-image_1.jpg?v=1700221410"], "sigma-bakeries": ["https://www.cbn.com.cy/images/1300x500/cache_1300x500_Analog_medium_77892_170798_25_03_31_123950.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/3b/38/28/caption.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/f6/b3/7c/caption.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/3b/38/40/caption.jpg?w=1100&h=1100&s=1"], "hans-and-gretel": ["https://hansgretel.com/wp-content/uploads/2023/06/ayia-napa.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/bf/7f/f9/this-place-is-very-nice.jpg?w=1200&h=1200&s=1", "https://imageproxy.wolt.com/assets/673208c780eb896202a8b4f7", "https://imageproxy.wolt.com/menu/menu-images/605aed56649cb583e0dd19dc/669c6ad0-4344-11ed-b74c-9a38de2f49d7_a09494ac_15d2_11eb_aa51_f6d947a9e15c_1.jpeg"], "stamna-taverna": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/32/a4/25/stamna-taverna.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/54/3c/e9/table-number-13-the-center.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/ac/70/99/kalamari.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/bb/c1/63/1.jpg"], "en-yevo-tavernaki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/c6/db/52/tavernaki-interior.jpg", "https://static.where-e.com/Cyprus/Famagusta/En-Yevo-Tavernaki_fe765e9e92fa539249a01814b316e335.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/7e/07/52/dishes-from-en-yevo-tavernaki.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/b2/ee/img-20181003-183839-largejpg.jpg"], "taverna-napa-1976": ["https://framerusercontent.com/images/Bd1jXIubz5MJruF2KiaaamYo.webp", "https://framerusercontent.com/images/daEULPzpuk0kw1nQs8caKa2xZo0.webp", "https://framerusercontent.com/images/WAbmkWUXVGtvEKtHtTC3CtFLBo.webp", "https://framerusercontent.com/images/hKLY9Q01zEDa4roTZfRQJeYLko.webp"], "opas-tavern": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/6c/74/ab/opas-tavern-across-the.jpg", "https://opastavern.com/wp-content/uploads/2024/05/opas-entertainment.jpg", "https://opastavern.com/wp-content/uploads/2024/05/Opas-Special-Souvlaki-1.jpg", "https://opastavern.com/wp-content/uploads/2024/05/Homemade-Pastitsio-1.jpg"], "avra-cypriot-kitchen": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/23/bf/8a/avra.jpg", "https://melpoantia.com/Content/Images/avra-rest-meze/AvraRest7362.jpg", "https://melpoantia.com/Content/Images/avra-rest-meze/AvraRestMeze7883.jpg", "https://melpoantia.com/Content/Images/avra-rest-meze/AvrarestMeze7798.jpg"], "tonys-taverna": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d4/ef/2e/esterno-locale.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/70/1c/23/img-20160529-182753-largejpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/ef/5e/8d/img-20180510-232917-002.jpg"], "old-village-tavern": ["https://oldvillagetavern.com/wp-content/uploads/2021/08/Frontwithgirl.png", "https://oldvillagetavern.com/wp-content/uploads/2021/08/Phonebox.png", "https://oldvillagetavern.com/wp-content/uploads/2021/08/Family.png", "https://oldvillagetavern.com/wp-content/uploads/2021/08/Food.png"], "mangas-meze-house": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/6b/08/c3/photo0jpg.jpg", "https://media-cdn.tripadvisor.com/media/photo-o/0c/e1/fb/27/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1e/cf/6d/8f/overzicht-vlees-meze.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/a6/f3/6b/yummy-souflaki-great.jpg"], "ayianapitika-tavern": ["https://static.where-e.com/Cyprus/Famagusta_District/Ayianapitika-Cyprus-Tavern_d65d05f869503426c3f8ad5f4bf4d9e8.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/11/9a/f5/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/14/18/75/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/7c/00/91/caption.jpg"], "raphaels-restaurant": ["https://raphaelscyprus.com/wp-content/uploads/2026/05/a14504db-c307-43c9-b67e-cb32e6b75860-1024x576.jpg", "https://raphaelscyprus.com/wp-content/uploads/2026/06/Gluten-Free-img-1024x683.jpeg", "https://raphaelscyprus.com/wp-content/uploads/2026/06/Vegan-img-1024x683.jpeg"], "the-agrotikon": ["https://media-cdn.tripadvisor.com/media/photo-s/03/0b/ce/a7/the-agrotikon-restaurant.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/3d/b8/ba/kanontrevligt-stalle.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/d4/00/76/i-tried-the-cyprus-dish.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/97/35/a8/luna-park.jpg"], "sesoula-kalamaki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/42/72/e7/sesoula-kalamaki.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/0a/9a/f8/caption.jpg", "https://sesoula-kalamaki.com/wp-content/uploads/2026/02/Platter.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/58/1e/53/pork-souvlaki.jpg"], "flames-restaurant": ["https://flamesrestaurantbar.com/wp-content/uploads/2026/05/front-2048x1536.jpg", "https://flamesrestaurantbar.com/wp-content/uploads/2026/05/side-2048x1536.jpg", "https://flamesrestaurantbar.com/wp-content/uploads/2026/05/bar-to-rest-scaled.jpg", "https://flamesrestaurantbar.com/wp-content/uploads/2020/03/salad-on-board-1-2048x1333.jpg"], "kota-greek-souvlaki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/83/74/8d/photo1jpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/77/68/71/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/04/51/2e/platte-fur-2.jpg"], "elma-kebab-house": ["https://static.where-e.com/Cyprus/Famagusta_District/Elma-Kebab-House_eac3c01b60ce4ede66be649c0a71a2a8.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/35/6c/0f/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/35/6c/0c/caption.jpg"], "vassos-psarolimano": ["https://media-cdn.tripadvisor.com/media/photo-w/0f/93/aa/89/table-setting-with-an.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/e3/7f/c1/tavern-3.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/74/bc/bd/vassos-fish-harbour-taverna.jpg"], "isaac-tavern": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/19/cd/b7/19/next-to-this-little-church.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/50/05/0d/isaac-tavern.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/48/d0/7b/isaac-tavern.jpg"], "fish-house": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/52/b9/36/fish-house.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/5c/61/3e/the-best-restaurant-ayia.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/cd/bc/a5/food.jpg"], "limanaki-fish": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/d1/89/b4/limanaki-restaurant.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/d3/12/6f/limanaki-restaurant.jpg", "https://limanakibeach.com/wp-content/uploads/2019/06/SPY_7939.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/52/c7/bf/20171117-205110-largejpg.jpg"], "ocean-basket": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/13/a9/93/5d/ocean-basket-agia-napa.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/50/7b/a2/ocean-basket.jpg", "https://imageproxy.wolt.com/menu/menu-images/60b0db6179888499abbf6580/2eb6a8fa-eda3-11ee-997f-e6f915a9093c_platter_for_2.png"], "koralli-seafood": ["https://media-cdn.tripadvisor.com/media/photo-w/0b/d2/14/39/dining-area-overlooking.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/d2/2a/8c/koralli-seafood-restaurant.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/ad/ae/21/grill-octopus-with-fava.jpg"], "fishermans-hut": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/17/48/9a/14/fisherman-s-hut-tavern.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/88/92/84/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/75/0b/fb/caption.jpg"], "sale-e-pepe": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/ae/ad/55/authentic-italian-restaurant.jpg", "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/e9/7c/6f/sake-e-pepe.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/9f/32/c3/decoration-was-impressive.jpg", "https://napaplaza.com/wp-content/uploads/2023/04/PEPEPic_1.jpg"], "quadro": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/9d/f8/c6/caption.jpg", "https://media-cdn.tripadvisor.com/media/photo-m/1280/17/cd/be/3e/quadro.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/ce/1c/59/fresh-pizza-cooked-in.jpg"], "bella-italy": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/2f/a9/7b/18/bella-italy-cy-promotional.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/9a/82/c7/caption.jpg", "https://imageproxy.wolt.com/assets/668553060ac93971af4d3850"], "al-ritrovo": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/59/5b/a2/al-ritrovo-italian-restaurant.jpg", "https://media-cdn.tripadvisor.com/media/photo-o/32/22/7f/c9/al-ritrovo-our-meeting.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/8f/6c/31/bruschette.jpg"], "de-medici": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/f6/5a/5c/de-medici-interior-enjoy.jpg", "https://demedicicy.com/wp-content/uploads/2019/06/Homepage-Ouc-830x553.jpg", "https://demedicicy.com/wp-content/uploads/2019/04/Pepper-Steak-370x280.jpg"], "davinci-napiana": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/97/43/47/das-napiana-ist-einfach.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/c1/fc/dc/napiana.jpg", "https://media-cdn.tripadvisor.com/media/photo-m/1280/1c/01/f8/7d/polo-con-salsa-ai-porcini.jpg"], "wagamama": ["https://media-cdn.tripadvisor.com/media/photo-s/24/e4/6d/29/wagamama-ayia-napa.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/18/cb/50/db/space.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/24/e4/4e/f3/rainbow-roll-we-roll.jpg"], "umami-sushi": ["https://media-cdn.tripadvisor.com/media/photo-s/28/d1/71/93/umami-sushi-pan-asian.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/1b/e9/65/47/umami-restaurant.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/1a/25/46/41/caption.jpg"], "sawadee-thai": ["https://media-cdn.tripadvisor.com/media/photo-s/0f/a7/cd/88/view-inside-sawadee-ayia.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/11/2b/43/5b/sawadee-thai-street-food.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/13/47/88/44/red-curry-paste-chicken.jpg"], "rasoi-indian": ["https://media-cdn.tripadvisor.com/media/photo-s/29/9d/bf/12/rasoi-indian-cuisine.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/29/9d/bf/11/taj-mahal.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/1d/46/60/17/chicken-tikka-lamb-biriyani.jpg"], "los-bandidos": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/a3/77/32/los-bandidos.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/2d/3a/d7/img-20201014-180659-largejpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/3d/f6/d7/tacos-bandido.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/3d/f6/d3/fajitas-supremos.jpg"], "nikitas-steak-house": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/19/5a/95/nikitas-restaurang.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/ea/a3/8f/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/14/22/a1/nikitas.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/8d/35/9d/food-cooked-from-scratch.jpg"], "zaatar-food-arts": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/5d/f9/15/20190716-190118-largejpg.jpg", "https://imageproxy.wolt.com/assets/67320854479a971266a6937f", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/b6/f9/66/irresistible-hummus-bar.jpg"], "sage-restaurant": ["https://media-cdn.tripadvisor.com/media/photo-s/18/28/9b/9b/sage-front.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0f/b5/30/a0/sage-restaurant-wine.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0f/b6/2d/11/sage-restaurant-wine.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0d/37/7c/e8/soup-of-the-day-blue.jpg"], "the-deck-terrace": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/09/65/36/sunset-dining.jpg?w=900&h=500&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/09/65/41/dinner-with-a-view.jpg?w=900&h=500&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/29/84/e1/snapchat-1082583941-largejpg.jpg?w=900&h=500&s=1"], "karamelomeno-kremmidi": ["https://media-cdn.tripadvisor.com/media/photo-s/27/ac/7d/a0/caption.jpg", "https://imageproxy.wolt.com/assets/67331141e99cb70efe075a4a", "https://media-cdn.tripadvisor.com/media/photo-s/12/f6/1a/bf/bifteki-bacon.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/15/62/e9/be/souvlaki.jpg"], "mr-tzatziki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/69/aa/82/a-popular-gyros-spot.jpg?w=1200&h=-1&s=1", "https://images.happycow.net/venues/1024/41/00/hcmp410087_2806481.jpeg", "https://mrtzatziki.com/wp-content/uploads/2023/09/File-2.jpg"], "burgerbox": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/ac/69/70/caption.jpg?w=1200&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/52/47/42/caption.jpg?w=1200&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/1a/ad/1d/juicy-burgers-100-beef.jpg?w=1200&h=-1&s=1"], "georgies-handy-food": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/b7/df/b8/georgie-s-handy-food.jpg?w=900&h=500&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/77/0d/ef/photo1jpg.jpg?w=1200&h=1200&s=1", "https://imageproxy.wolt.com/menu/menu-images/61c1fcee7b7554f620eeaca1/9032e6de-10b6-11f0-bb82-fa8bd16cf5bf_u3uvdqf33c260320251742993649.jpeg"]};
+async function getGalleryUrls(it){
+  if(GALLERY[it.id] && GALLERY[it.id].length) return GALLERY[it.id];
+  if(GAL_CACHE[it.id] && GAL_CACHE[it.id].length) return GAL_CACHE[it.id];
+  if(GAL_PENDING[it.id]) return GAL_PENDING[it.id];
+  const job = (async ()=>{
+    let urls = [];
+    const qs = QUERIES[it.id] || [it.name + " Cyprus"];
+    try{
+      for(const q2 of qs){
+        if(urls.length >= 5) break;
+        const got = await fetchCommons(q2);
+        for(const u of got){ if(urls.length < 5 && !urls.includes(u)) urls.push(u); }
+      }
+    }catch(e){}
+    if(!urls.length){
+      try{
+        for(const q2 of qs){
+          if(urls.length >= 5) break;
+          const got = await jsonpCommons(q2);
+          for(const u of got){ if(urls.length < 5 && !urls.includes(u)) urls.push(u); }
+        }
+      }catch(e){}
+    }
+    if(!urls.length && CANDIDATES[it.id]){
+      try{ urls = (await probeImages(CANDIDATES[it.id])).slice(0,5); }catch(e){}
+    }
+    if(!urls.length && it.img && !it.imgFailed) urls = [it.img];
+    return urls;
+  })();
+  GAL_PENDING[it.id] = job;
+  const urls = await job;
+  delete GAL_PENDING[it.id];
+  if(urls.length){
+    GAL_CACHE[it.id] = urls;
+    lsSet("napafoodGal", JSON.stringify(GAL_CACHE));
+  }
+  return urls;
+}
+function setMain(url){
+  const mm = document.querySelector("#galWrap .media");
+  if(!mm) return;
+  let img = mm.querySelector("img");
+  if(!img){
+    img = document.createElement("img");
+    img.onerror = ()=>img.remove();
+    mm.appendChild(img);
+  }
+  img.src = url;
+}
+function renderGallery(it, urls){
+  const mm = document.querySelector("#galWrap .media");
+  const tw = document.getElementById("thumbs");
+  if(!mm || !tw) return;
+  let idx = 0;
+  function show(i){
+    idx = (i + urls.length) % urls.length;
+    setMain(urls[idx]);
+    const c = mm.querySelector(".gcount");
+    if(c) c.textContent = (idx+1) + " / " + urls.length;
+    tw.querySelectorAll("img").forEach((x,k)=>x.classList.toggle("sel", k===idx));
+  }
+  tw.innerHTML = urls.map((u,i)=>'<img src="'+esc(u)+'" class="'+(i===0?"sel":"")+'" alt="" onerror="this.style.display=\'none\'">').join("");
+  tw.querySelectorAll("img").forEach((im,k)=>im.addEventListener("click", ev=>{ ev.stopPropagation(); show(k); }));
+  if(urls.length > 1){
+    mm.classList.add("has-nav");
+    if(!mm.querySelector(".gnav")){
+      const prev = document.createElement("button"); prev.className="gnav prev"; prev.innerHTML="&#8249;"; prev.setAttribute("aria-label","Previous photo");
+      const next = document.createElement("button"); next.className="gnav next"; next.innerHTML="&#8250;"; next.setAttribute("aria-label","Next photo");
+      const cnt = document.createElement("div"); cnt.className="gcount";
+      prev.addEventListener("click", ev=>{ ev.stopPropagation(); show(idx-1); });
+      next.addEventListener("click", ev=>{ ev.stopPropagation(); show(idx+1); });
+      mm.appendChild(prev); mm.appendChild(next); mm.appendChild(cnt);
+    }
+    if(!mm.dataset.touchBound){
+      mm.dataset.touchBound = "1";
+      let tx = null;
+      mm.addEventListener("touchstart", e=>{ tx = e.changedTouches[0].clientX; }, {passive:true});
+      mm.addEventListener("touchend", e=>{
+        if(tx===null) return;
+        const dx = e.changedTouches[0].clientX - tx; tx = null;
+        if(Math.abs(dx) > 40) show(idx + (dx<0 ? 1 : -1));
+      }, {passive:true});
+    }
+  }
+  show(0);
+}
+async function loadGallery(it){
+  if(!document.getElementById("galNote")) return;
+  const urls = await getGalleryUrls(it);
+  const m = document.getElementById("modal");
+  if(!m || m.dataset.galFor !== it.id) return;
+  const note = document.getElementById("galNote");
+  const tw = document.getElementById("thumbs");
+  if(!note || !tw) return;
+  if(!urls.length){
+    note.textContent = "Photos could not load in this viewer. They need an internet connection.";
+    return;
+  }
+  if(!it.img || it.imgFailed){ it.img = urls[0]; it.imgFailed = false; updateCardMedia(it); }
+  renderGallery(it, urls);
+  note.textContent = urls.length + (urls.length>1 ? " photos" : " photo") +
+    " of this place. Use the arrows or swipe.";
+}
+function updateCardMedia(it){
+  const card = document.querySelector('.card[data-id="'+it.id+'"]');
+  if(!card) return;
+  const mm = card.querySelector(".media");
+  if(!mm) return;
+  let img = mm.querySelector("img");
+  if(!img){
+    img = document.createElement("img");
+    img.loading = "lazy";
+    img.alt = it.name;
+    img.onerror = ()=>{ it.imgFailed = true; img.remove(); };
+    mm.appendChild(img);
+  }
+  img.src = it.img;
+}
+async function prefetchCovers(){
+  for(let pass = 0; pass < 2; pass++){
+    let i = 0;
+    const items = DATA.filter(it=>!it.img || it.imgFailed);
+    if(!items.length) break;
+    await Promise.all(Array.from({length:2}, async ()=>{
+      while(i < items.length){
+        const it = items[i++];
+        try{
+          const urls = await getGalleryUrls(it);
+          if(urls.length && (!it.img || it.imgFailed)){
+            it.img = urls[0];
+            it.imgFailed = false;
+            updateCardMedia(it);
+          }
+        }catch(e){}
+      }
+    }));
+    if(pass===0) await new Promise(r=>setTimeout(r, 4000));
+  }
+}
+
+/* ---------- interactions ---------- */
+function toggle(id, act){
+  if(act==="done"){
+    if(state[id]==="done"){
+      state[id] = wantOf(id) ? "want" : "";
+      extra.unDone[id] = 1; /* remember the correction so it syncs to the partner */
+    } else {
+      state[id] = "done";
+      delete extra.unDone[id];
+      extra.notes[id] = extra.notes[id]||{};
+      const n = extra.notes[id];
+      /* refresh the date on redo ONLY when there is no real memory attached —
+         a note or a spent amount means the original date is part of the record */
+      if(!n.dt || !(n.t || extra.spent[id]!=null)) n.dt = dayLabelToday();
+    }
+  } else {
+    const p = extra.who || "X";
+    let s = wantOf(id);
+    s = s.includes(p) ? s.replace(p,"") : s + p;
+    if(s) extra.wantBy[id] = s; else delete extra.wantBy[id];
+    if(state[id]!=="done") state[id] = s ? "want" : "";
+  }
+  saveState(); saveExtra();
+  /* keep the grid steady under the user's finger: update the tapped card in
+     place and re-sort only on the next full render (filter change etc.) */
+  if(stat==="all"){ refreshCard(id); updateHeaderCounts(); }
+  else render();
+}
+function refreshCard(id){
+  const card = document.querySelector('.card[data-id="'+id+'"]');
+  if(!card){ render(); return; }
+  const st = state[id]||"";
+  card.className = "card "+st;
+  const fw = card.querySelector(".flag.f-want"); if(fw) fw.textContent = "Want to"+wantTag(id);
+  const bw = card.querySelector(".bWant"); if(bw) bw.textContent = st==="want" ? "On the list" : "Want to";
+  const bd = card.querySelector(".bDone"); if(bd) bd.textContent = st==="done" ? "✓ Done" : "Mark done";
+}
+function updateHeaderCounts(){
+  const done = DATA.filter(i=>state[i.id]==="done").length;
+  const want = DATA.filter(i=>state[i.id]==="want").length;
+  document.getElementById("nDone").textContent = done;
+  document.getElementById("nWant").textContent = want;
+  document.getElementById("nTotal").textContent = done+" / "+DATA.length;
+  document.getElementById("barFill").style.width = (100*done/DATA.length)+"%";
+  const wishSum = DATA.filter(i=>state[i.id]==="want" && i.est).reduce((a,i)=>a+i.est,0);
+  const spentSum = Object.entries(extra.spent).filter(([id])=>state[id]==="done").reduce((a,[,v])=>a+(parseFloat(v)||0),0);
+  document.getElementById("budgetLine").textContent =
+    (wishSum? "Wish list ≈ €"+wishSum+" for two" : "") + (wishSum&&spentSum? " · " : "") + (spentSum? "Spent €"+Math.round(spentSum) : "");
+  renderChips();
+  if(mapObj && document.getElementById("mapWrap").classList.contains("open")) drawMapMarkers();
+}
+document.getElementById("grid").addEventListener("click", e=>{
+  const btn = e.target.closest("button[data-act]");
+  const card = e.target.closest(".card");
+  if(!card) return;
+  if(btn){ toggle(card.dataset.id, btn.dataset.act); }
+  else { openModal(card.dataset.id); }
+});
+document.getElementById("grid").addEventListener("keydown", e=>{
+  if(e.key!=="Enter" && e.key!==" ") return;
+  const card = e.target.closest(".card");
+  if(!card || e.target!==card) return;
+  e.preventDefault();
+  openModal(card.dataset.id);
+});
+document.getElementById("catChips").addEventListener("click", e=>{
+  const c = e.target.closest("[data-cat]"); if(!c) return;
+  cat = c.dataset.cat; render();
+});
+document.getElementById("filterChips").addEventListener("click", e=>{
+  const s = e.target.closest("[data-stat]");
+  const t = e.target.closest("[data-time]");
+  const mo = e.target.closest("[data-mode]");
+  const so = e.target.closest("[data-sort]");
+  const dy = e.target.closest("[data-day]");
+  if(s) stat = s.dataset.stat;
+  else if(t) timeF = t.dataset.time;
+  else if(mo) modeF = mo.dataset.mode;
+  else if(so){ extra.sort = so.dataset.sort; saveExtra(); }
+  else if(dy) dayF = dy.dataset.day;
+  else return;
+  render();
+});
+function resetFilters(){
+  cat="all"; stat="all"; timeF="all"; modeF="all"; dayF="all"; q="";
+  const qi = document.getElementById("q"); if(qi) qi.value="";
+  render();
+}
+function resetSecondary(){
+  stat="all"; timeF="all"; modeF="all"; dayF="all"; extra.sort="wish"; saveExtra();
+  render();
+}
+function setSheet(open){
+  document.getElementById("fSheet").classList.toggle("open", open);
+  document.getElementById("fBackdrop").classList.toggle("open", open);
+}
+document.getElementById("filtersBtn").addEventListener("click", ()=>setSheet(!document.getElementById("fSheet").classList.contains("open")));
+document.getElementById("fClose").addEventListener("click", ()=>setSheet(false));
+document.getElementById("fBackdrop").addEventListener("click", ()=>setSheet(false));
+document.getElementById("fApply").addEventListener("click", ()=>setSheet(false));
+document.getElementById("clearBtn").addEventListener("click", resetSecondary);
+document.addEventListener("keydown", e=>{
+  if(e.key==="Escape" && document.getElementById("fSheet").classList.contains("open")
+     && !document.getElementById("overlay").classList.contains("open")) setSheet(false);
+});
+let qTimer = null;
+document.getElementById("q").addEventListener("input", e=>{
+  clearTimeout(qTimer);
+  const v = e.target.value;
+  qTimer = setTimeout(()=>{ q = v; render(); }, 160);
+});
+document.getElementById("surpriseBtn").addEventListener("click", ()=>{
+  const pool = DATA.filter(it=>matches(it) && state[it.id]!=="done");
+  const btn = document.getElementById("surpriseBtn");
+  if(!pool.length){ flashBtn(btn, "Nothing matches — loosen filters", "Surprise us"); return; }
+  const pick = pool[Math.floor(Math.random()*pool.length)];
+  openModal(pick.id);
+});
+
+/* ---------- sync codes ---------- */
+function chk36(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i))>>>0; }
+  return ("000000"+h.toString(36)).slice(-6);
+}
+function parse36(str){
+  let n = 0n;
+  for(const ch of str){
+    const v = parseInt(ch, 36);
+    if(isNaN(v)) throw new Error("bad char");
+    n = n*36n + BigInt(v);
+  }
+  return n;
+}
+function encodeState(){
+  if(extra.who==="V" || extra.who==="H"){
+    let d = 0n, v = 0n, hh = 0n, dy = 0n, u = 0n;
+    DATA.forEach((it,i)=>{
+      const bit = 1n << BigInt(i);
+      if(state[it.id]==="done") d |= bit;
+      if(extra.unDone[it.id]) u |= bit; /* corrections: "this was NOT done after all" */
+      const s = wantOf(it.id);
+      if(s.includes("V") || (extra.who==="V" && s.includes("X"))) v |= bit;
+      if(s.includes("H") || (extra.who==="H" && s.includes("X"))) hh |= bit;
+      dy |= (BigInt(extra.days[it.id]||0) << BigInt(4*i));
+    });
+    const payload = extra.who+"."+DATA.length.toString(36)+"."+d.toString(36)+"."+v.toString(36)+"."+hh.toString(36)+"."+dy.toString(36)+"."+u.toString(36);
+    return "FOOD5." + payload + "." + chk36(payload);
+  }
+  let w = 0n, d = 0n, dy = 0n;
+  DATA.forEach((it,i)=>{
+    const st = state[it.id];
+    if(st==="want") w |= (1n << BigInt(i));
+    if(st==="done") d |= (1n << BigInt(i));
+    const day = extra.days[it.id]||0;
+    dy |= (BigInt(day) << BigInt(4*i));
+  });
+  return "FOOD3." + w.toString(36) + "." + d.toString(36) + "." + dy.toString(36);
+}
+function decodeState(code){
+  try{
+    code = (code||"").trim();
+    /* be forgiving: extract the code from a pasted WhatsApp/SMS message */
+    const mx = code.match(/FOOD\d\.[0-9a-zA-Z.]+/);
+    if(mx) code = mx[0].replace(/\.+$/,"");
+    const incoming = {};
+    const incomingDays = {};
+    if(code.indexOf("FOOD5.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==8) return {ok:false};
+      const who = parts[0];
+      const payload = parts.slice(0,7).join(".");
+      if(chk36(payload)!==parts[7]) return {ok:false, bad:"That code has a typo in it, ask for a fresh one."};
+      if(parseInt(parts[1],36)!==DATA.length) return {ok:false, bad:"The other phone has a different version of the list, so nothing was merged."};
+      if(who!=="V" && who!=="H") return {ok:false};
+      const d = parse36(parts[2]), v = parse36(parts[3]), hh = parse36(parts[4]), dy = parse36(parts[5]), u = parse36(parts[6]);
+      let added = 0; const conflicts = [];
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if((d & bit) && state[it.id]!=="done"){ state[it.id] = "done"; delete extra.unDone[it.id]; added++; }
+        /* the sender corrected an accidental "done" — honour it here too */
+        if((u & bit) && state[it.id]==="done"){
+          state[it.id] = wantOf(it.id) ? "want" : "";
+          extra.unDone[it.id] = 1;
+          added++;
+        }
+        const senderWants = who==="V" ? !!(v & bit) : !!(hh & bit);
+        let s = wantOf(it.id);
+        const had = s.includes(who);
+        if(senderWants && !had){ s += who; added++; }
+        if(!senderWants && had){ s = s.replace(who,""); added++; }
+        if(s) extra.wantBy[it.id] = s; else delete extra.wantBy[it.id];
+        if(state[it.id]!=="done") state[it.id] = s ? "want" : "";
+        const day = Number((dy >> BigInt(4*i)) & 15n);
+        if(day>=1 && day<=TRIP_LEN){
+          if(!extra.days[it.id]){ extra.days[it.id] = day; added++; }
+          else if(extra.days[it.id]!==day) conflicts.push(it.name+": "+DAY_LABELS[extra.days[it.id]-1]+" on this phone, "+DAY_LABELS[day-1]+" in the code");
+        }
+      });
+      saveState(); saveExtra();
+      return {ok:true, added, conflicts};
+    }
+    if(code.indexOf("FOOD4.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==7) return {ok:false};
+      const who = parts[0];
+      const payload = parts.slice(0,6).join(".");
+      if(chk36(payload)!==parts[6]) return {ok:false, bad:"That code has a typo in it, ask for a fresh one."};
+      if(parseInt(parts[1],36)!==DATA.length) return {ok:false, bad:"The other phone has a different version of the list, so nothing was merged."};
+      if(who!=="V" && who!=="H") return {ok:false};
+      const d = parse36(parts[2]), v = parse36(parts[3]), hh = parse36(parts[4]), dy = parse36(parts[5]);
+      let added = 0; const conflicts = [];
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if((d & bit) && state[it.id]!=="done"){ state[it.id] = "done"; added++; }
+        const senderWants = who==="V" ? !!(v & bit) : !!(hh & bit);
+        let s = wantOf(it.id);
+        const had = s.includes(who);
+        if(senderWants && !had){ s += who; added++; }
+        if(!senderWants && had){ s = s.replace(who,""); added++; }
+        if(s) extra.wantBy[it.id] = s; else delete extra.wantBy[it.id];
+        if(state[it.id]!=="done") state[it.id] = s ? "want" : "";
+        const day = Number((dy >> BigInt(4*i)) & 15n);
+        if(day>=1 && day<=TRIP_LEN){
+          if(!extra.days[it.id]){ extra.days[it.id] = day; added++; }
+          else if(extra.days[it.id]!==day) conflicts.push(it.name+": "+DAY_LABELS[extra.days[it.id]-1]+" on this phone, "+DAY_LABELS[day-1]+" in the code");
+        }
+      });
+      saveState(); saveExtra();
+      return {ok:true, added, conflicts};
+    }
+    if(code.indexOf("FOOD3.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==3) return {ok:false};
+      const w = parse36(parts[0]), d = parse36(parts[1]), dy = parse36(parts[2]);
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if(d & bit) incoming[it.id] = "done";
+        else if(w & bit) incoming[it.id] = "want";
+        const day = Number((dy >> BigInt(4*i)) & 15n);
+        if(day>=1 && day<=TRIP_LEN) incomingDays[it.id] = day;
+      });
+    } else if(code.indexOf("FOOD2.")===0){
+      const parts = code.slice(6).split(".");
+      if(parts.length!==2) return {ok:false};
+      const w = parse36(parts[0]), d = parse36(parts[1]);
+      DATA.forEach((it,i)=>{
+        const bit = 1n << BigInt(i);
+        if(d & bit) incoming[it.id] = "done";
+        else if(w & bit) incoming[it.id] = "want";
+      });
+    } else if(code.indexOf("FOOD1.")===0){
+      const o = JSON.parse(atob(code.slice(6)));
+      (o.w||[]).forEach(id=>incoming[id]="want");
+      (o.d||[]).forEach(id=>incoming[id]="done");
+    } else return {ok:false};
+    let added = 0;
+    for(const id in incoming){
+      const cur = state[id]||"";
+      if(incoming[id]==="done" && cur!=="done"){ state[id]="done"; added++; }
+      else if(incoming[id]==="want" && cur===""){ state[id]="want"; added++; }
+      /* keep legacy wants inside the per-person model so they survive future exports */
+      if(incoming[id]==="want" && !wantOf(id)) extra.wantBy[id] = "X";
+    }
+    for(const id in incomingDays){
+      if(!extra.days[id]){ extra.days[id] = incomingDays[id]; added++; }
+    }
+    saveState(); saveExtra();
+    return {ok:true, added};
+  }catch(e){ return {ok:false}; }
+}
+function flashBtn(btn, text, revert){
+  btn.textContent = text;
+  setTimeout(()=>{ btn.textContent = revert; }, 1800);
+}
+function doCopy(code, btn, revert){
+  /* the paste-in field is for the PARTNER's code — only borrow it for the
+     manual fallback, never leave our own code sitting there */
+  const inp = document.getElementById("syncIn");
+  const ok = ()=>flashBtn(btn, "Copied", revert);
+  const manual = ()=>{
+    inp.value = code; inp.focus(); inp.select();
+    try{ document.execCommand("copy") ? ok() : flashBtn(btn, "Select & copy", revert); }catch(e){ flashBtn(btn, "Select & copy", revert); }
+  };
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(code).then(ok).catch(manual);
+  } else manual();
+}
+function setWho(p){
+  extra.who = p;
+  Object.keys(extra.wantBy).forEach(id=>{
+    let s = extra.wantBy[id];
+    if(s.includes("X")){ s = s.replace("X",""); if(!s.includes(p)) s += p; extra.wantBy[id] = s; }
+  });
+  saveExtra(); updateWhoBtns(); render();
+}
+function updateWhoBtns(){
+  const st = document.getElementById("whoStatus");
+  if(st) st.textContent = extra.who ? ("This phone: "+(extra.who==="V"?"Vegard":"Hanne")) : "Not signed in";
+}
+updateWhoBtns();
+function requireWho(btn, revert){
+  if(extra.who) return true;
+  const n = document.getElementById("syncNote");
+  n.textContent = "Sign in first (Switch person) so codes carry your own wish list precisely, including removals and corrections.";
+  n.style.display = "block";
+  flashBtn(btn, "Sign in first", revert);
+  showLogin();
+  return false;
+}
+
+/* ---------- login gate: name + 4-digit PIN per person ---------- */
+/* PINs are stored as salted hashes, not plain text. This is a family lock,
+   not encryption: it keeps the wrong phone from posting as the wrong person
+   and casual eyes out — a determined person with the file can get past it. */
+const PIN_HASH = { V:"vm6sv0", H:"zvaezz" };
+function pinOk(person, pin){ return chk36(person+":"+pin+":napa26") === PIN_HASH[person]; }
+let loginPick = null;
+function showLogin(){
+  const ov = document.getElementById("loginOv");
+  ov.style.display = "flex";
+  loginPick = null;
+  document.getElementById("pickV").classList.remove("sel");
+  document.getElementById("pickH").classList.remove("sel");
+  document.getElementById("pinArea").classList.remove("show");
+  document.getElementById("pinIn").value = "";
+  document.getElementById("pinErr").classList.remove("show");
+}
+function hideLogin(){ document.getElementById("loginOv").style.display = "none"; }
+function pickPerson(p){
+  loginPick = p;
+  document.getElementById("pickV").classList.toggle("sel", p==="V");
+  document.getElementById("pickH").classList.toggle("sel", p==="H");
+  document.getElementById("
