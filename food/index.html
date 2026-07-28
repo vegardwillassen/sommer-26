@@ -13878,8 +13878,7 @@ function openModal(id){
       '<div class="m-links">'+
         '<a class="btn solid" href="'+esc(it.maps)+'" target="_blank" rel="noopener">Open in Google Maps</a>'+
         (it.web? '<a class="btn line" href="'+esc(it.web)+'" target="_blank" rel="noopener">Website</a>':'')+
-        '<a class="btn line" href="https://www.google.com/search?udm=2&q='+encodeURIComponent(it.name+' Ayia Napa Cyprus')+'" target="_blank" rel="noopener">More photos</a>'+
-        (it.ta && it.ta.url ? '<a class="btn line" href="'+esc(it.ta.url)+'" target="_blank" rel="noopener">Sun Score</a>' : '')+
+                (it.ta && it.ta.url ? '<a class="btn line" href="'+esc(it.ta.url)+'" target="_blank" rel="noopener">Sun Score</a>' : '')+
       '</div>'+
       '<div class="m-acts">'+
         '<button class="btn line'+(st==="want"?" activeWant":"")+'" id="mWant" onclick="tickFromModal(\''+id+'\',\'want\')">'+(st==="want"?"On the wish list":"Want to do this")+'</button>'+
@@ -14146,7 +14145,7 @@ async function loadGallery(it){
   const tw = document.getElementById("thumbs");
   if(!note || !tw) return;
   if(!urls.length){
-    note.textContent = "Live photos could not load in this viewer. The More photos button below opens them in Google.";
+    note.textContent = "Photos could not load in this viewer. They need an internet connection.";
     return;
   }
   if(!it.img || it.imgFailed){ it.img = urls[0]; it.imgFailed = false; updateCardMedia(it); }
