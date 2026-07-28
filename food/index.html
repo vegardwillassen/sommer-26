@@ -382,6 +382,7 @@
     <div class="controls">
       <div class="search"><input id="q" type="text" placeholder="Search the list&hellip;" aria-label="Search the list"></div>
       <button class="chip" id="syncTopBtn" type="button" aria-haspopup="dialog">⇄ Sync</button>
+      <button class="chip" id="planBtn" type="button" aria-haspopup="dialog">Plan</button>
       <button class="chip" id="whatNowBtn" type="button">What now?</button>
       <button class="chip" id="filtersBtn" type="button" aria-haspopup="dialog">Filters</button>
       <button class="chip" id="mapBtn" type="button">Map</button>
@@ -469,7 +470,7 @@
     <div class="syncNote2" id="syncNote2"></div>
   </div>
 </div>
-<script>/* storage fallback: sandboxed previews block localStorage; fall back to in-memory so the app still renders */
+<script>/* storage fallback: sandboxed previews block localStorage */
 try{ localStorage.getItem("x"); }catch(e){ (function(){ var m={};
   var shim={getItem:function(k){return m.hasOwnProperty(k)?m[k]:null;},
     setItem:function(k,v){m[k]=String(v);}, removeItem:function(k){delete m[k];},
@@ -12895,7 +12896,7 @@ const DATA = [
  getting:"At the front of your own hotel, 0 min",
  tips:"Take a terrace table mid morning before the heat builds, then move inside for the air conditioning. Book by phone only if you want a dinner slot; brunch is walk in.",
  maps:"https://www.google.com/maps/search/?api=1&query=Cafe%20Central%20Ayia%20Napa", web:"https://napaplaza.com/cafe-central/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/1b/e9/7a/be/cafe-central.jpg"},
 {id:"garys-bar-grill",cat:"beach",name:"Gary's Bar & Grill",
  blurb:"Family run breakfast spot on Nissi Avenue; full English about €7, open 08:30 to 16:00.",
  details:"Small budget bar and grill at Nissi Avenue 31 that works purely as a daytime breakfast and lunch stop, open 08:30 to 16:00. The full English is about €7 for two eggs, two bacon, a sausage, beans, mushrooms and toast, with black pudding an extra €1.50 and hash browns as an add on. Lighter options include scrambled eggs with spinach on brown bread and a fruit platter with yogurt and honey. TripAdvisor 4.6 from over 600 reviews with fresh 2026 feedback.",
@@ -12904,7 +12905,7 @@ const DATA = [
  getting:"8 min walk west along Nissi Avenue",
  tips:"Arrive before 10:30 in high season for a shaded table. It closes at 16:00, so this is strictly a morning and lunch place.",
  maps:"https://www.google.com/maps/search/?api=1&query=Gary%27s%20Bar%20%26%20Grill%20Ayia%20Napa", web:"https://www.facebook.com/p/Garys-Bar-and-Grill-Ayia-Napa-100063657339578/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/06/25/18/02/garys-bar.jpg"},
 {id:"liquid-cafe-bar",cat:"beach",name:"Liquid Cafe Bar",
  blurb:"All day cafe bar just past the square; brunch served until 15:00, cocktails and grills after.",
  details:"Long running cafe bar at Kryou Nerou 10, a few minutes east of the square, with a shaded terrace and indoor seating. Brunch runs until 15:00, which suits late starts, then the kitchen shifts to burgers, steaks, pizza, prawns and salads; reviewers single out the steaks and the strawberry daiquiris. The dine in menu lives on a QR code, so exact breakfast prices are not published online; budget mid range pub cafe money. TripAdvisor 4.6 from about 700 reviews and still collecting them in 2026.",
@@ -12913,7 +12914,7 @@ const DATA = [
  getting:"4 min walk through the square onto Kryou Nerou",
  tips:"Go before 15:00 if you want the brunch menu. Terrace fills for televised sport, so sit inside for a quieter meal.",
  maps:"https://www.google.com/maps/search/?api=1&query=Liquid%20Cafe%20Bar%20Ayia%20Napa", web:"https://liquidcafebar.com/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/18/bf/41/49/new-design-same-values.jpg"},
 {id:"queen-vic-pub",cat:"beach",name:"Queen Vic Pub",
  blurb:"British pub on the harbour approach; cooked breakfasts from 09:00 and a popular Sunday roast.",
  details:"Traditional British gastro pub on Makariou Avenue where the road drops toward the harbour, with a proper pub interior, terrace seating and sport on the screens. Doors open at 09:00 and English breakfast is served through the morning; later the menu turns to pub classics and kebabs in famously huge portions, and the Sunday roast pulls repeat visitors all summer. Exact breakfast prices are not published, but reviewers consistently call it good value; one couple paid €55 for a full dinner with drinks. TripAdvisor 4.5 from about 750 reviews, active into 2026.",
@@ -12922,7 +12923,7 @@ const DATA = [
  getting:"7 min walk down Makariou toward the harbour",
  tips:"If you are there on Sunday 2 August, the roast is the order; arrive early as portions and demand are both large. Inside is cooler at midday.",
  maps:"https://www.google.com/maps/search/?api=1&query=Queen%20Vic%20Pub%20Ayia%20Napa", web:"https://www.facebook.com/profile.php?id=162110980519257",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/08/95/3f/e9/queen-vic-pub.jpg"},
 {id:"mon-roi-coffee",cat:"beach",name:"Mon Roi Coffee Roasters",
  blurb:"Specialty roastery cafe on Makariou; freddo espresso €3.30, beans roasted on site daily.",
  details:"The specialty coffee stop of central Ayia Napa: a small roastery cafe at Makariou III Avenue 45, roughly halfway between the square and the harbour, roasting its own beans daily and selling 250 g bags to take home. Verified prices: freddo espresso €3.30, freddo cappuccino 3.80, iced flat white 3.80, iced latte 4.30, matcha iced latte 4.50, frappe 3.30. Food stays light, with mini waffles, fresh juices, smoothies and milkshakes rather than cooked plates. Open 09:00 to 18:00 daily, so it is a morning and afternoon place only.",
@@ -12931,7 +12932,7 @@ const DATA = [
  getting:"5 min walk down Makariou toward the harbour",
  tips:"Order a freddo cappuccino, the standard Cypriot summer coffee. Also on Wolt if you want delivery to the hotel.",
  maps:"https://www.google.com/maps/search/?api=1&query=Mon%20Roi%20Coffee%20Roasters%20Ayia%20Napa", web:"https://www.instagram.com/mon_roi_coffee_roasters/",
- img:null},
+ img:"https://imageproxy.wolt.com/assets/683ffa9310dcc9d77bec0015"},
 {id:"napa-star-inn",cat:"beach",name:"Napa Star Inn",
  blurb:"Seasonal pub between the square and harbour; breakfast and brunch with big portions at low prices.",
  details:"Casual pub inn at Makariou Avenue 31, three minutes from Napa Plaza on the walk toward the harbour, open April through October. It serves breakfast, brunch, lunch and dinner from a vast menu with vegetarian and vegan options; reviewers repeatedly mention huge portions and good value, so expect a straightforward full English and pub staples rather than anything refined. Exact prices are not published online. Google rates it 4.6 from about 475 reviews, TripAdvisor 4.5, though a couple of recent reviews grumble about slow service. Karaoke, shisha and sport take over at night.",
@@ -12940,7 +12941,7 @@ const DATA = [
  getting:"3 min walk down Makariou",
  tips:"Best as an easy, cheap fry up close to the hotel rather than a destination. Terrace tables are mostly unshaded by late morning, so go early.",
  maps:"https://www.google.com/maps/search/?api=1&query=Napa%20Star%20Inn%20Ayia%20Napa", web:"https://www.facebook.com/p/FOOD-STAR-INN-100063836295913/",
- img:null},
+ img:"https://www.loveayianapa.com/uploads/5/9/6/3/5963822/napa-star_orig.jpg"},
 {id:"the-bakery-co",cat:"beach",name:"The Bakery Co.",
  blurb:"Modern bakery cafe a few doors from Napa Plaza; eggs and bacon €5.95, single espresso 1.50.",
  details:"Modern cafe, bakery and eatery at Makariou III 14, practically next door to Napa Plaza, and the cheapest cooked breakfast within one minute of your bed. Verified prices: double egg and bacon €5.95, double egg and avocado 6.40, smoked salmon plate 6.95, single espresso 1.50, americano 2.40, cappuccino 2.80. The counter also runs bagels, sandwiches, cakes, cookies, muffins, fresh juices, smoothies and ice cream a May 2025 reviewer called the best in Ayia Napa. Open early until around midnight daily; TripAdvisor 4.2, Google 4.4.",
@@ -12949,7 +12950,7 @@ const DATA = [
  getting:"1 min walk, same block of Makariou as the hotel",
  tips:"Use it for a fast early breakfast before beach or bus days; it opens around 08:00 when most of the strip is still asleep. Also delivers via Wolt.",
  maps:"https://www.google.com/maps/search/?api=1&query=The%20Bakery%20Co.%20Ayia%20Napa", web:"https://wolt.com/en/cyp/ammochostos/restaurant/bakery-co",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/1c/04/88/caption.jpg?w=900&h=-1&s=1"},
 {id:"molos-seaside",cat:"beach",name:"Molos Seaside",
  blurb:"Chilled harbour front cafe bar, coffee and breakfast from 09:00 with fishing boats bobbing metres away.",
  details:"A laid back cafe bar right on the harbour front at 1st October Street, with comfortable shaded seats and fishing boats a few metres away, open from 09:00 so it suits a slow breakfast before the beach. Expect good coffee, fresh juices and simple breakfast plates, then salads, sandwiches and Mediterranean lunch dishes later in the day, fairly priced for such a prime spot. It rates 4.6 on TripAdvisor and features on the town's best breakfast cafes list, with steady 2025 and 2026 reviews praising the relaxed atmosphere and friendly staff. Closes around 20:00, so treat it as a daytime place.",
@@ -12958,7 +12959,7 @@ const DATA = [
  getting:"7 min walk downhill past the monastery to the harbour front",
  tips:"Claim a shaded front row seat before the mid morning rush, then use it again for a lazy drink between swims. Daytime only, so plan dinner elsewhere.",
  maps:"https://www.google.com/maps/search/?api=1&query=Molos%20Seaside%20Ayia%20Napa", web:"https://www.facebook.com/molosseasideayianapa/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/f7/5a/ea/molos-seaside.jpg?w=900&h=-1&s=1"},
 
 /* FISH & SEAFOOD */
 {id:"vassos-psarolimano",cat:"water",name:"Vassos Psarolimano",
@@ -12969,7 +12970,7 @@ const DATA = [
  getting:"10 min walk down Makariou to the harbour",
  tips:"Ask the per kilo price and the weight of your fish before it goes on the grill, and get the total confirmed. Book or arrive before 19:30 for a front row quay table.",
  maps:"https://www.google.com/maps/search/?api=1&query=Vassos%20Psarolimano%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-w/0f/93/aa/89/table-setting-with-an.jpg"},
 {id:"isaac-tavern",cat:"water",name:"Isaac Tavern",
  blurb:"Family fish tavern on the harbour's west side; chargrilled sea bream and a well rated fish meze.",
  details:"Family run fish tavern at the Limanaki end of Makariou, tables a few steps from the water, with live Greek music on Fridays and Saturdays and sirtaki dancing on Wednesday evenings in season. The fish meze platter is the standard order; a la carte runs to chargrilled sea bream, red snapper, garlic mussels, grilled prawns and calamari, with lamb chops for meat eaters. Diners report a whole fresh sea bass at about €35 for two, and complimentary baklava usually closes the meal. One of the most consistently reviewed fish places in town.",
@@ -12978,7 +12979,7 @@ const DATA = [
  getting:"12 min walk down to the west side of the harbour",
  tips:"Book an outside table for sunset in high season, especially Wednesday and weekend music nights. Order the fish meze only if you are hungry, it keeps coming.",
  maps:"https://www.google.com/maps/search/?api=1&query=Isaac%20Tavern%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-m/1280/19/cd/b7/19/next-to-this-little-church.jpg"},
 {id:"fish-house",cat:"water",name:"Fish House Restaurant",
  blurb:"Harbourside restaurant run by a fisherman; most of the seafood comes off the owner's own boat.",
  details:"Harbourside spot at Makariou 44 where owner Antonis, a working fisherman, supplies 70 to 80 percent of the seafood himself; the family has been at it since 1955. Bamboo pergolas out back look over the sea and harbour. Fish meze runs about €30 per person (about €80 for two with a €20 bottle of wine), and a VIP version adds oysters, tuna tartare and cuttlefish. Lobster and king prawn platters, grilled octopus and calamari headline; an all you can eat sushi buffet at €25 per person runs Wednesday and Friday evenings. Pizza, Angus burgers and vegan dishes cover non fish eaters.",
@@ -12987,7 +12988,7 @@ const DATA = [
  getting:"9 min walk down Makariou toward the harbour",
  tips:"Ask what came in that day, the catch changes through the afternoon. Book a pergola table at the back for the sea view; the sushi buffet nights fill up.",
  maps:"https://www.google.com/maps/search/?api=1&query=Fish%20House%20Restaurant%20Ayia%20Napa", web:"https://fishhousenapa.com",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/52/b9/36/fish-house.jpg"},
 {id:"limanaki-fish",cat:"water",name:"Limanaki Fish Restaurant",
  blurb:"All day terrace over the small harbour at Limanaki Beach Hotel; platters, grills, big portions.",
  details:"All day restaurant of the Limanaki Beach Hotel whose front terrace sits directly over the small harbour, a calmer perch than the quay side tavernas. The kitchen runs from breakfast to late: sharing seafood platters, grilled fish and calamari, plus lamb chops, kebabs and club sandwiches for anyone fished out. Portions are consistently big, cocktails run €6 to €8.50, and vegetarian, vegan and gluten free dishes are marked. Reviews are mixed on finesse, so keep orders simple, grilled fish and salads, and let the view do the rest.",
@@ -12996,7 +12997,7 @@ const DATA = [
  getting:"10 min walk, harbour end of 1st October Street",
  tips:"No real need to book; walk in at sunset and ask for a front terrace table. Good fallback for lunch or a lazy long breakfast by the water.",
  maps:"https://www.google.com/maps/search/?api=1&query=Limanaki%20Fish%20Restaurant%20Ayia%20Napa", web:"https://limanakibeach.com/restaurants-bars/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/d1/89/b4/limanaki-restaurant.jpg"},
 {id:"ocean-basket",cat:"water",name:"Ocean Basket",
  blurb:"Dependable seafood chain near the harbour; fixed menu prices, platters, sushi and calamari.",
  details:"Big, busy branch of the South African seafood chain on 1st October Street near the harbour, useful precisely because everything has a printed price, no per kilo arithmetic. The sharing Platter for Two is €36.50 on the delivery menu and similar in house: grilled fish, prawns, calamari and rice or chips. Beyond that: sushi platters, fish and chips, grilled octopus and mussels, with tiramisu to finish. Service can wobble when slammed in August, but it is family friendly, air conditioned inside with terrace tables outside, and the value is hard to argue with.",
@@ -13005,7 +13006,7 @@ const DATA = [
  getting:"7 min walk down 1st October Street",
  tips:"No booking needed; go early evening to dodge the queue. Cards accepted, and the sushi and platter combos are the best value on the menu.",
  maps:"https://www.google.com/maps/search/?api=1&query=Ocean%20Basket%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-m/1280/13/a9/93/5d/ocean-basket-agia-napa.jpg"},
 {id:"koralli-seafood",cat:"water",name:"Koralli Seafood & Asian",
  blurb:"Beachfront seafood and sushi house on Makronissos Beach, worth the short taxi west of town.",
  details:"Waterfront restaurant directly on Makronissos Beach at the quiet west end of Ayia Napa, a Travelers' Choice winner ranked in the town's top 20. The kitchen runs two lanes: Mediterranean seafood, with grilled octopus and calamari the most praised plates, fresh lobster and sharing seafood platters priced by the day, and an Asian line of sushi, maki, poke bowls and noodles. Meat mains cover the rest. Tables sit over the sand with sunset views across the bay. Prices are mid to upper range but reviewers call the quality fair for the money.",
@@ -13014,7 +13015,7 @@ const DATA = [
  getting:"10 min by taxi or bus 101 along Nissi Avenue, about 6 km west",
  tips:"Book a front row table for sunset. Closed Tuesdays, so plan around it; parking is free if you have a hire car.",
  maps:"https://www.google.com/maps/search/?api=1&query=Koralli%20Seafood%20%26%20Asian%20Ayia%20Napa", web:"https://www.facebook.com/Koralli.Seafood.Restaurant/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-w/0b/d2/14/39/dining-area-overlooking.jpg"},
 {id:"fishermans-hut",cat:"water",name:"Fisherman's Hut",
  blurb:"Open air beach taverna at the Grecian Bay Hotel; the chef's daily catch and a big salad bar.",
  details:"Beachside fish taverna belonging to the five star Grecian Bay Hotel at Kryo Nero, east of the centre, open to non guests. Tables sit outdoors just off the sand with sea views, and the pull is simple: fresh fish, often caught that morning, reviewers rave about the fangri (local sea bream), grilled and served with an unlimited refrigerated salad bar included with mains. Calamari runs about €25 a portion, so this is hotel pricing, but portions are generous and the fish quality is among the best reported in town. Relaxed, lunch first atmosphere.",
@@ -13023,7 +13024,7 @@ const DATA = [
  getting:"20 min seafront walk east, or a 5 min taxi",
  tips:"Best as a long lunch off the beach; call the hotel to reserve in August. Ask the day's whole fish and its price before ordering.",
  maps:"https://www.google.com/maps/search/?api=1&query=Fisherman%27s%20Hut%20Ayia%20Napa", web:"https://www.grecianbay.com/en/dine-n-drink/fisherman-s-hut/4",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-m/1280/17/48/9a/14/fisherman-s-hut-tavern.jpg"},
 
 /* CYPRIOT & MEZE */
 {id:"stamna-taverna",cat:"sight",name:"Stamna Taverna",
@@ -13034,7 +13035,7 @@ const DATA = [
  getting:"6 min walk up Dimokratias",
  tips:"Book a terrace table in summer and go hungry; pace yourself if you order the meze. Cards accepted, dinner only.",
  maps:"https://www.google.com/maps/search/?api=1&query=Stamna%20Taverna%20Ayia%20Napa", web:"http://stamnatavern.com",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/32/a4/25/stamna-taverna.jpg"},
 {id:"en-yevo-tavernaki",cat:"sight",name:"En-yevo Tavernaki",
  blurb:"Owner run Cypriot tavern on Dionysiou Solomou, home cooking with kleftiko, stifado and fish meze.",
  details:"Owner run tavern on Dionysiou Solomou where Bambos and Christos cook home style Cypriot food; simple room, family crowd, and one of the highest rated tables in town. Expect fetta saganaki, melitzanosalata, dolmades and halloumi to start, then kleftiko, beef stifado, moussaka, souvlaki or a fish meze with octopus and king prawns. Portions are large and prices mid range, roughly €30 to €35 a head with wine. Vegetarian, vegan and gluten free dishes are marked. It fills up fast every evening, so reserve.",
@@ -13043,7 +13044,7 @@ const DATA = [
  getting:"5 min walk past the square",
  tips:"Reserve a day or two ahead in high season; portions are big, so go easy on starters if you order kleftiko.",
  maps:"https://www.google.com/maps/search/?api=1&query=En-yevo%20Tavernaki%20Ayia%20Napa", web:"https://en-yevotavernaki.com/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/c6/db/52/tavernaki-interior.jpg"},
 {id:"taverna-napa-1976",cat:"sight",name:"Taverna Napa est. 1976",
  blurb:"Meze taverna in a 1932 house on Dimokratias, same family since 1976; the meat meze runs to about 16 dishes.",
  details:"Meze taverna in a 1932 stone house on Dimokratias, in the same family since 1976 with Mario front of house and Emily in the kitchen. The meat meze is the point: around 16 small homemade courses, typically halloumi, stuffed vine leaves, village sausage, lamb chops, kleftiko and moussaka, at about €25 a head; reviewers report about €60 for a couple including wine and coffee. There is also a fish meze with grilled sea bream, calamari and octopus, plus stifado a la carte and a dedicated vegetarian or vegan platter. Homemade orange and pistachio cakes close the meal. Courtyard tables, dinner only from 17:00.",
@@ -13052,7 +13053,7 @@ const DATA = [
  getting:"6 min walk up Dimokratias",
  tips:"Book ahead and allow a full evening for the meze; tell them early if part of the group prefers the fish meze.",
  maps:"https://www.google.com/maps/search/?api=1&query=Taverna%20Napa%20est.%201976%20Ayia%20Napa", web:"http://www.tavernanapa1976.com/",
- img:null},
+ img:"https://framerusercontent.com/images/Bd1jXIubz5MJruF2KiaaamYo.webp"},
 {id:"opas-tavern",cat:"sight",name:"Opas Traditional Tavern",
  blurb:"Family tavern on Kryou Nerou with a 20 course Cypriot meze and live music with dancing most nights.",
  details:"Family tavern on Kryou Nerou run by Mr Christodoulos, with live Cypriot music nightly from 19:00 and dance shows on Monday, Wednesday, Friday and Saturday. The Cypriot meze is €27.95 per person (minimum two): tzatziki, tahini, halloumi, pastourmas, meatballs, beef stifado, bulgur with halloumi, dolmades, then chicken and pork souvlaki, sheftalia and lamb chops, finishing with a traditional dessert. A la carte: kleftiko €20.95, moussaka €18.95, sheftalia €16.95, plus vegetarian moussaka, falafel and dolmades at €16 to €18. Mains come with salad, potatoes and pitta.",
@@ -13061,7 +13062,7 @@ const DATA = [
  getting:"7 min walk east on Kryou Nerou",
  tips:"Reserve for the dance nights (Mon, Wed, Fri, Sat). The meze needs a minimum of two people and about two hours.",
  maps:"https://www.google.com/maps/search/?api=1&query=Opas%20Traditional%20Tavern%20Ayia%20Napa", web:"https://opastavern.com/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/6c/74/ab/opas-tavern-across-the.jpg"},
 {id:"avra-cypriot-kitchen",cat:"sight",name:"AVRA Authentic Cypriot Kitchen",
  blurb:"Top ten rated Cypriot kitchen minutes from the square; meat meze €22 a head and kleftiko from the oven.",
  details:"Big, well drilled Cypriot kitchen at the town end of Nissi Avenue, a few minutes from the square, open from lunch until late. The meat meze at €22 per person is one of the best priced in town, and a seafood meze for two runs €46. A la carte leans traditional: lamb kleftiko €16.50, moussaka €15, grills and daily fish. Two people typically pay about €60 to €70 with wine. Vegetarian and vegan dishes are marked. Terrace plus an indoor dining room; manager Spyros gets name checked in hundreds of reviews.",
@@ -13070,7 +13071,7 @@ const DATA = [
  getting:"4 min walk",
  tips:"Walk in usually works at lunch; book for dinner in high season. The €22 meze is plenty, skip extra starters.",
  maps:"https://www.google.com/maps/search/?api=1&query=AVRA%20Authentic%20Cypriot%20Kitchen%20Ayia%20Napa", web:"https://melpoantia.com/en/avra-meze-restaurant",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/23/bf/8a/avra.jpg"},
 {id:"tonys-taverna",cat:"sight",name:"Tony's Taverna",
  blurb:"Old school garden taverna on Nissi Avenue where owner Tony has served meat meze and kleftiko for decades.",
  details:"Old school garden taverna near the start of Nissi Avenue, run for decades by Tony himself, who still works the tables. The meat meze and the kleftiko are the orders here, alongside grilled meats, fresh fish and Cypriot pasta. Vine shaded garden, unhurried pace, mid range prices. Recent reviews are more mixed than in its heyday, mostly about pacing on busy nights, but the welcome and the slow cooked lamb still earn repeat visits from returning guests. Dinner only, from 17:00 to 23:00.",
@@ -13079,7 +13080,7 @@ const DATA = [
  getting:"6 min walk along Nissi Avenue",
  tips:"Ask for a garden table and order the kleftiko; evenings only. Carry some cash in case the card machine is down.",
  maps:"https://www.google.com/maps/search/?api=1&query=Tony%27s%20Taverna%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d4/ef/2e/esterno-locale.jpg"},
 {id:"old-village-tavern",cat:"sight",name:"Old Village Tavern",
  blurb:"Stone arched meze house on Nissi Avenue with live Greek music and optional plate smashing.",
  details:"Meze house on Nissi Avenue built around stone arches, carriage wheels and bougainvillea, with live Greek music most evenings. The Cypriot meze runs about €20 per person and arrives in waves: bread, dips and village salad, then kleftiko, pastourmas, egg with courgettes, pourgouri, chicken and pork souvlakia and sheftalies, with baklava or cake to finish. Plate smashing is offered at about €15 a dozen if you want the show, and a glass of commandaria often lands with the bill. Recent reviews are mixed, so go as much for the atmosphere as the plate.",
@@ -13088,7 +13089,7 @@ const DATA = [
  getting:"12 min walk west along Nissi Avenue",
  tips:"Go on a live music night and order the meze rather than a la carte; book the plate smashing when you reserve.",
  maps:"https://www.google.com/maps/search/?api=1&query=Old%20Village%20Tavern%20Ayia%20Napa", web:"https://oldvillagetavern.com/",
- img:null},
+ img:"https://oldvillagetavern.com/wp-content/uploads/2021/08/Frontwithgirl.png"},
 {id:"mangas-meze-house",cat:"sight",name:"Mangas Meze House",
  blurb:"Long running meze house on outer Nissi Avenue serving meat and fish meze from noon until late.",
  details:"Meze house towards the west end of Nissi Avenue, open from noon until about 01:00, which makes it useful after a Nissi Beach day. It runs on sharing food: a meat meze with souvlaki, sheftalia and garlic chicken, a fish meze, plus gyros and grills for smaller appetites. Big terrace, casual service, full bar, takeaway available. Recent feedback is polarised, with slow service reported on packed peak nights, so aim for early evening or a weekday. About 25 minutes on foot from the hotel, or a short taxi along Nissi Avenue.",
@@ -13097,7 +13098,7 @@ const DATA = [
  getting:"25 min walk or 5 min taxi along Nissi Avenue",
  tips:"Go early evening or on a weekday in peak season; pair it with a Nissi Beach day and taxi back after dinner.",
  maps:"https://www.google.com/maps/search/?api=1&query=Mangas%20Meze%20House%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/6b/08/c3/photo0jpg.jpg"},
 {id:"ayianapitika-tavern",cat:"sight",name:"Ayianapitika Cyprus Tavern",
  blurb:"Dinner and show tavern on Makariou; souvla and antikristo lamb with nightly live Greek music and plate smashing.",
  details:"Dinner and show tavern on lower Makariou where the old cooking methods are the theme: souvla turned slowly over coals and antikristo lamb, plus kleftiko, ribs, dolmades, afelia and meze spreads. Live Greek music every night with dancing and plate smashing, so expect noise rather than conversation. Food gets mixed marks and service slows when the room is full; you come for the party that builds around the tables. Open 13:00 to 01:00, a five minute walk from Napa Plaza toward the harbour. Vegan options are listed.",
@@ -13106,7 +13107,7 @@ const DATA = [
  getting:"6 min walk down Makariou",
  tips:"Book a table away from the speakers if you want to talk; treat it as a late, loud night out, not a quiet dinner.",
  maps:"https://www.google.com/maps/search/?api=1&query=Ayianapitika%20Cyprus%20Tavern%20Ayia%20Napa", web:"https://www.ayianapitika.com",
- img:null},
+ img:"https://static.where-e.com/Cyprus/Famagusta_District/Ayianapitika-Cyprus-Tavern_d65d05f869503426c3f8ad5f4bf4d9e8.jpg"},
 {id:"raphaels-restaurant",cat:"sight",name:"Raphael's Restaurant",
  blurb:"Family taverna near the harbour end of Makariou serving Cypriot meze and grills since 2001.",
  details:"Family restaurant on lower Makariou near the harbour, serving Greek and Cypriot food since 2001 with a long international menu alongside. Meze platters, kleftiko, souvlaki and chargrilled fish are the core, and it is one of the few tavernas in town with dedicated vegan and gluten free menus. Open all day from noon, so it works for a long lunch as well as dinner, and there is a separate kids menu. Quality can wobble on busy nights according to recent reviews, but the range and the location keep it popular with families.",
@@ -13115,7 +13116,7 @@ const DATA = [
  getting:"6 min walk down Makariou",
  tips:"Handy for mixed groups since vegan and gluten free menus are separate; lunch is quieter than dinner.",
  maps:"https://www.google.com/maps/search/?api=1&query=Raphael%27s%20Restaurant%20Ayia%20Napa", web:"https://raphaelscyprus.com/",
- img:null},
+ img:"https://raphaelscyprus.com/wp-content/uploads/2026/05/a14504db-c307-43c9-b67e-cb32e6b75860-1024x576.jpg"},
 {id:"the-agrotikon",cat:"sight",name:"The Agrotikon",
  blurb:"Family run meze taverna out on Nissi Avenue that locals rate, with a big terrace, parking and a playground.",
  details:"A family run taverna out along Nissi Avenue that locals and returning visitors treat as their regular, with a relaxed terrace, free parking and a children's playground that makes it an easy evening with kids. The Cypriot meze is the order here, a parade of homemade dips and grills that reviewers call exceptional value, and the rest of the menu runs to peppercorn steak, moussaka, Cyprus style pork chops and grilled king prawns. Rated 4.7 from about 1,260 TripAdvisor reviews and ranked around the town's top dozen, with fresh reviews into 2026. Staff are known for remembering guests year after year.",
@@ -13124,7 +13125,7 @@ const DATA = [
  getting:"About 4 km west at Nissi Avenue 130: bus 101/102 or a 10 min taxi",
  tips:"Order the meze and arrive hungry. Booking ahead is wise on summer evenings.",
  maps:"https://www.google.com/maps/search/?api=1&query=The%20Agrotikon%20Ayia%20Napa", web:"https://theagrotikon.weebly.com/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/03/0b/ce/a7/the-agrotikon-restaurant.jpg"},
 
 /* GRILL & SOUVLA */
 {id:"sesoula-kalamaki",cat:"boat",name:"Sesoula Kalamaki",
@@ -13135,7 +13136,7 @@ const DATA = [
  getting:"8 min walk down Makariou toward the harbour",
  tips:"A queue builds between 20:00 and 21:00 in summer, so go before 19:30 or after 21:30. One souvlaki plate genuinely feeds two people.",
  maps:"https://www.google.com/maps/search/?api=1&query=Sesoula%20Kalamaki%20Ayia%20Napa", web:"https://sesoula-kalamaki.com/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/42/72/e7/sesoula-kalamaki.jpg"},
 {id:"flames-restaurant",cat:"boat",name:"Flames Restaurant and Bar",
  blurb:"Family grill and steakhouse on Nissi Avenue since 1989; charcoal steaks, souvlakia, sheftalies and meat meze.",
  details:"Large family grill and steakhouse on Nissi Avenue, run by brothers Theo and Peter since 1989 and sitting near the top of the town rankings with thousands of reviews. Chargrilled steaks and souvlakia lead the menu next to Cypriot standards like sheftalies, beef stifado, kleftiko and a meat meze; kalamari, grilled halloumi and koupepia start things off, and there is a dedicated vegetarian and vegan section. Live traditional music several nights a week and proper facilities for kids. Portions are big; two people typically spend about €70 with drinks.",
@@ -13144,7 +13145,7 @@ const DATA = [
  getting:"26 min walk or 5 min taxi along Nissi Avenue",
  tips:"Book a day or two ahead in late July; portions are large, so share a mixed grill before adding sides.",
  maps:"https://www.google.com/maps/search/?api=1&query=Flames%20Restaurant%20and%20Bar%20Ayia%20Napa", web:"https://flamesrestaurantbar.com/",
- img:null},
+ img:"https://flamesrestaurantbar.com/wp-content/uploads/2026/05/front-2048x1536.jpg"},
 {id:"kota-greek-souvlaki",cat:"boat",name:"Kota Greek Souvlaki",
  blurb:"Family charcoal souvlaki grill by Monastery Square; pitas about €7 and meat platters sized for two to five.",
  details:"A family run Greek souvlaki grill on Monastery Square, run by owner Christos, two minutes from the hotel with tables out by the old monastery walls. Charcoal chicken and pork skewers come in pitas (about €7) or as plates, and meat platters are sized for two to five people; sides include tzatziki €2.50, hummus €2.50, Greek salad €6.50, pita bread €0.70 and chips €3.50. The flaming saganaki cheese is the party trick starter. Vegetarian, vegan and gluten free options are marked, and there is a full bar. Kitchen closes about 22:00.",
@@ -13153,7 +13154,7 @@ const DATA = [
  getting:"2 min walk to Monastery Square",
  tips:"No booking needed for two, just avoid the 20:00 to 21:00 rush; the meat platter for two is the best value order. Kitchen closes around 22:00.",
  maps:"https://www.google.com/maps/search/?api=1&query=Kota%20Greek%20Souvlaki%20Ayia%20Napa", web:"https://www.facebook.com/kotagreeksouvlaki/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/83/74/8d/photo1jpg.jpg"},
 {id:"elma-kebab-house",cat:"boat",name:"Elma Kebab House",
  blurb:"Locals' kebab house on Yianni Ritsou street; charcoal souvlaki and sheftalia, evenings only, closed Sunday.",
  details:"A genuinely local, family run kebab house on Yianni Ritsou street north of the centre, the sort of place where Cypriot families outnumber tourists; reviewers call it a throwback to old Cyprus. It opens evenings only, 18:00 to 22:00, and closes Sundays. The order is the large chicken souvlaki or the mixed grill, charcoal grilled to order and served with pita, salad and pickles; reviewers also mention sheftalia, pork belly and grilled halloumi. Portions are big and prices low, about €8 to €12 a head, with a sit down dinner for two around €35. Cards accepted, takeaway popular.",
@@ -13162,7 +13163,7 @@ const DATA = [
  getting:"8 min walk north of the square",
  tips:"Closed Sundays and only open 18:00 to 22:00, so plan it as an early dinner; expect a wait while they grill to order. Bring some cash to be safe.",
  maps:"https://www.google.com/maps/search/?api=1&query=Elma%20Kebab%20House%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://static.where-e.com/Cyprus/Famagusta_District/Elma-Kebab-House_eac3c01b60ce4ede66be649c0a71a2a8.jpg"},
 
 /* ITALIAN & PIZZA */
 {id:"sale-e-pepe",cat:"daytrip",name:"Sale e Pepe",
@@ -13173,7 +13174,7 @@ const DATA = [
  getting:"In the Napa Plaza building, no walk at all",
  tips:"Book, it fills with non guests every night in season. Ask for a terrace table on live music nights.",
  maps:"https://www.google.com/maps/search/?api=1&query=Sale%20e%20Pepe%20Ayia%20Napa", web:"https://napaplaza.com/sale-e-pepe-italian-restaurant/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/ae/ad/55/authentic-italian-restaurant.jpg"},
 {id:"quadro",cat:"daytrip",name:"Quadro",
  blurb:"Smart evening Italian on Kryou Nerou; wood fired Neapolitan pizza and a proper wine list.",
  details:"Polished family run Italian on Kryou Nerou, a few minutes from the square, ranked around 12th in town with a 4.7 from over 2,000 reviews. Wood fired Neapolitan style pizzas are the calling card, backed by pasta, risotto and more ambitious plates: prawns in champagne sauce and a fillet steak with foie gras at €47 for the blowout end. A sommelier runs a genuinely good wine list, and coeliacs are well served with gluten free pizza bases and pasta on a clearly labelled allergen menu. Evenings only; it closes each winter and reopens for the season.",
@@ -13182,7 +13183,7 @@ const DATA = [
  getting:"4 min walk via the square onto Kryou Nerou",
  tips:"Book a day or two ahead in high summer; tables turn quickly so mention if you want a slow dinner. Ask the sommelier for a Cypriot wine pairing.",
  maps:"https://www.google.com/maps/search/?api=1&query=Quadro%20Ayia%20Napa", web:"https://www.facebook.com/quadroristorante/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/9d/f8/c6/caption.jpg"},
 {id:"bella-italy",cat:"daytrip",name:"Bella Italy Cy",
  blurb:"Casual Neapolitan pizzeria two minutes from the hotel, open from midday until past midnight.",
  details:"Buzzy, casual pizzeria at Makariou 27, barely two minutes from Napa Plaza, with a 4.8 rating and a Travelers' Choice badge. The wood oven turns out Neapolitan pizzas with the classic charred, soft rimmed crust, plus calzone; pasta splits into classics, stuffed ravioli and their signature orzo dishes. Starters are concrete value: bruschetta caprese €6, bruschetta gamberoni €7.50, pizza breadsticks €5.50, and a €25 cured meat and cheese board for sharing. Long hours, from 11:30 in the morning to past midnight, make it the flexible option; dog friendly, delivery available, terrace out front.",
@@ -13191,7 +13192,7 @@ const DATA = [
  getting:"2 min walk south on Makariou",
  tips:"Handy for a late dinner after the beach since the kitchen runs past midnight. Peak evening waits happen; earlier or later sittings are painless.",
  maps:"https://www.google.com/maps/search/?api=1&query=Bella%20Italy%20Cy%20Ayia%20Napa", web:"https://www.facebook.com/bella.italy.ayianapa/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-m/1280/2f/a9/7b/18/bella-italy-cy-promotional.jpg"},
 {id:"al-ritrovo",cat:"daytrip",name:"Al Ritrovo",
  blurb:"Quiet family run trattoria on Kryou Nerou; wood fired pizza and limoncello on the house.",
  details:"Small family run trattoria at Kryou Nerou 23, away from the square's noise, ranked around 20th in town and rated among the top pizza stops. The wood fired oven does the classics well, and the rest of the card is honest trattoria fare: beef carpaccio, penne arrabbiata, lasagna, carbonara, mussels and grilled swordfish. Vegetarian, vegan and gluten free dishes are available and clearly handled. Italian wines like Bardolino by the bottle, and a complimentary limoncello arrives at the end. Calm, relaxed, grown up pace, so a good pick when you want conversation over spectacle.",
@@ -13200,7 +13201,7 @@ const DATA = [
  getting:"7 min walk east along Kryou Nerou",
  tips:"Reservations are advised for Friday and Saturday evenings, otherwise walk ins are fine. Doors open at 16:00, useful for an early dinner.",
  maps:"https://www.google.com/maps/search/?api=1&query=Al%20Ritrovo%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/59/5b/a2/al-ritrovo-italian-restaurant.jpg"},
 {id:"de-medici",cat:"daytrip",name:"De Medici",
  blurb:"Long running trattoria on Nissi Avenue with pizzas €12.70 to €15.50 and a serious grill list.",
  details:"Established Italian on Nissi Avenue 29 with a warm dining room, terrace and one of the clearest priced menus in town. Pizzas run €12.70 to €15.50 from Margherita up to the seafood loaded Pescatora; pasta and risotto sit at €12.80 to €23.50, including carbonara and their Pasta Crumbs Rustica. Seafood mains, sea bass, salmon and king prawns, are €19.50 to €22.50, while the grill climbs to a €35.50 T-bone. A children's menu at €8.70 to €9.70 makes it an easy family call, and the tiramisu and espresso creme brulee are house made.",
@@ -13209,7 +13210,7 @@ const DATA = [
  getting:"12 min walk west along Nissi Avenue",
  tips:"The restaurant asks for bookings 24 hours ahead via its site in peak season. Free off street parking if you have a car.",
  maps:"https://www.google.com/maps/search/?api=1&query=De%20Medici%20Ayia%20Napa", web:"http://demedicicy.com",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/f6/5a/5c/de-medici-interior-enjoy.jpg"},
 {id:"davinci-napiana",cat:"daytrip",name:"Davinci Napiana",
  blurb:"Relaxed Italian on the main avenue three minutes away; pasta, pizza and homemade desserts.",
  details:"Elegant but easy going Italian at Makariou 29, three minutes down the avenue from Napa Plaza, holding a 4.6 rating across more than 650 reviews. The menu is classic trattoria territory: generous plates of pasta and thin pizzas, well presented mains, and homemade desserts that get repeat mentions. Special diets are properly covered with vegetarian, vegan and gluten free options, which reviewers on coeliac forums confirm. Terrace tables face the evening promenade, the interior is Italian styled and air conditioned. It gets hectic at peak hours in August, when service can slow; early sittings are smoother.",
@@ -13218,7 +13219,7 @@ const DATA = [
  getting:"3 min walk south on Makariou",
  tips:"Go at opening around 16:00 to 18:00 for the calmest service in high season. Terrace seats are the pick for people watching on the strip.",
  maps:"https://www.google.com/maps/search/?api=1&query=Davinci%20Napiana%20Ayia%20Napa", web:"https://www.facebook.com/Napianarestaurant/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/97/43/47/das-napiana-ist-einfach.jpg"},
 
 /* WORLD KITCHEN */
 {id:"wagamama",cat:"food",name:"Wagamama",
@@ -13229,7 +13230,7 @@ const DATA = [
  getting:"3 min walk up Makariou",
  tips:"Dishes come out as they are cooked, standard Wagamama style, so do not wait for both plates. Good air conditioned lunch option; delivery also runs via Wolt.",
  maps:"https://www.google.com/maps/search/?api=1&query=Wagamama%20Ayia%20Napa", web:"https://www.wagamama.com.cy/restaurants/ayia-napa",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/24/e4/6d/29/wagamama-ayia-napa.jpg"},
 {id:"umami-sushi",cat:"food",name:"Umami Sushi & Pan-Asian",
  blurb:"Sushi and pan Asian kitchen at the Napa Suites hotel, maki rolls from €8, calmer than the centre.",
  details:"A calm sushi and pan Asian restaurant inside the Napa Suites hotel on Dimokratias Avenue, ten minutes north of the square, with table service and a long maki list. California roll 8 pcs €8.50, tempura prawn roll €9, crunchy chicken roll €9, spicy tuna or spicy salmon €11, volcano roll €11.50, plus sashimi and nigiri, wok dishes, noodles and poke bowls. Rolls are standard 8 piece cuts, so two or three rolls plus a wok dish suits a couple. The green roll at €8 covers vegetarians. Rated 4.5 on TripAdvisor and delivers via Wolt.",
@@ -13238,7 +13239,7 @@ const DATA = [
  getting:"12 min walk via Dimokratias",
  tips:"Closed Mondays, otherwise open 12:30 to 22:00. Because it sits inside a hotel it stays quiet even in peak season; cards accepted.",
  maps:"https://www.google.com/maps/search/?api=1&query=Umami%20Sushi%20%26%20Pan-Asian%20Ayia%20Napa", web:"https://umamiasian.com/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/28/d1/71/93/umami-sushi-pan-asian.jpg"},
 {id:"sawadee-thai",cat:"food",name:"Sawadee Thai Food",
  blurb:"Tiny family Thai kitchen off Nissi Avenue, Issan chefs cooking street food to order, 4.8 on TripAdvisor.",
  details:"A small family Thai kitchen on Kassandrous street just off Nissi Avenue, more street food canteen than restaurant, with everything cooked to order by Thai chefs from the Issan region. Reviewers rate the green chicken curry, pad thai, tom yum soup, beef sauteed with basil, shrimp with pineapple and sticky rice with coconut milk. Mains with rice run about €10 to €13; one visitor paid €35 for three dishes with rice plus beers and water. Takeaway and delivery available, and it holds a 4.8 TripAdvisor score from 75 reviews.",
@@ -13247,7 +13248,7 @@ const DATA = [
  getting:"8 min walk along Nissi Avenue",
  tips:"Only a handful of tables, so take away at busy times or reserve by phone. Kitchen closes at 22:00, earlier than most places in town.",
  maps:"https://www.google.com/maps/search/?api=1&query=Sawadee%20Thai%20Food%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/0f/a7/cd/88/view-inside-sawadee-ayia.jpg"},
 {id:"rasoi-indian",cat:"food",name:"Rasoi Indian Cuisine",
  blurb:"Indian and Pakistani curry house at Nissi Avenue 82, tandoor and biryani, kitchen open to midnight.",
  details:"A proper Indian and Pakistani curry house at Nissi Avenue 82, with terrace seating, its own free parking and a kitchen that runs to midnight, useful after a beach day. Starters are cheap: vegetable samosas €4, chicken samosas €6, onion bhaji €6, paneer pakoda €7, aloo paratha €8. Mains cover tandoori grills, curries and the house biryani, with fresh naan from the tandoor; a party of four paid €81 including a bottle of wine, four mains, rice and naans. Vegetarian and vegan friendly, and it delivers through Wolt and Foody.",
@@ -13256,7 +13257,7 @@ const DATA = [
  getting:"18 min walk or 5 min taxi along Nissi Avenue",
  tips:"One of the later full kitchens in town, open until midnight daily. Free off street parking if you have a hire car; otherwise it is an easy flat walk.",
  maps:"https://www.google.com/maps/search/?api=1&query=Rasoi%20Indian%20Cuisine%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/29/9d/bf/12/rasoi-indian-cuisine.jpg"},
 {id:"los-bandidos",cat:"food",name:"Los Bandidos",
  blurb:"Busy Tex Mex cantina one street off the square, fajitas €18.50, margaritas, top ten on TripAdvisor.",
  details:"Ayia Napa's long running Mexican restaurant on Ari Velouchioti street, a few minutes from the square, complete with sombreros, a bandit cutout at the door and birthday theatrics; tables turn over fast in season. From the menu: enchiladas and burritos €15.90, quesadillas €17.90, fajitas €18.50, Ensalada Mexicana €12.50, nachos with guacamole and sour cream to start, and lemon margarita pitchers. Portions are big and cheese heavy rather than subtle. From 17:00 to 19:00 there is 10 percent off plus a margarita on the house.",
@@ -13265,7 +13266,7 @@ const DATA = [
  getting:"4 min walk toward the square",
  tips:"Book a table or arrive at 17:00 opening; it fills quickly and staff keep tables moving. The 17:00 to 19:00 deal gives 10 percent off and a free margarita.",
  maps:"https://www.google.com/maps/search/?api=1&query=Los%20Bandidos%20Ayia%20Napa", web:"https://www.facebook.com/losbandidosayianapa/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/a3/77/32/los-bandidos.jpg"},
 {id:"nikitas-steak-house",cat:"food",name:"Nikitas Steak House",
  blurb:"Family steakhouse on a rise just off the square, local beef cooked fresh, 4.8 from 672 reviews.",
  details:"A family run steakhouse on a small rise off Ari Velouchioti street, minutes from the square, with attentive old school service and everything grilled to order from local beef, so allow time. Regulars order the fillet or ribeye, Steak Diane or pepper steak with mash, prawns in Pernod, or slow cooked lamb kleftiko; the garlic mushrooms served in a crispy tortilla bowl are the signature starter. Steaks run about €20 to €30, which reviewers call fair for the quality. Summer evenings are usually fully booked.",
@@ -13274,7 +13275,7 @@ const DATA = [
  getting:"5 min walk toward the square",
  tips:"Book at least a day ahead in July and August, it is routinely full. Food is cooked fresh, so treat it as the evening's main event, not a quick stop.",
  maps:"https://www.google.com/maps/search/?api=1&query=Nikitas%20Steak%20House%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/19/5a/95/nikitas-restaurang.jpg"},
 {id:"zaatar-food-arts",cat:"food",name:"Zaatar Food Arts",
  blurb:"Halal Lebanese Syrian charcoal grill by the Nissi Beach lights, hummus €4, charcoal kebabs €10.",
  details:"A halal Lebanese and Syrian charcoal grill by the traffic lights near Nissi Beach, family run, with free parking and belly dancing on Friday and Saturday evenings around 20:30. Cold mezze are the draw: classic hummus €4, hummus with sauteed lamb €8, falafel €3 for four pieces, tabouli and fattoush from €5. From the charcoal grill: kebab kafta €10, shish tawook €10, lamb chops from €12. Full mezze spreads run €30 vegetarian or vegan and €48 with mixed grill. Vegetarians eat very well here.",
@@ -13283,7 +13284,7 @@ const DATA = [
  getting:"7 min taxi or bus 101/102, about 3 km along Nissi Avenue",
  tips:"Go on Friday or Saturday for the belly dancing around 20:30, and book for those nights. Two people can share the €30 vegetarian mezze and add one grill plate.",
  maps:"https://www.google.com/maps/search/?api=1&query=Zaatar%20Food%20Arts%20Ayia%20Napa", web:"https://www.zaatarfoodarts.com/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/5d/f9/15/20190716-190118-largejpg.jpg"},
 {id:"sage-restaurant",cat:"food",name:"Sage Restaurant & Wine Bar",
  blurb:"Renovated fine dining steakhouse and wine bar on Kryou Nerou, the classic special occasion pick.",
  details:"Ayia Napa's long running special occasion address, with a fully renovated, strikingly designed dining room and an elegant terrace that feels calm and grown up compared with the strip. The kitchen is best known for its steaks, cooked exactly as ordered, and regulars also praise the prawn ravioli, salmon and seafood plates. Desserts get their own fan club, especially the chocolate sphere with vanilla ice cream and strawberry sorbet, plus a proper tiramisu, backed by a serious wine list. Rated 4.7 from over 2,300 TripAdvisor reviews and a Travelers' Choice 2025 winner. Dinner only.",
@@ -13292,7 +13293,7 @@ const DATA = [
  getting:"4 min walk: past the square onto Kryou Nerou, at number 8",
  tips:"Book a terrace table a few days ahead in high summer. Save room for the chocolate sphere dessert.",
  maps:"https://www.google.com/maps/search/?api=1&query=Sage%20Restaurant%20%26%20Wine%20Bar%20Ayia%20Napa", web:"https://www.facebook.com/sagerestaurantagianapa/",
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/18/28/9b/9b/sage-front.jpg"},
 {id:"the-deck-terrace",cat:"food",name:"The Deck Terrace",
  blurb:"Ayia Napa's number one rated restaurant, al fresco Mediterranean fine dining at the Alion Beach Hotel.",
  details:"The number one rated restaurant in Ayia Napa on TripAdvisor, set on an open air terrace at the five star Alion Beach Hotel with the sea a few steps away and tables under the stars. Service is genuinely polished, which makes it the pick for an anniversary or last night blowout. The a la carte menu is modern Mediterranean: reviewers single out the scallops, sea bass tartare, whole sea bass and properly cooked steaks, with tiramisu to finish. Vegetarian, vegan and gluten free menus are available. Dinner only from 19:00 and booking ahead is close to essential in August.",
@@ -13301,7 +13302,7 @@ const DATA = [
  getting:"10 min walk via the square and down Kryou Nerou to the Alion Beach Hotel, or a 3 min taxi",
  tips:"Reserve as early as you can and ask for a sea facing table. Dress code is smart casual; Bermuda shorts are allowed.",
  maps:"https://www.google.com/maps/search/?api=1&query=The%20Deck%20Terrace%20Ayia%20Napa", web:"https://alion.com/gastronomy/the-deck-terrace-restaurant/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/09/65/36/sunset-dining.jpg?w=900&h=500&s=1"},
 
 /* FAST & LATE NIGHT */
 {id:"karamelomeno-kremmidi",cat:"night",name:"To Karamelomeno Kremmidi",
@@ -13312,7 +13313,7 @@ const DATA = [
  getting:"2 min walk on Makariou",
  tips:"Most useful after 23:00 when sit down kitchens have closed; Friday and Saturday it runs to 01:00. Takeaway is quicker than waiting for one of the few tables.",
  maps:"https://www.google.com/maps/search/?api=1&query=To%20Karamelomeno%20Kremmidi%20Ayia%20Napa", web:null,
- img:null},
+ img:"https://media-cdn.tripadvisor.com/media/photo-s/27/ac/7d/a0/caption.jpg"},
 {id:"mr-tzatziki",cat:"night",name:"Mr Tzatziki",
  blurb:"Build your own gyros pita for €7 at this Nissi Avenue grill, open until about half past midnight.",
  details:"A Greek fast food grill at Nissi Avenue 15, under ten minutes on foot from the square, doing gyros, souvlaki, burgers and pizza to eat in or take away until well past midnight. Prices are printed on its own site: make your own Greek pita €7, gyros in a box €9, gyros portion €13, single souvlaki skewers €3.50, falafel Cypriot pita €8 for vegetarians, fries €4, drinks from €1. The build your own format lets you pick meat, sauces and extras. Orders also run through Foody and Wolt.",
@@ -13321,7 +13322,7 @@ const DATA = [
  getting:"7 min walk along Nissi Avenue",
  tips:"Open to about 00:30, so it covers the walk home from the bars. Ordering at the counter is faster than the delivery apps on busy nights.",
  maps:"https://www.google.com/maps/search/?api=1&query=Mr%20Tzatziki%20Ayia%20Napa", web:"https://mrtzatziki.com/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/69/aa/82/a-popular-gyros-spot.jpg?w=1200&h=-1&s=1"},
 {id:"burgerbox",cat:"night",name:"Burgerbox",
  blurb:"Small smash burger shop at Makariou 26 by the hotel, Black Angus patties from €6.90, 4.9 on TripAdvisor.",
  details:"A small burger shop at Makariou 26, effectively next door to Napa Plaza, that opened in 2024 and quickly earned a 4.9 TripAdvisor score for its Black Angus beef. The format is build your own: a 120 g smash style burger starts at €6.90, doubles and a 200 g beef burger cost more, hot dogs and chicken options exist, and fries are €3 with a long list of toppings and sauces. There is a children's menu too. It is counter service with limited seats, so treat it as a quick stop or a takeaway back to the hotel balcony.",
@@ -13330,7 +13331,7 @@ const DATA = [
  getting:"2 min walk on Makariou",
  tips:"Handy for a lazy night, open to around 00:30. Ask what is in stock before setting your heart on a topping, ingredients occasionally run out.",
  maps:"https://www.google.com/maps/search/?api=1&query=Burgerbox%20Ayia%20Napa", web:"https://www.facebook.com/p/BurgerBox-61560473085796/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/ac/69/70/caption.jpg?w=1200&h=-1&s=1"},
 {id:"georgies-handy-food",cat:"night",name:"Georgie's Handy Food",
  blurb:"Cheap and cheerful gyros counter two minutes away, feeding the post bar crowd until about 01:30.",
  details:"A no frills Greek fast food counter at the town end of Nissi Avenue, two minutes from Napa Plaza, and one of the most useful late night addresses in town, serving until about 01:30 in season. Pork or chicken souvlaki sticks are €4.60, beef €5.00 and Anatolian kebab €5.90, stuffed into Greek or Cypriot pittas, with gyros portions so generous that reviewers call them the best in Ayia Napa. Burgers, pizza slices, crispy chicken wraps and salads round out the menu, and it delivers via Wolt and Foody if the walk feels too far after a big night.",
@@ -13339,7 +13340,7 @@ const DATA = [
  getting:"2 min walk to Nissi Avenue 10, on the corner near the centre",
  tips:"Go for the full size gyros pitta rather than the snack size. Handy stop on the way back from the square bars.",
  maps:"https://www.google.com/maps/search/?api=1&query=Georgie%27s%20Handy%20Food%20Ayia%20Napa", web:"https://wolt.com/en/cyp/ammochostos/restaurant/georgies-handy-food-ayia-napa",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/b7/df/b8/georgie-s-handy-food.jpg?w=900&h=500&s=1"},
 
 /* SWEET & BAKERY */
 {id:"napolea-ice-cream",cat:"well",name:"Napolea French Ice Cream",
@@ -13350,7 +13351,7 @@ const DATA = [
  getting:"4 min walk to the start of Nissi Avenue",
  tips:"Ask what was churned that day rather than defaulting to vanilla. Eat fast outside in July or walk it back to the hotel lounge.",
  maps:"https://www.google.com/maps/search/?api=1&query=Napolea%20French%20Ice%20Cream%20Ayia%20Napa", web:"https://napolea.com",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/7f/33/f1/napolea-french-ice-cream.jpg?w=900&h=-1&s=1"},
 {id:"zorbas-bakery",cat:"well",name:"Zorbas Bakery",
  blurb:"24 hour Cypriot bakery at Nissi Avenue 17; pastries, cakes, ice cream and filled baguettes about €3.",
  details:"The Ayia Napa branch of Cyprus's best known bakery chain, open 24 hours at Nissi Avenue 17. Long glass counters hold Cypriot sweet and savoury pies, croissants, cookies, cakes and ice cream, plus made to order filled baguettes around €3, sandwiches, salads and juices. It is the town's default stop at both ends of the day: early coffee and a warm pastry before an excursion, or cake at 3 am after the strip. A past visitor fed two people baguettes, cakes and Cokes for €11. TripAdvisor 4.5 from about 300 reviews; dependable chain standard rather than artisan.",
@@ -13359,7 +13360,7 @@ const DATA = [
  getting:"5 min walk along Nissi Avenue",
  tips:"Try a Cypriot sweet pastry with a frappe; there is limited seating so takeaway is normal. Open 24 hours, so it also covers the walk home at 03:00 and cheap picnic supplies before beach days.",
  maps:"https://www.google.com/maps/search/?api=1&query=Zorbas%20Bakery%20Ayia%20Napa", web:"https://zorbas.com.cy",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/29/d5/3c/zorbas-bakery.jpg?w=900&h=-1&s=1"},
 {id:"jello-cafe",cat:"well",name:"Jello Cafe Restaurant",
  blurb:"All day cafe on Makariou 43 with waffles, crepes and a house cheesecake, open 09:00 to 02:00.",
  details:"One of the trendier all day spots on Makariou Avenue, a short walk from Napa Plaza toward the harbour, with a big terrace, shisha and a menu that stretches from breakfast and sushi to a full dessert card. For the sweet visit the regulars' picks are the waffles, crepes with ice cream and the house Jello cheesecake; there is also a jumbo English breakfast if someone wants savoury. Cocktail happy hour runs from noon to 19:00. Open 09:00 to 02:00 daily; TripAdvisor 4.3 from over 700 reviews with positive 2026 feedback. Dessert prices are not published online.",
@@ -13368,7 +13369,7 @@ const DATA = [
  getting:"4 min walk down Makariou toward the harbour",
  tips:"Best as an evening dessert and people watching stop; the terrace is prime seating after dark. Staff handle allergies well according to recent reviews.",
  maps:"https://www.google.com/maps/search/?api=1&query=Jello%20Cafe%20Restaurant%20Ayia%20Napa", web:"https://www.jello-rest.com/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/4a/cf/e3/restuarant-ayia-nappa.jpg?w=1100&h=1100&s=1"},
 {id:"fresco-cafe",cat:"well",name:"Fresco Cafe & Dessert",
  blurb:"Gelato and milkshake cafe near Nissi Avenue; bubble waffle €4 and rotating homemade flavours.",
  details:"Small dessert cafe at 17 Nissi Avenue, serving gelato, soft serve, frozen Greek yogurt, milkshakes, waffles, croissants and smoothies from 07:30 to 22:00, with delivery on Wolt. Bubble waffles and mini waffles are €4; gelato flavours rotate, and reviewers name salted caramel, pistachio, cheesecake and bitter chocolate as standouts, with the milkshakes repeatedly called the best in town. A July 2026 TripAdvisor review describes it as a daily tradition on every visit to Ayia Napa. Rated 4.9 on TripAdvisor from a small base and 4.7 on Google. Cards accepted.",
@@ -13377,7 +13378,7 @@ const DATA = [
  getting:"5 min walk along Nissi Avenue",
  tips:"The frozen yogurt portions are notably generous. Opens 07:30, so it doubles as an early coffee and croissant stop.",
  maps:"https://www.google.com/maps/search/?api=1&query=Fresco%20Cafe%20%26%20Dessert%20Ayia%20Napa", web:"https://www.facebook.com/p/Fresco-Cafe-Dessert-100063627788308/",
- img:null},
+ img:"https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/84/99/94/caption.jpg?w=1200&h=1200&s=1"},
 {id:"my-cookie-dough",cat:"well",name:"My Cookie Dough",
  blurb:"Cookie dough and sundae bar on Kryou Nerou; mini cookie bucket €9.90, open 14:30 to 23:30.",
  details:"Ayia Napa outpost of the My Cookie Dough dessert brand at Kryou Nerou 20, five minutes past the square. The menu is built around warm cookie dough tubs, cookie stacks, sundaes, ice cream and milkshakes, backed by hot and iced coffee; the mini cookies bucket is €9.90 and comes in a vegan version, which is the notable option for non dairy eaters. It opens at 14:30 and runs to 23:30, so treat it as an afternoon or after dinner stop, not a breakfast one. Active on Wolt in 2026, confirming it is trading.",
@@ -13386,7 +13387,7 @@ const DATA = [
  getting:"5 min walk through the square onto Kryou Nerou",
  tips:"Share the €9.90 bucket between two; portions are rich. Goes busiest late evening when the strip fills, so mid afternoon is calmer.",
  maps:"https://www.google.com/maps/search/?api=1&query=My%20Cookie%20Dough%20Ayia%20Napa", web:"https://mycookiedough.com",
- img:null},
+ img:"https://imageproxy.wolt.com/mes-image/e26719c2-19dc-44f9-86b8-b1969bd6a5aa/88afde1a-c2d8-410a-8b61-aa9c6426159e"},
 {id:"sigma-bakeries",cat:"well",name:"Sigma Bakeries",
  blurb:"24 hour bakery branch at Nissi Avenue 28; cheese pies under €2.50, gelato, cakes and coffee.",
  details:"Large modern branch of the Sigma bakery chain at Nissi Avenue 28, opened in late 2023 and running around the clock with plenty of clean indoor seating and WiFi, which makes it the comfortable sit down bakery of the two on this street. Counters cover cakes, pastries, croissants, bread, gelato and hot dishes; verified prices include savoury koupa me kima at €1.10 and cheese pies and croissants under 2.50, so coffee and cake for two stays around €10. TripAdvisor 4.6 with fresh June and July 2026 reviews praising the coffee; gluten free options are flagged by review sites.",
@@ -13395,7 +13396,7 @@ const DATA = [
  getting:"7 min walk along Nissi Avenue",
  tips:"Good air conditioned escape mid afternoon, and open all night if you want cake after the bars. Terrace WiFi is weak; sit inside to use it.",
  maps:"https://www.google.com/maps/search/?api=1&query=Sigma%20Bakeries%20Ayia%20Napa", web:"https://www.sigmabakeries.com",
- img:null},
+ img:"https://www.cbn.com.cy/images/1300x500/cache_1300x500_Analog_medium_77892_170798_25_03_31_123950.jpg"},
 {id:"hans-and-gretel",cat:"well",name:"Hans & Gretel",
  blurb:"Fairytale candy house on Nissi Avenue doing chimney cakes, bubble waffles and inventive gelato.",
  details:"A fairytale themed sweet shop on Nissi Avenue from the well known Greek dessert brand, decorated like the witch's candy house with a pick and mix wall and staff who hand out free bottles of water. The stars are the freshly baked chimney cakes at about €6, best filled with ice cream, and gelato scoops at about €2.30 in playful flavours like Kinder Bueno, alongside bubble waffles, slushes and bags of sweets to take home. Summer and autumn 2025 reviewers call it the best ice cream stop in town, and it also delivers through Wolt. An easy add on to any Nissi Avenue stroll.",
@@ -13404,7 +13405,7 @@ const DATA = [
  getting:"12 min walk west along Nissi Avenue, at number 37",
  tips:"The chimney cake filled with ice cream is the signature order and big enough to share.",
  maps:"https://www.google.com/maps/search/?api=1&query=Hans%20%26%20Gretel%20Ayia%20Napa", web:"https://hansgretel.com/index.php/portfolio-item/ayia-napa/",
- img:null},
+ img:"https://hansgretel.com/wp-content/uploads/2023/06/ayia-napa.jpg"},
 ];
 
 const EXTRA = {
@@ -14049,7 +14050,9 @@ function probeImages(names){
     });
   });
 }
+const GALLERY = {"cafe-central": ["https://media-cdn.tripadvisor.com/media/photo-s/1b/e9/7a/be/cafe-central.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/e9/7a/d3/cafe-central.jpg?w=900&h=500&s=1", "https://napaplaza.com/wp-content/uploads/2023/04/Pic_1.jpg", "https://napaplaza.com/wp-content/uploads/2023/04/Pic_2.jpg"], "garys-bar-grill": ["https://media-cdn.tripadvisor.com/media/photo-s/06/25/18/02/garys-bar.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0f/c1/a5/58/photo0jpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/ab/90/54/amazing-full-english.jpg?w=1200&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/fe/db/9a/guacamole-sandwich.jpg?w=1200&h=1200&s=1"], "liquid-cafe-bar": ["https://media-cdn.tripadvisor.com/media/photo-s/18/bf/41/49/new-design-same-values.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/a7/b7/88/liquid-cafe-bar.jpg?w=300&h=200&s=1", "https://liquidcafebar.com/wp-content/uploads/2014/09/Comfortable-atmosphere-358x539.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/4c/72/ef/creme-brulee.jpg?w=300&h=200&s=1"], "queen-vic-pub": ["https://media-cdn.tripadvisor.com/media/photo-s/08/95/3f/e9/queen-vic-pub.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/17/62/4f/eb/queen-vic-pub.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/62/4f/f3/queen-vic-pub.jpg?w=1200&h=1200&s=1"], "mon-roi-coffee": ["https://imageproxy.wolt.com/assets/683ffa9310dcc9d77bec0015", "https://media-cdn.tripadvisor.com/media/photo-s/2b/bf/f8/82/caption.jpg", "https://imageproxy.wolt.com/menu/menu-images/636b6a0321c1f0a14d7a54ae/bb52de06-6027-11ed-91fa-a252e47e54ba_mon_roi_product__21_.jpeg", "https://imageproxy.wolt.com/menu/menu-images/636b6a0321c1f0a14d7a54ae/bffd5a62-6027-11ed-9682-72aae2ef6908_mon_roi_product__22_.jpeg"], "napa-star-inn": ["https://www.loveayianapa.com/uploads/5/9/6/3/5963822/napa-star_orig.jpg", "https://www.loveayianapa.com/uploads/5/9/6/3/5963822/napa-star-inn-2.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/fa/f2/53/napa-star.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/ca/c5/69/napa-star.jpg?w=900&h=-1&s=1"], "the-bakery-co": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/1c/04/88/caption.jpg?w=900&h=-1&s=1", "https://melpoantia.com/Content/Images/the-bakery-co/bakery-3.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/fb/38/c1/the-bakery-co.jpg?w=900&h=-1&s=1", "https://imageproxy.wolt.com/assets/67331c6217e00e657c00aabe"], "molos-seaside": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/f7/5a/ea/molos-seaside.jpg?w=900&h=-1&s=1", "https://ak-d.tripcdn.com/images/1tx0k12000rvt7rz5C59B_D_2208_1242_R5.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/45/ab/90/molos-seaside.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/3b/8f/3c/caption.jpg?w=900&h=-1&s=1"], "napolea-ice-cream": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/7f/33/f1/napolea-french-ice-cream.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/3b/31/ac/caption.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/2f/ab/e6/caption.jpg?w=900&h=-1&s=1"], "zorbas-bakery": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/29/d5/3c/zorbas-bakery.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/14/63/2f/caption.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/14/63/2e/caption.jpg?w=900&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/cd/ca/52/20190602-175750-largejpg.jpg?w=900&h=-1&s=1"], "jello-cafe": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/4a/cf/e3/restuarant-ayia-nappa.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/33/c5/7e/20180605-193802-largejpg.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/c3/37/7d/sushilicous.jpg?w=1200&h=1200&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/58/80/ab/jello-cheese-cake.jpg?w=1200&h=1200&s=1"], "fresco-cafe": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/84/99/94/caption.jpg?w=1200&h=1200&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/84/99/96/caption.jpg?w=1200&h=1200&s=1", "https://imageproxy.wolt.com/assets/673312023c621863a19bef6f", "https://imageproxy.wolt.com/menu/menu-images/626fd1c6642f265b116f6067/2e616990-cd01-11ec-b4cd-7228466362ff_fresco_coffee_and_ice_cream_product_62.jpeg"], "my-cookie-dough": ["https://imageproxy.wolt.com/mes-image/e26719c2-19dc-44f9-86b8-b1969bd6a5aa/88afde1a-c2d8-410a-8b61-aa9c6426159e", "https://cdn.shopify.com/s/files/1/0271/4628/9239/files/IMG_7857_jpg_17fc036c-849a-483d-a462-d612273eb2a3.jpg?v=1630844631", "https://www.mycookiedough.com/cdn/shop/files/main-home-image_1.jpg?v=1700221410"], "sigma-bakeries": ["https://www.cbn.com.cy/images/1300x500/cache_1300x500_Analog_medium_77892_170798_25_03_31_123950.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/3b/38/28/caption.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/f6/b3/7c/caption.jpg?w=1100&h=1100&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/3b/38/40/caption.jpg?w=1100&h=1100&s=1"], "hans-and-gretel": ["https://hansgretel.com/wp-content/uploads/2023/06/ayia-napa.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/bf/7f/f9/this-place-is-very-nice.jpg?w=1200&h=1200&s=1", "https://imageproxy.wolt.com/assets/673208c780eb896202a8b4f7", "https://imageproxy.wolt.com/menu/menu-images/605aed56649cb583e0dd19dc/669c6ad0-4344-11ed-b74c-9a38de2f49d7_a09494ac_15d2_11eb_aa51_f6d947a9e15c_1.jpeg"], "stamna-taverna": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/32/a4/25/stamna-taverna.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/54/3c/e9/table-number-13-the-center.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/ac/70/99/kalamari.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/bb/c1/63/1.jpg"], "en-yevo-tavernaki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/c6/db/52/tavernaki-interior.jpg", "https://static.where-e.com/Cyprus/Famagusta/En-Yevo-Tavernaki_fe765e9e92fa539249a01814b316e335.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/7e/07/52/dishes-from-en-yevo-tavernaki.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/14/ec/b2/ee/img-20181003-183839-largejpg.jpg"], "taverna-napa-1976": ["https://framerusercontent.com/images/Bd1jXIubz5MJruF2KiaaamYo.webp", "https://framerusercontent.com/images/daEULPzpuk0kw1nQs8caKa2xZo0.webp", "https://framerusercontent.com/images/WAbmkWUXVGtvEKtHtTC3CtFLBo.webp", "https://framerusercontent.com/images/hKLY9Q01zEDa4roTZfRQJeYLko.webp"], "opas-tavern": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/23/6c/74/ab/opas-tavern-across-the.jpg", "https://opastavern.com/wp-content/uploads/2024/05/opas-entertainment.jpg", "https://opastavern.com/wp-content/uploads/2024/05/Opas-Special-Souvlaki-1.jpg", "https://opastavern.com/wp-content/uploads/2024/05/Homemade-Pastitsio-1.jpg"], "avra-cypriot-kitchen": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/23/bf/8a/avra.jpg", "https://melpoantia.com/Content/Images/avra-rest-meze/AvraRest7362.jpg", "https://melpoantia.com/Content/Images/avra-rest-meze/AvraRestMeze7883.jpg", "https://melpoantia.com/Content/Images/avra-rest-meze/AvrarestMeze7798.jpg"], "tonys-taverna": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/d4/ef/2e/esterno-locale.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/70/1c/23/img-20160529-182753-largejpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/ef/5e/8d/img-20180510-232917-002.jpg"], "old-village-tavern": ["https://oldvillagetavern.com/wp-content/uploads/2021/08/Frontwithgirl.png", "https://oldvillagetavern.com/wp-content/uploads/2021/08/Phonebox.png", "https://oldvillagetavern.com/wp-content/uploads/2021/08/Family.png", "https://oldvillagetavern.com/wp-content/uploads/2021/08/Food.png"], "mangas-meze-house": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/6b/08/c3/photo0jpg.jpg", "https://media-cdn.tripadvisor.com/media/photo-o/0c/e1/fb/27/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1e/cf/6d/8f/overzicht-vlees-meze.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/a6/f3/6b/yummy-souflaki-great.jpg"], "ayianapitika-tavern": ["https://static.where-e.com/Cyprus/Famagusta_District/Ayianapitika-Cyprus-Tavern_d65d05f869503426c3f8ad5f4bf4d9e8.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/11/9a/f5/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/14/18/75/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/7c/00/91/caption.jpg"], "raphaels-restaurant": ["https://raphaelscyprus.com/wp-content/uploads/2026/05/a14504db-c307-43c9-b67e-cb32e6b75860-1024x576.jpg", "https://raphaelscyprus.com/wp-content/uploads/2026/06/Gluten-Free-img-1024x683.jpeg", "https://raphaelscyprus.com/wp-content/uploads/2026/06/Vegan-img-1024x683.jpeg"], "the-agrotikon": ["https://media-cdn.tripadvisor.com/media/photo-s/03/0b/ce/a7/the-agrotikon-restaurant.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/3d/b8/ba/kanontrevligt-stalle.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/d4/00/76/i-tried-the-cyprus-dish.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/97/35/a8/luna-park.jpg"], "sesoula-kalamaki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/42/72/e7/sesoula-kalamaki.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/0a/9a/f8/caption.jpg", "https://sesoula-kalamaki.com/wp-content/uploads/2026/02/Platter.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/58/1e/53/pork-souvlaki.jpg"], "flames-restaurant": ["https://flamesrestaurantbar.com/wp-content/uploads/2026/05/front-2048x1536.jpg", "https://flamesrestaurantbar.com/wp-content/uploads/2026/05/side-2048x1536.jpg", "https://flamesrestaurantbar.com/wp-content/uploads/2026/05/bar-to-rest-scaled.jpg", "https://flamesrestaurantbar.com/wp-content/uploads/2020/03/salad-on-board-1-2048x1333.jpg"], "kota-greek-souvlaki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/83/74/8d/photo1jpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/29/77/68/71/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/04/51/2e/platte-fur-2.jpg"], "elma-kebab-house": ["https://static.where-e.com/Cyprus/Famagusta_District/Elma-Kebab-House_eac3c01b60ce4ede66be649c0a71a2a8.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/35/6c/0f/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2b/35/6c/0c/caption.jpg"], "vassos-psarolimano": ["https://media-cdn.tripadvisor.com/media/photo-w/0f/93/aa/89/table-setting-with-an.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0a/e3/7f/c1/tavern-3.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/74/bc/bd/vassos-fish-harbour-taverna.jpg"], "isaac-tavern": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/19/cd/b7/19/next-to-this-little-church.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/05/50/05/0d/isaac-tavern.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/03/48/d0/7b/isaac-tavern.jpg"], "fish-house": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/2a/52/b9/36/fish-house.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/5c/61/3e/the-best-restaurant-ayia.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/cd/bc/a5/food.jpg"], "limanaki-fish": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/d1/89/b4/limanaki-restaurant.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/d3/12/6f/limanaki-restaurant.jpg", "https://limanakibeach.com/wp-content/uploads/2019/06/SPY_7939.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/52/c7/bf/20171117-205110-largejpg.jpg"], "ocean-basket": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/13/a9/93/5d/ocean-basket-agia-napa.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/50/7b/a2/ocean-basket.jpg", "https://imageproxy.wolt.com/menu/menu-images/60b0db6179888499abbf6580/2eb6a8fa-eda3-11ee-997f-e6f915a9093c_platter_for_2.png"], "koralli-seafood": ["https://media-cdn.tripadvisor.com/media/photo-w/0b/d2/14/39/dining-area-overlooking.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/d2/2a/8c/koralli-seafood-restaurant.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/ad/ae/21/grill-octopus-with-fava.jpg"], "fishermans-hut": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/17/48/9a/14/fisherman-s-hut-tavern.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/88/92/84/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/04/75/0b/fb/caption.jpg"], "sale-e-pepe": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/ae/ad/55/authentic-italian-restaurant.jpg", "https://media-cdn.tripadvisor.com/media/photo-m/1280/1b/e9/7c/6f/sake-e-pepe.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/9f/32/c3/decoration-was-impressive.jpg", "https://napaplaza.com/wp-content/uploads/2023/04/PEPEPic_1.jpg"], "quadro": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/31/9d/f8/c6/caption.jpg", "https://media-cdn.tripadvisor.com/media/photo-m/1280/17/cd/be/3e/quadro.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/ce/1c/59/fresh-pizza-cooked-in.jpg"], "bella-italy": ["https://media-cdn.tripadvisor.com/media/photo-m/1280/2f/a9/7b/18/bella-italy-cy-promotional.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/9a/82/c7/caption.jpg", "https://imageproxy.wolt.com/assets/668553060ac93971af4d3850"], "al-ritrovo": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/59/5b/a2/al-ritrovo-italian-restaurant.jpg", "https://media-cdn.tripadvisor.com/media/photo-o/32/22/7f/c9/al-ritrovo-our-meeting.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/8f/6c/31/bruschette.jpg"], "de-medici": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/f6/5a/5c/de-medici-interior-enjoy.jpg", "https://demedicicy.com/wp-content/uploads/2019/06/Homepage-Ouc-830x553.jpg", "https://demedicicy.com/wp-content/uploads/2019/04/Pepper-Steak-370x280.jpg"], "davinci-napiana": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0b/97/43/47/das-napiana-ist-einfach.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/c1/fc/dc/napiana.jpg", "https://media-cdn.tripadvisor.com/media/photo-m/1280/1c/01/f8/7d/polo-con-salsa-ai-porcini.jpg"], "wagamama": ["https://media-cdn.tripadvisor.com/media/photo-s/24/e4/6d/29/wagamama-ayia-napa.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/18/cb/50/db/space.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/24/e4/4e/f3/rainbow-roll-we-roll.jpg"], "umami-sushi": ["https://media-cdn.tripadvisor.com/media/photo-s/28/d1/71/93/umami-sushi-pan-asian.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/1b/e9/65/47/umami-restaurant.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/1a/25/46/41/caption.jpg"], "sawadee-thai": ["https://media-cdn.tripadvisor.com/media/photo-s/0f/a7/cd/88/view-inside-sawadee-ayia.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/11/2b/43/5b/sawadee-thai-street-food.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/13/47/88/44/red-curry-paste-chicken.jpg"], "rasoi-indian": ["https://media-cdn.tripadvisor.com/media/photo-s/29/9d/bf/12/rasoi-indian-cuisine.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/29/9d/bf/11/taj-mahal.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/1d/46/60/17/chicken-tikka-lamb-biriyani.jpg"], "los-bandidos": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/a3/77/32/los-bandidos.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/2d/3a/d7/img-20201014-180659-largejpg.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/3d/f6/d7/tacos-bandido.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2c/3d/f6/d3/fajitas-supremos.jpg"], "nikitas-steak-house": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/19/5a/95/nikitas-restaurang.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2f/ea/a3/8f/caption.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/09/14/22/a1/nikitas.jpg", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0c/8d/35/9d/food-cooked-from-scratch.jpg"], "zaatar-food-arts": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/5d/f9/15/20190716-190118-largejpg.jpg", "https://imageproxy.wolt.com/assets/67320854479a971266a6937f", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/b6/f9/66/irresistible-hummus-bar.jpg"], "sage-restaurant": ["https://media-cdn.tripadvisor.com/media/photo-s/18/28/9b/9b/sage-front.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0f/b5/30/a0/sage-restaurant-wine.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0f/b6/2d/11/sage-restaurant-wine.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/0d/37/7c/e8/soup-of-the-day-blue.jpg"], "the-deck-terrace": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/09/65/36/sunset-dining.jpg?w=900&h=500&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/22/09/65/41/dinner-with-a-view.jpg?w=900&h=500&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/29/84/e1/snapchat-1082583941-largejpg.jpg?w=900&h=500&s=1"], "karamelomeno-kremmidi": ["https://media-cdn.tripadvisor.com/media/photo-s/27/ac/7d/a0/caption.jpg", "https://imageproxy.wolt.com/assets/67331141e99cb70efe075a4a", "https://media-cdn.tripadvisor.com/media/photo-s/12/f6/1a/bf/bifteki-bacon.jpg", "https://media-cdn.tripadvisor.com/media/photo-s/15/62/e9/be/souvlaki.jpg"], "mr-tzatziki": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/33/69/aa/82/a-popular-gyros-spot.jpg?w=1200&h=-1&s=1", "https://images.happycow.net/venues/1024/41/00/hcmp410087_2806481.jpeg", "https://mrtzatziki.com/wp-content/uploads/2023/09/File-2.jpg"], "burgerbox": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/ac/69/70/caption.jpg?w=1200&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/52/47/42/caption.jpg?w=1200&h=-1&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/1a/ad/1d/juicy-burgers-100-beef.jpg?w=1200&h=-1&s=1"], "georgies-handy-food": ["https://dynamic-media-cdn.tripadvisor.com/media/photo-o/07/b7/df/b8/georgie-s-handy-food.jpg?w=900&h=500&s=1", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/77/0d/ef/photo1jpg.jpg?w=1200&h=1200&s=1", "https://imageproxy.wolt.com/menu/menu-images/61c1fcee7b7554f620eeaca1/9032e6de-10b6-11f0-bb82-fa8bd16cf5bf_u3uvdqf33c260320251742993649.jpeg"]};
 async function getGalleryUrls(it){
+  if(GALLERY[it.id] && GALLERY[it.id].length) return GALLERY[it.id];
   if(GAL_CACHE[it.id] && GAL_CACHE[it.id].length) return GAL_CACHE[it.id];
   if(GAL_PENDING[it.id]) return GAL_PENDING[it.id];
   const job = (async ()=>{
@@ -14960,5 +14963,91 @@ setTimeout(prefetchCovers, 2500); /* let first paint and user taps win over phot
   window.openSync = openSync;
 })();
 </script>
+
+<style>
+#planWrap{position:fixed;inset:0;z-index:1200;display:none;}
+#planWrap.open{display:block;}
+#planWrap .pbk{position:absolute;inset:0;background:rgba(16,28,46,.45);}
+#planWrap .psheet{position:absolute;left:0;right:0;bottom:0;max-height:86vh;overflow:auto;background:#FBF3E4;
+  border-radius:22px 22px 0 0;padding:18px 16px 28px;-webkit-overflow-scrolling:touch;}
+#planWrap h3{margin:0 0 2px;font-size:20px;}
+#planWrap .psub{font-size:12.5px;color:#5a6a7d;margin:0 0 12px;}
+#planWrap .pday{margin:14px 0 0;}
+#planWrap .pdayh{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#0C7489;
+  border-bottom:1.5px solid rgba(16,28,46,.15);padding-bottom:4px;margin-bottom:6px;display:flex;justify-content:space-between;}
+#planWrap .prow{display:flex;align-items:center;gap:8px;padding:7px 2px;border-bottom:1px dashed rgba(16,28,46,.10);}
+#planWrap .prow:last-child{border-bottom:0;}
+#planWrap .pname{flex:1;font-weight:700;font-size:14.5px;cursor:pointer;}
+#planWrap .prow.done .pname{text-decoration:line-through;opacity:.55;}
+#planWrap .ptag{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#fff;
+  background:#0C7489;padding:3px 8px;border-radius:999px;white-space:nowrap;}
+#planWrap .px{border:0;background:none;color:#B23A2F;font-size:16px;font-weight:800;cursor:pointer;padding:2px 6px;}
+#planWrap .pempty{font-size:13px;color:#8a94a3;font-style:italic;padding:4px 2px;}
+#planWrap .dpick{display:flex;gap:4px;flex-wrap:wrap;}
+#planWrap .dpick button{border:1.5px solid rgba(16,28,46,.25);background:#fff;border-radius:8px;
+  font-size:11.5px;font-weight:700;padding:4px 7px;cursor:pointer;}
+#planWrap .pclose{position:sticky;top:0;float:right;border:0;background:#101C2E;color:#fff;border-radius:999px;
+  padding:8px 16px;font-weight:800;cursor:pointer;z-index:2;}
+#planWrap .pbklh{margin:20px 0 0;padding-top:10px;border-top:2px solid #101C2E;}
+</style>
+<div id="planWrap" role="dialog" aria-label="Day plan">
+  <div class="pbk" onclick="closePlan()"></div>
+  <div class="psheet">
+    <button class="pclose" onclick="closePlan()">Close</button>
+    <h3>The plan</h3>
+    <p class="psub">Day by day. Tap a name to open the place, tap &times; to take it off a day.</p>
+    <div id="planDays"></div>
+    <div class="pbklh">
+      <h3>Backlog</h3>
+      <p class="psub">Places one of you wants that have no date yet. Tap a day to schedule.</p>
+      <div id="planBacklog"></div>
+    </div>
+  </div>
+</div>
+<script>
+function planRows(list, withPick){
+  return list.map(function(it){
+    var st = state[it.id]||"";
+    var meal = (it.s||"").indexOf("M")>=0 ? "morning" : ((it.s||"").indexOf("D")>=0 ? "day" : "evening");
+    var pick = "";
+    if(withPick){
+      pick = '<span class="dpick">'+DAY_LABELS.map(function(L,i){
+        return '<button title="'+esc(L)+'" onclick="planSet(\''+it.id+'\','+(i+1)+')">'+esc(L.split(" ")[1]||L)+'</button>';
+      }).join("")+'</span>';
+    }
+    return '<div class="prow'+(st==="done"?" done":"")+'">'+
+      '<span class="pname" onclick="closePlan();openModal(\''+it.id+'\')">'+esc(it.name)+'</span>'+
+      '<span class="ptag">'+esc(CATLAB[it.cat]||it.cat)+' &middot; '+meal+'</span>'+
+      (withPick ? pick : '<button class="px" aria-label="Remove from day" onclick="planSet(\''+it.id+'\',0)">&times;</button>')+
+      '</div>';
+  }).join("");
+}
+function renderPlan(){
+  var days = document.getElementById("planDays");
+  var mealRank = function(it){ var s=it.s||""; return s.indexOf("M")>=0?0:(s.indexOf("D")>=0?1:2); };
+  days.innerHTML = DAY_LABELS.map(function(L,i){
+    var list = DATA.filter(function(it){ return extra.days[it.id]===i+1; })
+                   .sort(function(a,b){ return mealRank(a)-mealRank(b) || a.name.localeCompare(b.name); });
+    return '<div class="pday"><div class="pdayh"><span>'+esc(L)+'</span><span>'+
+      (list.length? list.length + (list.length===1?" place":" places") : "")+'</span></div>'+
+      (list.length ? planRows(list,false) : '<div class="pempty">Nothing planned yet.</div>')+'</div>';
+  }).join("");
+  var bl = DATA.filter(function(it){
+    var st = state[it.id]||"";
+    return !extra.days[it.id] && st!=="done" && (st==="want" || (typeof wantOf==="function" && wantOf(it.id)));
+  }).sort(function(a,b){ return a.name.localeCompare(b.name); });
+  document.getElementById("planBacklog").innerHTML =
+    bl.length ? planRows(bl,true)
+    : '<div class="pempty">Empty. Mark places as Want to and they land here until you give them a day.</div>';
+}
+function planSet(id, d){
+  if(!d){ delete extra.days[id]; } else { extra.days[id]=d; }
+  saveExtra(); render(); renderPlan();
+}
+function openPlan(){ renderPlan(); document.getElementById("planWrap").classList.add("open"); }
+function closePlan(){ document.getElementById("planWrap").classList.remove("open"); }
+document.getElementById("planBtn").addEventListener("click", openPlan);
+</script>
+
 </body>
 </html>
