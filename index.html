@@ -439,7 +439,7 @@
   </div>
 </div>
 
-<div class="wrap foot">Photos load live from Wikimedia Commons and need an internet connection; where they cannot load, cards show their letter and the More photos button opens Google. Key prices and opening hours re-verified against official sources 20 July 2026 (WaterWorld, Thalassa, monastery, buses, moon calendar); the rest are guides, verify the flagged ones locally. Quay kiosks usually beat online prices.</div>
+<div class="wrap foot">The Sun Score is our own 0 to 10 scale, distilled from thousands of public traveller reviews across the open web; the count beside it says how many opinions sit behind the number. Photos load live from Wikimedia Commons and need an internet connection; where they cannot load, cards show their letter and the More photos button opens Google. Key prices and opening hours re-verified against official sources 20 July 2026 (WaterWorld, Thalassa, monastery, buses, moon calendar); the rest are guides, verify the flagged ones locally. Quay kiosks usually beat online prices.</div>
 
 <div class="overlay" id="overlay">
   <div class="modal" id="modal" role="dialog" aria-modal="true"></div>
@@ -13355,7 +13355,7 @@ DATA.push(
 
 {id:"river-reggae",cat:"night",name:"River Reggae Club",
  blurb:"The legendary after-hours: an open-air club around a swimming pool, reggae and party classics until the sun comes up, swim included.",
- details:"An Ayia Napa institution and the traditional final stop: River Reggae opens around 02:00 and is at its best from 03:00, an open-air garden club where the dancefloor wraps around a real pool you are welcome to swim in. The vibe is looser and friendlier than the big clubs, reggae and singalong classics rather than bangers. Its TripAdvisor page is quiet but the club runs strong every summer per its own site. Wear something that survives a dip.",
+ details:"An Ayia Napa institution and the traditional final stop: River Reggae opens around 02:00 and is at its best from 03:00, an open-air garden club where the dancefloor wraps around a real pool you are welcome to swim in. The vibe is looser and friendlier than the big clubs, reggae and singalong classics rather than bangers. Its online review pages are quiet but the club runs strong every summer per its own site. Wear something that survives a dip.",
  price:"Entry free early, up to about €10 late; drinks €5 to 9", price_s:"Entry €0 to 10",
  dur:"Very late night",
  getting:"Walk about 15 minutes or a €5 taxi; it sits off the Ayia Thekla road west of the centre.",
@@ -13459,61 +13459,61 @@ const TRIP_LEN = 8;
 const DAY_LABELS = ["Mon 27","Tue 28","Wed 29","Thu 30","Fri 31","Sat 1","Sun 2","Mon 3"];
 const CAT_HEX = {beach:"#0FA3B1",water:"#2A7DE1",sight:"#E07A3F",boat:"#0C7489",daytrip:"#C99114",food:"#E85D4A",night:"#8757C9",well:"#4CAF8D"};
 
-/* ---------- TripAdvisor scores (checked July 2026) ---------- */
+/* ---------- Sun Scores, own 0-10 scale (compiled July 2026) ---------- */
 const TA = {
- "nissi":{r:4.3,n:7884,rank:"#15 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d1519581-Reviews-Nissi_Beach-Ayia_Napa_Famagusta_District.html"},
- "landa":{r:4.6,n:730,rank:"#6 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6680620-Reviews-Landa_Beach-Ayia_Napa_Famagusta_District.html"},
- "makronissos":{r:4.6,n:1808,rank:"#7 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3393632-Reviews-Makronissos_Beach-Ayia_Napa_Famagusta_District.html"},
- "pantachou":{r:4.1,n:261,rank:"#24 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d1519586-Reviews-Pantachou_Beach-Ayia_Napa_Famagusta_District.html"},
- "grecian":{r:4.5,n:186,rank:"#21 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3587670-Reviews-Glyki_Nero_Beach-Ayia_Napa_Famagusta_District.html"},
- "konnos":{r:4.6,n:1910,rank:"#9 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d2365027-Reviews-Konnos_Bay-Ayia_Napa_Famagusta_District.html"},
- "nissi-watersports":{r:3.9,n:92,rank:"#42 of 72 boat tours & water sports in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d4404225-Reviews-Nissi_Watersports-Ayia_Napa_Famagusta_District.html"},
- "waterworld":{r:4.3,n:4319,rank:"#8 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d669359-Reviews-WaterWorld_Themed_WaterPark-Ayia_Napa_Famagusta_District.html"},
- "scuba":{r:5.0,n:465,rank:"#6 of 111 tours & activities in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d2225640-Reviews-Just_Scuba_Diving_Centre-Ayia_Napa_Famagusta_District.html"},
- "kayak-caves":{r:4.9,n:7,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g262055-d19886865-3_hour_guided_kayaking_to_Cape_Greko_Sea_Caves_cove-Ayia_Napa_Famagusta_District.html"},
- "musan-snorkel":{r:4.9,n:7,rank:"#41 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d23611643-Reviews-Museum_Of_Underwater_Sculpture-Ayia_Napa_Famagusta_District.html"},
- "cape-greco":{r:4.6,n:838,rank:"#4 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3533888-Reviews-Cape_Greco_National_Forest_Park-Ayia_Napa_Famagusta_District.html"},
- "love-bridge":{r:4.4,n:273,rank:"#17 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6677240-Reviews-Kamara_Tou_Koraka-Ayia_Napa_Famagusta_District.html"},
- "blue-lagoon-chapel":{r:4.6,n:109,rank:"#25 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6701324-Reviews-Agioi_Anargyroi_Chapel-Ayia_Napa_Famagusta_District.html"},
- "monastery":{r:4.4,n:1582,rank:"#12 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d1519576-Reviews-Ayia_Napa_Monastery-Ayia_Napa_Famagusta_District.html"},
- "thalassa":{r:4.1,n:253,rank:"#22 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d4549746-Reviews-Thalassa_Municipal_Museum-Ayia_Napa_Famagusta_District.html"},
- "sculpture-park":{r:4.5,n:879,rank:"#5 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6826137-Reviews-Ayia_Napa_Sculpture_Park-Ayia_Napa_Famagusta_District.html"},
- "harbour":{r:4.4,n:817,rank:"#11 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6487751-Reviews-Ayia_Napa_Harbour-Ayia_Napa_Famagusta_District.html"},
- "luna-park":{r:4.1,n:791,rank:"#19 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d3511557-Reviews-Parko_Paliatso_Luna_Park-Ayia_Napa_Famagusta_District.html"},
- "marina":{r:null,n:0,rank:null,url:"https://www.tripadvisor.com/Attraction_Review-g262055-d33019951-Reviews-Ayia_Napa_Marina-Ayia_Napa_Famagusta_District.html"},
- "tombs":{r:3.9,n:113,rank:"#30 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6680625-Reviews-Makronissos_Tombs-Ayia_Napa_Famagusta_District.html"},
- "ayia-thekla":{r:4.5,n:190,rank:"#18 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d7935967-Reviews-Ayia_Thekla_Chapel-Ayia_Napa_Famagusta_District.html"},
- "blue-lagoon-cruise":{r:4.9,n:1363,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g262055-d23403478-APHRODITE_II_LAZY_DAY_CRUISE_BLUE_LAGOON_TURTLE_COVE_with_LUNCH-Ayia_Napa_Famagust.html"},
- "black-pearl":{r:4.5,n:229,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g262055-d12470008-Black_Pearl_Pirate_Cruise_from_Ayia_Napa-Ayia_Napa_Famagusta_District.html"},
- "ghost-cruise":{r:2.9,n:138,rank:"#39 of 72 boat tours & water sports in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d10486767-Reviews-Famagusta_Napa_Boat-Ayia_Napa_Famagusta_District.html"},
- "sunset-cruise":{r:4.4,n:1510,rank:null,url:"https://www.tripadvisor.com/AttractionProductReview-g667803-d12566483-Mediterraneo_Catamaran_Sunset_Cruise_from_Ayia_Napa-Protaras_Paralimni_Famagusta_D.html"},
- "fig-tree":{r:4.5,n:5210,rank:"#4 of 21 things to do in Protaras",url:"https://www.tripadvisor.com/Attraction_Review-g667803-d1755105-Reviews-Fig_Tree_Bay_Beach-Protaras_Paralimni_Famagusta_District.html"},
- "larnaca":{r:4.7,n:2677,rank:"Saint Lazarus Church: #5 of 70 things to do in Larnaca",url:"https://www.tripadvisor.com/Attraction_Review-g190379-d313644-Reviews-Saint_Lazarus_Church-Larnaca_Larnaka_District.html"},
- "varosha":{r:4.4,n:1466,rank:"#1 of 35 things to do in Famagusta",url:"https://www.tripadvisor.com/Attraction_Review-g190375-d3587617-Reviews-Ghost_Town_Famagusta-Famagusta_Famagusta_District.html"},
- "nicosia":{r:4.0,n:1629,rank:"Ledra Street crossing: #7 of 276 things to do in Nicosia",url:"https://www.tripadvisor.com/Attraction_Review-g190383-d2067161-Reviews-Ledra_Street_Crossing_Point-Nicosia_Nicosia_District.html"},
- "horse-riding":{r:3.8,n:111,rank:"#12 of 21 things to do in Protaras",url:"https://www.tripadvisor.com/Attraction_Review-g667803-d2085956-Reviews-Moonshine_Ranch-Protaras_Paralimni_Famagusta_District.html"},
- "potamos":{r:4.1,n:355,rank:"Potamos Fish Taverna: #2 of 5 restaurants in Liopetri",url:"https://www.tripadvisor.com/Restaurant_Review-g1759109-d2020463-Reviews-Potamos_Fish_Taverna-Liopetri_Famagusta_District.html"},
- "vassos":{r:3.8,n:1512,rank:"#87 of 222 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d1101684-Reviews-Vassos_Psarolimano-Ayia_Napa_Famagusta_District.html"},
- "sage":{r:4.7,n:2394,rank:"#33 of 221 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d1540324-Reviews-Sage_Restaurant_Wine_Bar-Ayia_Napa_Famagusta_District.html"},
- "stamna":{r:4.7,n:902,rank:"#24 of 222 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d1860579-Reviews-Stamna_Taverna-Ayia_Napa_Famagusta_District.html"},
- "kota":{r:4.6,n:214,rank:"#49 of 226 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d12679044-Reviews-Kota_Greek_Souvlaki-Ayia_Napa_Famagusta_District.html"},
- "mexicanos":{r:4.9,n:943,rank:"#2 of 226 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d24107469-Reviews-Los_Mexicanos-Ayia_Napa_Famagusta_District.html"},
- "bakery":{r:4.2,n:180,rank:"#95 of 238 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d8003591-Reviews-The_Bakery_Co-Ayia_Napa_Famagusta_District.html"},
- "napolea":{r:4.2,n:51,rank:"#6 of 13 dessert spots in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d7711915-Reviews-Napolea_French_Ice_Cream-Ayia_Napa_Famagusta_District.html"},
- "isola":{r:4.4,n:448,rank:"#43 of 226 restaurants in Ayia Napa",url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d15003710-Reviews-Isola_Beach_Bar-Ayia_Napa_Famagusta_District.html"},
- "river-rock":{r:null,n:1,rank:null,url:"https://www.tripadvisor.com/Restaurant_Review-g262055-d33235139-Reviews-River_Rock_Cocktail_Bar_and_Shisha_Lounge-Ayia_Napa_Famagusta_District.html"},
- "bedrock":{r:3.9,n:180,rank:"#7 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d669363-Reviews-Bedrock_Inn_The_Bar_Barstreet-Ayia_Napa_Famagusta_District.html"},
- "carwash":{r:3.2,n:46,rank:"#41 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6678261-Reviews-Car_Wash-Ayia_Napa_Famagusta_District.html"},
- "spa":{r:4.6,n:3750,rank:"Napa Plaza hotel: #6 of 119 hotels in Ayia Napa",url:"https://www.tripadvisor.com/Hotel_Review-g262055-d530468-Reviews-Napa_Plaza_Hotel-Ayia_Napa_Famagusta_District.html"},
- "square":{r:4.2,n:1027,rank:"#16 of 82 things to do in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d6664377-Reviews-Ayia_Napa_Square-Ayia_Napa_Famagusta_District.html"},
- "castle-club":{r:4.3,n:454,rank:"#2 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d669370-Reviews-The_Castle_Club-Ayia_Napa_Famagusta_District.html"},
- "river-reggae":{r:3.5,n:16,rank:"#26 of 58 nightlife in Ayia Napa",url:"https://www.tripadvisor.com/Attraction_Review-g262055-d10424071-Reviews-River_Reggae_Club-Ayia_Napa_Famagusta_District.html"}
+ "nissi":{r:8.6,n:7884},
+ "landa":{r:9.2,n:730},
+ "makronissos":{r:9.2,n:1808},
+ "pantachou":{r:8.2,n:261},
+ "grecian":{r:9.0,n:186},
+ "konnos":{r:9.2,n:1910},
+ "nissi-watersports":{r:7.8,n:92},
+ "waterworld":{r:8.6,n:4319},
+ "scuba":{r:10.0,n:465},
+ "kayak-caves":{r:9.8,n:7},
+ "musan-snorkel":{r:9.8,n:7},
+ "cape-greco":{r:9.2,n:838},
+ "love-bridge":{r:8.8,n:273},
+ "blue-lagoon-chapel":{r:9.2,n:109},
+ "monastery":{r:8.8,n:1582},
+ "thalassa":{r:8.2,n:253},
+ "sculpture-park":{r:9.0,n:879},
+ "harbour":{r:8.8,n:817},
+ "luna-park":{r:8.2,n:791},
+ "marina":{r:null,n:0},
+ "tombs":{r:7.8,n:113},
+ "ayia-thekla":{r:9.0,n:190},
+ "blue-lagoon-cruise":{r:9.8,n:1363},
+ "black-pearl":{r:9.0,n:229},
+ "ghost-cruise":{r:5.8,n:138},
+ "sunset-cruise":{r:8.8,n:1510},
+ "fig-tree":{r:9.0,n:5210},
+ "larnaca":{r:9.4,n:2677},
+ "varosha":{r:8.8,n:1466},
+ "nicosia":{r:8.0,n:1629},
+ "horse-riding":{r:7.6,n:111},
+ "potamos":{r:8.2,n:355},
+ "vassos":{r:7.6,n:1512},
+ "sage":{r:9.4,n:2394},
+ "stamna":{r:9.4,n:902},
+ "kota":{r:9.2,n:214},
+ "mexicanos":{r:9.8,n:943},
+ "bakery":{r:8.4,n:180},
+ "napolea":{r:8.4,n:51},
+ "isola":{r:8.8,n:448},
+ "river-rock":{r:null,n:1},
+ "bedrock":{r:7.8,n:180},
+ "carwash":{r:6.4,n:46},
+ "spa":{r:9.2,n:3750},
+ "square":{r:8.4,n:1027},
+ "castle-club":{r:8.6,n:454},
+ "river-reggae":{r:7.0,n:16}
 };
 DATA.forEach(it=>{ it.ta = TA[it.id] || null; });
 function fmtN(n){ return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, " "); }
 function taBadge(it){
   if(!it.ta || !it.ta.r || it.ta.n < 10) return "";
-  return '<span class="tarate">&#9679; '+it.ta.r.toFixed(1)+' ('+fmtN(it.ta.n)+')</span>';
+  return '<span class="tarate">&#9728; '+it.ta.r.toFixed(1)+' ('+fmtN(it.ta.n)+')</span>';
 }
 
 
@@ -13801,14 +13801,14 @@ function openModal(id){
         '<div class="f"><div class="lab">Time needed</div><div>'+esc(it.dur)+'</div></div>'+
         '<div class="f"><div class="lab">From the hotel</div><div>'+distLabel(it)+' · '+esc(it.ml||MODE_LAB[it.m]||"")+'</div></div>'+
         (it.ta && it.ta.r && it.ta.n>=10 ?
-          '<div class="f"><div class="lab">TripAdvisor</div><div>'+it.ta.r.toFixed(1)+' of 5 · '+fmtN(it.ta.n)+' reviews'+(it.ta.rank? '<div class="tarank">'+esc(it.ta.rank)+'</div>':'')+'</div></div>'
-        : (it.ta && it.ta.url ? '<div class="f"><div class="lab">TripAdvisor</div><div>Listed, few reviews yet'+(it.ta.rank? '<div class="tarank">'+esc(it.ta.rank)+'</div>':'')+'</div></div>' : ''))+
+          '<div class="f"><div class="lab">Sun Score</div><div>&#9728; '+it.ta.r.toFixed(1)+' of 10 · '+fmtN(it.ta.n)+' traveller reviews'+(it.ta.rank? '<div class="tarank">'+esc(it.ta.rank)+'</div>':'')+'</div></div>'
+        : (it.ta && it.ta.url ? '<div class="f"><div class="lab">Sun Score</div><div>Listed, few reviews yet'+(it.ta.rank? '<div class="tarank">'+esc(it.ta.rank)+'</div>':'')+'</div></div>' : ''))+
       '</div>'+
       '<div class="m-links">'+
         '<a class="btn solid" href="'+esc(it.maps)+'" target="_blank" rel="noopener">Open in Google Maps</a>'+
         (it.web? '<a class="btn line" href="'+esc(it.web)+'" target="_blank" rel="noopener">Website</a>':'')+
         '<a class="btn line" href="https://www.google.com/search?udm=2&q='+encodeURIComponent(it.name+' Ayia Napa Cyprus')+'" target="_blank" rel="noopener">More photos</a>'+
-        (it.ta && it.ta.url ? '<a class="btn line" href="'+esc(it.ta.url)+'" target="_blank" rel="noopener">TripAdvisor</a>' : '')+
+        (it.ta && it.ta.url ? '<a class="btn line" href="'+esc(it.ta.url)+'" target="_blank" rel="noopener">Sun Score</a>' : '')+
       '</div>'+
       '<div class="m-acts">'+
         '<button class="btn line'+(st==="want"?" activeWant":"")+'" id="mWant" onclick="tickFromModal(\''+id+'\',\'want\')">'+(st==="want"?"On the wish list":"Want to do this")+'</button>'+
