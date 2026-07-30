@@ -346,7 +346,9 @@
       <p class="lede" id="tgtHint">Loading into the partner column.</p>
       <video id="cam" playsinline muted></video>
       <div class="msg" id="scanMsg"></div>
-      <label class="flabel" for="pasteBox">No camera? Paste their code</label>
+      <label class="flabel" for="photoInput">Or read the code from a photo or screenshot</label>
+      <input type="file" id="photoInput" accept="image/*" style="width:100%;font-size:13px;padding:10px;border:2px dashed var(--line);border-radius:12px;background:#fff">
+      <label class="flabel" for="pasteBox">Or paste the code as text</label>
       <textarea id="pasteBox" placeholder="Paste code here" style="min-height:64px;font-family:'Courier New',monospace;font-size:11px"></textarea>
       <div class="btnrow">
         <button class="btn solid" id="pasteLoadBtn">Load pasted code</button>
@@ -618,7 +620,7 @@ async function openScan(){
     scanLoop();
   }catch(e){
     $("scanMsg").className="msg err";
-    $("scanMsg").textContent="Camera unavailable here. Use the paste box: on their phone, tap Copy code instead, and send it to you.";
+    $("scanMsg").textContent="Camera unavailable here. Use the photo or paste options below.";
   }
 }
 function scanLoop(){
@@ -766,6 +768,37 @@ $("pasteLoadBtn").addEventListener("click",()=>{
   }catch(e){
     msg.className="msg err"; msg.textContent="That code did not read correctly. Make sure the whole code was copied.";
   }
+});
+
+$("photoInput").addEventListener("change",(e)=>{
+  const f=e.target.files && e.target.files[0];
+  if(!f) return;
+  const msg=$("scanMsg");
+  msg.className="msg"; msg.textContent="Reading the photo";
+  const img=new Image();
+  img.onload=()=>{
+    const canvas=$("scanCanvas");
+    canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+    const ctx=canvas.getContext("2d");
+    ctx.drawImage(img,0,0);
+    const data=ctx.getImageData(0,0,canvas.width,canvas.height);
+    URL.revokeObjectURL(img.src);
+    const res=jsQR(data.data,data.width,data.height);
+    if(res && res.data){
+      try{
+        const p=decodePayload(res.data);
+        stopScan();
+        importPayload(p);
+        $("scanModal").classList.remove("open");
+        return;
+      }catch(err){}
+    }
+    msg.className="msg err";
+    msg.textContent="Could not read a code in that photo. Use a sharp screenshot showing the whole QR.";
+  };
+  img.onerror=()=>{ msg.className="msg err"; msg.textContent="Could not open that image."; };
+  img.src=URL.createObjectURL(f);
+  e.target.value="";
 });
 
 $("quizResultsBtn").addEventListener("click",()=>{
