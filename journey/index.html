@@ -335,8 +335,13 @@
 <div class="modal" id="scanModal" role="dialog" aria-label="Scan their QR code">
   <div class="modal-inner">
     <div class="card">
-      <span class="stagetag">Scan theirs</span>
-      <h2>Point the camera at their screen</h2>
+      <span class="stagetag">Import answers</span>
+      <h2>Point the camera at a code</h2>
+      <div class="chips" style="margin-bottom:6px">
+        <button class="chip" id="tgtTheirs" type="button" aria-pressed="true">Their answers</button>
+        <button class="chip" id="tgtMine" type="button" aria-pressed="false">My answers</button>
+      </div>
+      <p class="lede" id="tgtHint">Loading into the partner column.</p>
       <video id="cam" playsinline muted></video>
       <div class="msg" id="scanMsg"></div>
       <label class="flabel" for="pasteBox">No camera? Paste their code</label>
@@ -574,9 +579,24 @@ function openShow(){
   $("showMsg").textContent="";
   $("showModal").classList.add("open");
 }
+let importTarget="theirs";
+function setTarget(t){
+  importTarget=t;
+  $("tgtTheirs").setAttribute("aria-pressed", t==="theirs" ? "true":"false");
+  $("tgtMine").setAttribute("aria-pressed", t==="mine" ? "true":"false");
+  $("tgtHint").textContent = t==="theirs"
+    ? "Loading into the partner column."
+    : "Loading into your own column. Replaces your current answers on this device.";
+}
 function importPayload(p){
-  state.theirs=p.a;
-  state.theirName=p.n||"Them";
+  if(importTarget==="mine"){
+    state.mine=p.a||{};
+    if(p.n) state.myName=p.n;
+    state.done=true;
+  }else{
+    state.theirs=p.a;
+    state.theirName=p.n||"Them";
+  }
   persist();
   renderResults();
 }
@@ -723,7 +743,9 @@ $("copyCodeBtn").addEventListener("click",async ()=>{
   catch(e){ msg.className="msg err"; msg.textContent="Copy blocked. Long-press the code text and copy manually."; }
 });
 
-$("scanQRBtn").addEventListener("click",openScan);
+$("scanQRBtn").addEventListener("click",()=>{ setTarget("theirs"); openScan(); });
+$("tgtTheirs").addEventListener("click",()=>setTarget("theirs"));
+$("tgtMine").addEventListener("click",()=>setTarget("mine"));
 $("closeScan").addEventListener("click",()=>{ stopScan(); $("scanModal").classList.remove("open"); });
 $("pasteLoadBtn").addEventListener("click",()=>{
   const msg=$("scanMsg");
