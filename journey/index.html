@@ -246,7 +246,7 @@
       </p>
       <div class="btnrow">
         <button class="btn solid" id="startBtn">Begin</button>
-        <button class="btn quiet" id="skipToResults">I already answered</button>
+        <button class="btn quiet" id="skipToResults">Go to results</button>
       </div>
     </div>
   </div>
@@ -278,6 +278,7 @@
       <div class="btnrow">
         <button class="btn quiet" id="backBtn">Back</button>
         <button class="btn solid" id="nextBtn">Next</button>
+        <button class="btn quiet" id="quizResultsBtn">Results</button>
       </div>
     </div>
   </div>
@@ -767,7 +768,11 @@ $("pasteLoadBtn").addEventListener("click",()=>{
   }
 });
 
-$("editBtn").addEventListener("click",()=>{ state.idx=0; persist(); show("scr-quiz"); renderQuiz(); });
+$("quizResultsBtn").addEventListener("click",()=>{
+  mine(STAGES[state.idx].id).t=$("quizText").value;
+  persist(); show("scr-results"); renderResults();
+});
+$("editBtn").addEventListener("click",()=>{ persist(); show("scr-quiz"); renderQuiz(); });
 $("resetBtn").addEventListener("click",()=>{
   if(!confirm("Clear all answers on this device? The other person's copy is not affected.")) return;
   state={myName:"",theirName:"",mine:{},theirs:null,idx:0,done:false,filter:false};
