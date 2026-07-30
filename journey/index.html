@@ -802,6 +802,28 @@ document.addEventListener("keydown",e=>{
   if(state.myName) $("myName").value=state.myName;
   $("filterCheck").checked=state.filter;
   $("filterToggle").classList.toggle("on",state.filter);
+
+  /* Import-by-link: a URL ending in #v=CODE carries a full answer set.
+     Confirm, then load it as this device's own answers. */
+  let linkImported=false;
+  try{
+    const h=location.hash;
+    if(h && h.indexOf("#v=")===0){
+      const p=decodePayload(decodeURIComponent(h.slice(3)));
+      const who=p.n?("("+p.n+") "):"";
+      if(confirm("This link carries a full set of answers "+who+"and will load them as YOUR answers on this device. Load them?")){
+        importTarget="mine";
+        importPayload(p);
+        importTarget="theirs";
+        state.done=true; persist();
+        show("scr-results");
+        linkImported=true;
+      }
+      history.replaceState(null,"",location.pathname+location.search);
+    }
+  }catch(e){}
+
+  if(linkImported) return;
   if(state.done){ show("scr-results"); renderResults(); }
   else if(state.idx>0){ show("scr-quiz"); renderQuiz(); }
 })();
