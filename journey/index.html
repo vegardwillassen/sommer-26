@@ -231,7 +231,7 @@
 <section class="screen active" id="scr-intro">
   <div class="hero">
     <div class="hero-inner">
-      <span class="kickpill">Nine questions &middot; Two minds &middot; v5.7</span>
+      <span class="kickpill">Nine questions &middot; Two minds &middot; v5.8</span>
       <h1>The Thinking Journey</h1>
       <p class="sub">Puzzles first, then questions with no clean answer. Answer on your own, swap by QR code, and see exactly where the two of you thought differently.</p>
     </div>
@@ -288,7 +288,7 @@
 <section class="screen" id="scr-results">
   <div class="hero small">
     <div class="hero-inner">
-      <span class="kickpill">Results &middot; v5.7</span>
+      <span class="kickpill">Results &middot; v5.8</span>
       <h1 id="resTitle">Side by side</h1>
     </div>
   </div>
@@ -348,8 +348,8 @@
       <div class="msg" id="scanMsg"></div>
       <label class="flabel" for="photoInput">Or read the code from a photo or screenshot</label>
       <input type="file" id="photoInput" accept="image/*" style="width:100%;font-size:13px;padding:10px;border:2px dashed var(--line);border-radius:12px;background:#fff">
-      <label class="flabel" for="pasteBox">Or paste the code as text</label>
-      <textarea id="pasteBox" placeholder="Paste code here" style="min-height:64px;font-family:'Courier New',monospace;font-size:11px"></textarea>
+      <label class="flabel" for="pasteBox">Or paste the code, or the whole link</label>
+      <textarea id="pasteBox" placeholder="Paste code or link here" style="min-height:64px;font-family:'Courier New',monospace;font-size:11px"></textarea>
       <div class="btnrow">
         <button class="btn solid" id="pasteLoadBtn">Load pasted code</button>
         <button class="btn quiet" id="closeScan">Close</button>
@@ -568,8 +568,17 @@ function encodePayload(){
   }
   return code;
 }
+function normalizeCode(raw){
+  raw=(raw||"").trim();
+  const i=raw.indexOf("#v=");
+  if(i>=0){
+    raw=raw.slice(i+3).split(/\s/)[0];
+    try{ raw=decodeURIComponent(raw); }catch(e){}
+  }
+  return raw;
+}
 function decodePayload(code){
-  const json=LZString.decompressFromBase64(code.trim());
+  const json=LZString.decompressFromBase64(normalizeCode(code));
   if(!json) throw new Error("decode");
   const p=JSON.parse(json);
   if(!p.a) throw new Error("shape");
@@ -766,7 +775,7 @@ $("pasteLoadBtn").addEventListener("click",()=>{
     importPayload(p);
     $("scanModal").classList.remove("open");
   }catch(e){
-    msg.className="msg err"; msg.textContent="That code did not read correctly. Make sure the whole code was copied.";
+    msg.className="msg err"; msg.textContent="That code did not read correctly. Make sure the whole code or link was copied.";
   }
 });
 
