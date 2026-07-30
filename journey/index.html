@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Thinking Journey</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.5.0/lz-string.min.js"></script>
+<style>
+  :root{
+    --sea:#6C6293; --deep:#3E3763; --coral:#7D4A6A; --sun:#C9A24B;
+    --sand:#F3EEE3; --card:#FFFFFF; --ink:#2A2438; --soft:#6E6785;
+    --line:#E2DACB; --green:#6F8B6F; --amber:#C9A24B;
+    --fs-tag:11px; --fs-micro:13px; --fs-body:15.5px; --fs-q:18px; --fs-h:24px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--sand); color:var(--ink);
+    font-family:'Avenir Next','Segoe UI','Helvetica Neue',system-ui,-apple-system,sans-serif;
+    font-size:var(--fs-body); line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px 110px}
+
+  /* ---- Hero ---- */
+  .hero{
+    position:relative; overflow:hidden; color:#fff;
+    background:linear-gradient(165deg,#D9CBE3 0%,#8B7AA8 45%,#4A4070 100%);
+    padding:44px 0 54px; margin:0 -16px 22px; text-align:left;
+  }
+  .hero::before{
+    content:''; position:absolute; right:6%; top:22px; width:170px; height:170px; border-radius:50%;
+    background:radial-gradient(circle,#FBF7E8 0%,#E8D9A8 55%,rgba(232,217,168,0) 72%);
+    pointer-events:none;
+  }
+  .hero-inner{max-width:680px;margin:0 auto;padding:0 16px;position:relative}
+  .kickpill{
+    display:inline-block; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    background:rgba(255,255,255,.32); color:#2E2749; padding:7px 14px; border-radius:999px; margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:Georgia,'Times New Roman',serif; font-style:italic; font-weight:bold;
+    font-size:clamp(32px,7vw,48px); line-height:1.08; margin:0 0 10px;
+    text-shadow:0 2px 12px rgba(40,30,70,.30);
+  }
+  .hero .sub{margin:0; font-size:16px; max-width:52ch; color:rgba(255,255,255,.96)}
+  .hero.small{padding:26px 0 30px}
+  .hero.small h1{font-size:clamp(24px,5.5vw,32px)}
+
+  /* ---- Cards ---- */
+  .card{
+    background:var(--card); border-radius:18px; padding:22px;
+    box-shadow:0 6px 18px rgba(42,36,56,.08); margin:16px 0;
+  }
+  h2{font-family:Georgia,serif; font-style:italic; font-weight:bold; font-size:var(--fs-h); margin:0 0 10px; color:var(--ink)}
+  .lede{color:var(--soft); font-size:var(--fs-micro); margin:0 0 4px}
+
+  /* ---- Buttons ---- */
+  .btn{
+    display:inline-block; font:inherit; font-size:12px; font-weight:800; letter-spacing:.08em;
+    text-transform:uppercase; padding:13px 22px; border-radius:999px; cursor:pointer;
+    border:2px solid var(--deep); color:var(--deep); background:var(--card);
+    min-height:46px;
+    transition:transform 140ms ease-out, background-color 140ms ease-out, color 140ms ease-out, border-color 140ms ease-out;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn.solid{background:var(--coral); border-color:var(--coral); color:#fff}
+  .btn.solid:hover{background:#6d3f5c; border-color:#6d3f5c}
+  .btn.solid:disabled{background:#e3dccd; border-color:#e3dccd; color:#ab9f88; cursor:not-allowed; transform:none}
+  .btn.quiet{border-color:var(--line); color:var(--soft)}
+  .btn.quiet:hover{border-color:var(--sea); color:var(--sea)}
+  .btn:focus-visible{outline:3px solid var(--amber); outline-offset:2px}
+  .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:16px}
+  .micbtn{padding:9px 16px; min-height:40px; margin-bottom:2px}
+  .micbtn[aria-pressed=true]{background:var(--coral); border-color:var(--coral); color:#fff}
+
+  /* ---- Inputs ---- */
+  input[type=text]{
+    background:#fff; border:2px solid var(--line); color:var(--ink);
+    font:inherit; font-size:var(--fs-body);
+    padding:12px 14px; border-radius:14px; width:100%;
+    transition:border-color 140ms ease-out;
+  }
+  input[type=text]:focus-visible{outline:none; border-color:var(--sea)}
+  textarea{
+    width:100%; min-height:96px; resize:vertical;
+    background:#fff; border:2px solid var(--line); border-radius:14px;
+    font-family:Georgia,serif; font-size:var(--fs-body); line-height:1.55; color:var(--ink);
+    padding:12px 14px;
+    transition:border-color 140ms ease-out;
+  }
+  textarea::placeholder{color:#ada088}
+  textarea:focus-visible{outline:none; border-color:var(--sea)}
+  label.flabel{
+    display:block; font-size:var(--fs-tag); font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--soft); margin:16px 0 7px;
+  }
+
+  /* ---- Screens ---- */
+  .screen{display:none}
+  .screen.active{display:block}
+
+  /* ---- Progress ---- */
+  .progress{display:flex; align-items:center; gap:12px; margin:2px 0 14px}
+  .pbar{flex:1; height:8px; background:#E9E2D2; border-radius:999px; overflow:hidden}
+  .pbar span{display:block; height:100%; background:linear-gradient(90deg,var(--sea),var(--deep)); border-radius:999px; width:0%; transition:width 240ms ease-out}
+  .pcount{font-size:12px; font-weight:800; letter-spacing:.08em; color:var(--soft)}
+  .stagetag{
+    display:inline-block; background:var(--deep); color:#fff;
+    font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    padding:6px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .stagetag.warm{background:var(--coral)}
+
+  /* ---- Quiz ---- */
+  .question{
+    font-family:Georgia,serif; font-size:var(--fs-q); line-height:1.55; margin:6px 0 16px; color:var(--ink);
+  }
+  .chips{display:flex; flex-wrap:wrap; gap:9px; margin-bottom:6px}
+  .chip{
+    font:inherit; font-size:13px; font-weight:700; background:var(--card); color:var(--soft);
+    border:2px solid var(--line); padding:11px 16px; min-height:44px; border-radius:999px; cursor:pointer;
+    transition:border-color 140ms ease-out, background-color 140ms ease-out, color 140ms ease-out;
+  }
+  .chip:hover{border-color:var(--sea); color:var(--sea)}
+  .chip[aria-pressed=true]{background:var(--deep); border-color:var(--deep); color:#fff}
+  .chip:focus-visible{outline:3px solid var(--amber); outline-offset:2px}
+
+  /* ---- Results ---- */
+  .scorecard{
+    background:var(--card); border-radius:18px; padding:18px 22px;
+    box-shadow:0 6px 18px rgba(42,36,56,.08); margin:16px 0;
+    display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px;
+  }
+  .scorecard .big{font-family:Georgia,serif; font-style:italic; font-weight:bold; font-size:34px; line-height:1; color:var(--coral)}
+  .scorecard .big.zero{color:var(--green)}
+  .scorecard .lbl{font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--soft); margin-top:3px}
+  .scorecard .note{font-size:var(--fs-micro); color:var(--soft); max-width:34ch}
+  .toggle{
+    display:inline-flex; align-items:center; gap:9px; cursor:pointer; margin-left:auto;
+    font-size:11px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--soft);
+    min-height:44px;
+  }
+  .toggle .box{width:42px; height:24px; background:#E0D8C6; border-radius:999px; position:relative; transition:background-color 160ms ease-out}
+  .toggle .box::after{content:""; position:absolute; top:3px; left:3px; width:18px; height:18px; background:#fff; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,.2); transition:transform 160ms ease-out}
+  .toggle.on .box{background:var(--coral)}
+  .toggle.on .box::after{transform:translateX(18px)}
+  .toggle input{position:absolute; opacity:0; width:0; height:0}
+  .toggle input:focus-visible + .box{outline:3px solid var(--amber); outline-offset:2px}
+
+  .waitbox{
+    background:#F7F2E2; border:2px dashed var(--sun); border-radius:18px;
+    padding:18px 20px; margin:16px 0; color:#6b5a2a; font-size:var(--fs-micro);
+  }
+  .waitbox b{color:#4a3e1c}
+
+  .stage{
+    background:var(--card); border-radius:18px; margin:16px 0; overflow:hidden;
+    box-shadow:0 6px 18px rgba(42,36,56,.08);
+  }
+  .stage.is-diverge{box-shadow:0 0 0 3px var(--amber), 0 10px 24px rgba(42,36,56,.12)}
+  .stage.hidden{display:none}
+  .stage-head{padding:18px 20px 0; display:flex; align-items:flex-start; gap:10px}
+  .stage-head .stagetag{margin-bottom:0}
+  .status{
+    margin-left:auto; font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    padding:6px 12px; border-radius:999px; white-space:nowrap;
+  }
+  .status.pending{background:#E9E2D2; color:#8f8770}
+  .status.aligned{background:#E7EEE3; color:#4E6650}
+  .status.diverge{background:var(--amber); color:#3d3316}
+  .stage .q{font-family:Georgia,serif; font-size:15px; line-height:1.55; margin:12px 20px 6px; color:var(--ink)}
+  .panels{display:grid; grid-template-columns:1fr 1fr; gap:0; margin-top:14px; border-top:2px solid var(--sand)}
+  .panel{padding:16px 20px 18px}
+  .panel + .panel{border-left:2px solid var(--sand)}
+  .panel.mine{background:#F8F4EA}
+  .pname{
+    display:inline-block; font-size:10.5px; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    padding:5px 11px; border-radius:999px; margin:0 0 10px;
+    background:var(--sea); color:#fff;
+  }
+  .panel.mine .pname{background:var(--coral)}
+  .verdict{font-family:Georgia,serif; font-weight:bold; font-size:16px; margin:0 0 6px; color:var(--ink)}
+  .verdict.none{font-weight:normal; font-style:italic; color:#ab9f88}
+  .reason{font-size:var(--fs-micro); color:var(--soft); white-space:pre-wrap; margin:0; line-height:1.55}
+
+  /* ---- Modals ---- */
+  .modal{display:none; position:fixed; inset:0; background:rgba(26,22,40,.60); z-index:20; overflow-y:auto}
+  .modal.open{display:block}
+  .modal-inner{max-width:430px; margin:26px auto; padding:0 16px 40px}
+  .modal .card{
+    border-radius:22px; box-shadow:0 24px 60px rgba(26,22,40,.40); margin-top:0;
+  }
+  #qrTarget{display:flex; justify-content:center; padding:16px; background:#fff; border:2px solid var(--line); border-radius:16px; margin:14px 0}
+  #qrTarget img, #qrTarget canvas{max-width:100%; height:auto}
+  .codefallback{
+    font-family:'Courier New',monospace; font-size:11px; word-break:break-all;
+    background:var(--sand); border:2px solid var(--line); border-radius:12px;
+    padding:11px; max-height:92px; overflow-y:auto; color:var(--soft); margin:10px 0;
+  }
+  video#cam{width:100%; border-radius:16px; background:#1a1628; border:2px solid var(--line)}
+  .msg{font-size:var(--fs-micro); margin-top:10px; min-height:18px}
+  .msg.ok{color:var(--green); font-weight:700}
+  .msg.err{color:var(--coral); font-weight:700}
+
+  /* ---- Bottom bar ---- */
+  .bottombar{
+    position:fixed; left:0; right:0; bottom:0; z-index:10;
+    background:rgba(243,238,227,.94); backdrop-filter:none;
+    border-top:2px solid var(--line);
+    padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+    display:flex; gap:9px; justify-content:center; flex-wrap:wrap;
+  }
+  .bottombar .btn{padding:11px 16px; min-height:44px}
+
+  @media (max-width:560px){
+    .panels{grid-template-columns:1fr}
+    .panel + .panel{border-left:0; border-top:2px solid var(--sand)}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+<!-- SCREEN: INTRO -->
+<section class="screen active" id="scr-intro">
+  <div class="hero">
+    <div class="hero-inner">
+      <span class="kickpill">Nine questions &middot; Two minds</span>
+      <h1>The Thinking Journey</h1>
+      <p class="sub">Puzzles first, then questions with no clean answer. Answer on your own, swap by QR code, and see exactly where the two of you thought differently.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="card">
+      <h2>Before you start</h2>
+      <label class="flabel" for="myName">Your name</label>
+      <input type="text" id="myName" autocomplete="off" placeholder="Who's holding this phone?">
+      <p class="lede" style="margin-top:14px">
+        Pick a verdict, write your reasoning in a sentence or two, and be honest. The comparison at the end only works if both of you mean what you write.
+      </p>
+      <div class="btnrow">
+        <button class="btn solid" id="startBtn">Begin</button>
+        <button class="btn quiet" id="skipToResults">I already answered</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN: QUIZ -->
+<section class="screen" id="scr-quiz">
+  <div class="hero small">
+    <div class="hero-inner">
+      <h1 id="quizTitle">The Thinking Journey</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="progress">
+      <div class="pbar"><span id="pfill"></span></div>
+      <span class="pcount" id="pcount">1 / 9</span>
+    </div>
+    <div class="card">
+      <span class="stagetag" id="quizKicker">Stage 01</span>
+      <p class="question" id="quizQ"></p>
+      <div class="chips" id="quizChips"></div>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px">
+        <label class="flabel" for="quizText" style="margin-bottom:7px">Your reasoning</label>
+        <button class="btn quiet micbtn" id="micBtn" type="button" aria-pressed="false" style="display:none">Speak</button>
+      </div>
+      <textarea id="quizText" placeholder="Why? Type it, or tap Speak and say it."></textarea>
+      <div class="msg" id="micMsg"></div>
+      <div class="btnrow">
+        <button class="btn quiet" id="backBtn">Back</button>
+        <button class="btn solid" id="nextBtn">Next</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCREEN: RESULTS -->
+<section class="screen" id="scr-results">
+  <div class="hero small">
+    <div class="hero-inner">
+      <span class="kickpill">Results</span>
+      <h1 id="resTitle">Side by side</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="scorecard">
+      <div>
+        <div class="big" id="divCount">0</div>
+        <div class="lbl">Divergences</div>
+      </div>
+      <div class="note" id="summaryNote"></div>
+      <label class="toggle" id="filterToggle">
+        <input type="checkbox" id="filterCheck">
+        <span class="box"></span>
+        <span>Only splits</span>
+      </label>
+    </div>
+
+    <div class="waitbox" id="waitBox">
+      Only your side is here so far. Tap <b>Show my QR</b> and let the other person scan it from their copy, or tap <b>Scan theirs</b> to read their code. Once both sides are in, every question shows both answers and the splits get a golden ring.
+    </div>
+
+    <main id="stages"></main>
+  </div>
+</section>
+
+<!-- QR SHOW MODAL -->
+<div class="modal" id="showModal" role="dialog" aria-label="Show my QR code">
+  <div class="modal-inner">
+    <div class="card">
+      <span class="stagetag warm">Show my QR</span>
+      <h2>Let them scan this</h2>
+      <div id="qrTarget"></div>
+      <p class="lede">The other person opens their copy, goes to results, taps <b>Scan theirs</b>, and points the camera here.</p>
+      <label class="flabel">If scanning fails</label>
+      <div class="codefallback" id="codeText"></div>
+      <div class="btnrow">
+        <button class="btn solid" id="copyCodeBtn">Copy code instead</button>
+        <button class="btn quiet" id="closeShow">Close</button>
+      </div>
+      <div class="msg" id="showMsg"></div>
+    </div>
+  </div>
+</div>
+
+<!-- QR SCAN MODAL -->
+<div class="modal" id="scanModal" role="dialog" aria-label="Scan their QR code">
+  <div class="modal-inner">
+    <div class="card">
+      <span class="stagetag">Scan theirs</span>
+      <h2>Point the camera at their screen</h2>
+      <video id="cam" playsinline muted></video>
+      <div class="msg" id="scanMsg"></div>
+      <label class="flabel" for="pasteBox">No camera? Paste their code</label>
+      <textarea id="pasteBox" placeholder="Paste code here" style="min-height:64px;font-family:'Courier New',monospace;font-size:11px"></textarea>
+      <div class="btnrow">
+        <button class="btn solid" id="pasteLoadBtn">Load pasted code</button>
+        <button class="btn quiet" id="closeScan">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom bar (results only) -->
+<div class="bottombar" id="bottomBar" style="display:none">
+  <button class="btn solid" id="showQRBtn">Show my QR</button>
+  <button class="btn" id="scanQRBtn">Scan theirs</button>
+  <button class="btn quiet" id="editBtn">Edit</button>
+  <button class="btn quiet" id="resetBtn">Reset</button>
+</div>
+
+<canvas id="scanCanvas" style="display:none"></canvas>
+
+<script>
+const STAGES = [
+  {id:"s1", tag:"Stage 01 · Puzzle",
+   q:"Three doors. A car behind one, goats behind the others. You pick door one. The host, who knows what is where, opens door three to reveal a goat and offers you a switch to door two. Does switching improve your odds, and why?",
+   opts:["Switch","Stick","Fifty-fifty"]},
+  {id:"s2", tag:"Stage 02 · Puzzle",
+   q:"A man lives on the tenth floor. Every morning he rides the elevator down. Coming home he rides to the seventh and walks the rest up the stairs. Except on rainy days, when he rides all the way to the tenth. Why? Answer before you look anything up.",
+   opts:["Solved it","Solved with a hint","Didn't get it"]},
+  {id:"s3", tag:"Stage 03 · Reflection",
+   q:"You get one extra hour a day, invisible to everyone else, yours alone. What do you actually do with it, every day? Be honest: something meaningful, or rest?",
+   opts:["Something productive","Mostly rest","A mix"]},
+  {id:"s4", tag:"Stage 04 · The wallet",
+   q:"You find a wallet with cash and an ID. Nobody saw you, and you would never be caught. Return it? What if the cash covers a bill you are stressed about? What if the owner is far richer than you? What if they turn out to be a scammer? And if you return it and the scammer later uses it to defraud an elderly couple, was returning it still right?",
+   opts:["Always return it","Depends on the situation","In between"]},
+  {id:"s5", tag:"Stage 05 · The trolley",
+   q:"A runaway train will kill five people. From a footbridge you can stop it only by pushing a large stranger onto the track: he dies, the five live. Do you push? Same stakes, but now you pull a lever sending the train onto a side track where one person stands. Do you pull? If your answers differ, why? The arithmetic is identical.",
+   opts:["Neither","Lever only","Both"]},
+  {id:"s6", tag:"Stage 06 · The doctor",
+   q:"A doctor may give painkillers strong enough to shorten a dying patient's life, because the intent is to ease pain, not to kill. The doctor may not give a lethal dose intending death, even if begged. Sometimes the outcome is identical. Is that distinction real and meaningful, or a technicality we invented to feel better?",
+   opts:["A real distinction","Mostly a technicality","In between"]},
+  {id:"s7", tag:"Stage 07 · The machine",
+   q:"A machine gives you a life of perfect, endless bliss, but none of it is real, and once inside you will never know the difference. By pure outcome you should step in. Do you? If you refuse, what are you protecting that you value more than your own bliss?",
+   opts:["Step in","Refuse","Unsure"]},
+  {id:"s8", tag:"Stage 08 · The economy",
+   q:"Point all of this at economics. The redistributive instinct, take from those with more and give to those who suffer, looks good in intent. Markets are usually defended by outcomes: prosperity, poverty lifted. Which do you back, and are you judging by intent or by outcome? Does a system of billions of repeated actions change which lens is fair?",
+   opts:["Market-leaning","Redistribution-leaning","In between"]},
+  {id:"s9", tag:"Stage 09 · The throughline",
+   q:"Look back across everything. Where did you judge by the act and the intent, and where by the outcome? Do you trust powerful systems on their own, or only with safeguards? In your own words: what is your throughline?",
+   opts:null}
+];
+
+const KEY="journey-qr-v1";
+let state={ myName:"", theirName:"", mine:{}, theirs:null, idx:0, done:false, filter:false };
+let scanStream=null, scanRAF=null;
+
+/* ---------- persistence ----------
+   Two backends, tried in order:
+   1. window.storage  (Claude artifact storage, per account)
+   2. localStorage    (plain browser / hosted page, per device)
+   Every state change is saved; closing the page flushes immediately. */
+async function saveData(json){
+  let ok=false;
+  if(window.storage && window.storage.set){
+    try{ const r=await window.storage.set(KEY, json, false); ok=!!r; }catch(e){}
+  }
+  try{ localStorage.setItem(KEY, json); ok=true; }catch(e){}
+  return ok;
+}
+async function loadData(){
+  if(window.storage && window.storage.get){
+    try{
+      const r=await window.storage.get(KEY,false);
+      if(r&&r.value) return r.value;
+    }catch(e){}
+  }
+  try{
+    const v=localStorage.getItem(KEY);
+    if(v) return v;
+  }catch(e){}
+  return null;
+}
+let saveTimer=null;
+function persist(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{ saveData(JSON.stringify(state)); },300);
+}
+function flushNow(){
+  clearTimeout(saveTimer);
+  saveData(JSON.stringify(state));
+}
+document.addEventListener("visibilitychange",()=>{ if(document.visibilityState==="hidden") flushNow(); });
+window.addEventListener("pagehide",flushNow);
+async function load(){
+  const v=await loadData();
+  if(v){ try{ state=Object.assign(state, JSON.parse(v)); }catch(e){} }
+}
+
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function esc(s){return (s||"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function mine(id){ state.mine[id]=state.mine[id]||{v:null,t:""}; return state.mine[id]; }
+
+function show(screen){
+  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+  $(screen).classList.add("active");
+  $("bottomBar").style.display = screen==="scr-results" ? "flex" : "none";
+  window.scrollTo(0,0);
+}
+
+/* ---------- quiz ---------- */
+function renderQuiz(){
+  const st=STAGES[state.idx];
+  $("quizKicker").textContent=st.tag;
+  $("pfill").style.width=((state.idx)/STAGES.length*100)+"%";
+  $("pcount").textContent=(state.idx+1)+" / "+STAGES.length;
+  $("quizQ").textContent=st.q;
+  const a=mine(st.id);
+  const chips=$("quizChips");
+  if(st.opts){
+    chips.style.display="flex";
+    chips.innerHTML=st.opts.map(o=>
+      `<button class="chip" data-opt="${esc(o)}" aria-pressed="${a.v===o}">${esc(o)}</button>`
+    ).join("");
+    chips.querySelectorAll(".chip").forEach(c=>{
+      c.addEventListener("click",()=>{
+        a.v = (a.v===c.dataset.opt)?null:c.dataset.opt;
+        persist(); renderQuiz();
+      });
+    });
+  }else{
+    chips.style.display="none"; chips.innerHTML="";
+  }
+  $("quizText").value=a.t;
+  $("micBtn").style.display = micSupported() ? "inline-block" : "none";
+  if(listening) stopMic();
+  $("micMsg").textContent="";
+  $("backBtn").style.visibility = state.idx===0 ? "hidden":"visible";
+  $("nextBtn").textContent = state.idx===STAGES.length-1 ? "Finish" : "Next";
+  $("nextBtn").disabled = !!st.opts && !a.v;
+}
+
+/* ---------- results ---------- */
+function verdictHTML(a){
+  if(!a || (!a.v && !a.t)) return `<p class="verdict none">No answer</p>`;
+  let h="";
+  if(a.v) h+=`<p class="verdict">${esc(a.v)}</p>`;
+  if(a.t) h+=`<p class="reason">${esc(a.t)}</p>`;
+  return h || `<p class="verdict none">No answer</p>`;
+}
+function statusFor(st){
+  if(!st.opts) return {cls:"pending",label:"Compare"};
+  const a=state.mine[st.id]&&state.mine[st.id].v;
+  const b=state.theirs&&state.theirs[st.id]&&state.theirs[st.id].v;
+  if(!a||!b) return {cls:"pending",label:"Waiting"};
+  return a===b ? {cls:"aligned",label:"Aligned"} : {cls:"diverge",label:"Split"};
+}
+function renderResults(){
+  const both = !!state.theirs;
+  $("waitBox").style.display = both ? "none":"block";
+  $("resTitle").textContent = both
+    ? (state.myName||"You")+" & "+(state.theirName||"them")
+    : "Your answers";
+  let div=0, compared=0;
+  const html=STAGES.map(st=>{
+    const s=statusFor(st);
+    if(s.cls==="diverge") div++;
+    if(s.cls==="diverge"||s.cls==="aligned") compared++;
+    const hide = state.filter && s.cls!=="diverge";
+    return `
+    <section class="stage ${s.cls==="diverge"?"is-diverge":""} ${hide?"hidden":""}">
+      <div class="stage-head">
+        <span class="stagetag">${esc(st.tag)}</span>
+        <span class="status ${s.cls}">${s.label}</span>
+      </div>
+      <p class="q">${esc(st.q)}</p>
+      <div class="panels">
+        <div class="panel mine">
+          <span class="pname">${esc(state.myName||"You")}</span>
+          ${verdictHTML(state.mine[st.id])}
+        </div>
+        <div class="panel">
+          <span class="pname">${esc(state.theirName|| (both?"Them":"Waiting"))}</span>
+          ${both ? verdictHTML(state.theirs[st.id]) : `<p class="verdict none">Not imported yet</p>`}
+        </div>
+      </div>
+    </section>`;
+  }).join("");
+  $("stages").innerHTML=html;
+  const dc=$("divCount");
+  dc.textContent=div;
+  dc.classList.toggle("zero", both && div===0 && compared>0);
+  const note=$("summaryNote");
+  if(!both){ note.textContent="Waiting for the other side. Swap QR codes below."; }
+  else if(compared===0){ note.textContent="No comparable verdicts yet."; }
+  else if(div===0){ note.textContent="Aligned on all "+compared+" compared. Remarkably in sync."; }
+  else { note.textContent="You split on "+div+" of "+compared+". Look for the golden rings."; }
+}
+
+/* ---------- QR share ---------- */
+function buildPayload(){
+  const a={};
+  STAGES.forEach(st=>{
+    const m=state.mine[st.id];
+    if(!m||(!m.v&&!m.t)) return;
+    a[st.id]={v:m.v||null,t:(m.t||"").slice(0,350)};
+  });
+  return {n:(state.myName||"").slice(0,30), a:a};
+}
+function encodePayload(){
+  let p=buildPayload();
+  let code=LZString.compressToBase64(JSON.stringify(p));
+  let cap=350;
+  while(code.length>1900 && cap>60){
+    cap-=60;
+    Object.values(p.a).forEach(x=>{ x.t=(x.t||"").slice(0,cap); });
+    code=LZString.compressToBase64(JSON.stringify(p));
+  }
+  return code;
+}
+function decodePayload(code){
+  const json=LZString.decompressFromBase64(code.trim());
+  if(!json) throw new Error("decode");
+  const p=JSON.parse(json);
+  if(!p.a) throw new Error("shape");
+  return p;
+}
+function openShow(){
+  const code=encodePayload();
+  const target=$("qrTarget");
+  target.innerHTML="";
+  new QRCode(target,{text:code,width:300,height:300,correctLevel:QRCode.CorrectLevel.L});
+  $("codeText").textContent=code;
+  $("showMsg").textContent="";
+  $("showModal").classList.add("open");
+}
+function importPayload(p){
+  state.theirs=p.a;
+  state.theirName=p.n||"Them";
+  persist();
+  renderResults();
+}
+
+/* ---------- QR scan ---------- */
+async function openScan(){
+  $("scanMsg").className="msg"; $("scanMsg").textContent="Starting camera";
+  $("pasteBox").value="";
+  $("scanModal").classList.add("open");
+  const video=$("cam");
+  try{
+    scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:"environment"}});
+    video.srcObject=scanStream;
+    await video.play();
+    $("scanMsg").textContent="Looking for a code";
+    scanLoop();
+  }catch(e){
+    $("scanMsg").className="msg err";
+    $("scanMsg").textContent="Camera unavailable here. Use the paste box: on their phone, tap Copy code instead, and send it to you.";
+  }
+}
+function scanLoop(){
+  const video=$("cam"), canvas=$("scanCanvas");
+  const tick=()=>{
+    if(!scanStream) return;
+    if(video.readyState===video.HAVE_ENOUGH_DATA){
+      canvas.width=video.videoWidth; canvas.height=video.videoHeight;
+      const ctx=canvas.getContext("2d");
+      ctx.drawImage(video,0,0,canvas.width,canvas.height);
+      const img=ctx.getImageData(0,0,canvas.width,canvas.height);
+      const res=jsQR(img.data,img.width,img.height,{inversionAttempts:"dontInvert"});
+      if(res && res.data){
+        try{
+          const p=decodePayload(res.data);
+          stopScan();
+          importPayload(p);
+          $("scanModal").classList.remove("open");
+          return;
+        }catch(e){ /* not our code, keep looking */ }
+      }
+    }
+    scanRAF=requestAnimationFrame(tick);
+  };
+  scanRAF=requestAnimationFrame(tick);
+}
+function stopScan(){
+  if(scanRAF) cancelAnimationFrame(scanRAF);
+  scanRAF=null;
+  if(scanStream){ scanStream.getTracks().forEach(t=>t.stop()); scanStream=null; }
+  $("cam").srcObject=null;
+}
+
+/* ---------- voice input ----------
+   Uses the browser's SpeechRecognition when available (Chrome, Edge,
+   Safari on HTTPS). Where it is not available, the button stays hidden
+   and the phone keyboard's own dictation mic still works in the box. */
+let recog=null, listening=false;
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function micSupported(){ return !!SR; }
+function setMicUI(on){
+  listening=on;
+  const b=$("micBtn");
+  b.setAttribute("aria-pressed", on?"true":"false");
+  b.textContent = on ? "Listening" : "Speak";
+}
+function startMic(){
+  if(!SR) return;
+  recog=new SR();
+  recog.lang=navigator.language||"en-US";
+  recog.continuous=true;
+  recog.interimResults=false;
+  recog.onresult=(ev)=>{
+    let heard="";
+    for(let i=ev.resultIndex;i<ev.results.length;i++){
+      if(ev.results[i].isFinal) heard+=ev.results[i][0].transcript;
+    }
+    if(heard){
+      const t=$("quizText");
+      const sep=t.value && !/\s$/.test(t.value) ? " " : "";
+      t.value=t.value+sep+heard.trim();
+      mine(STAGES[state.idx].id).t=t.value;
+      persist();
+    }
+  };
+  recog.onerror=(ev)=>{
+    setMicUI(false);
+    const m=$("micMsg"); m.className="msg err";
+    m.textContent = ev.error==="not-allowed"
+      ? "Microphone blocked here. Use the mic on your keyboard instead."
+      : "Voice input stopped. Tap Speak to try again, or use the keyboard mic.";
+  };
+  recog.onend=()=>{ if(listening) setMicUI(false); };
+  try{
+    recog.start();
+    setMicUI(true);
+    const m=$("micMsg"); m.className="msg"; m.textContent="Listening. Speak, then tap again to stop.";
+  }catch(e){
+    setMicUI(false);
+  }
+}
+function stopMic(){
+  if(recog){ try{ recog.stop(); }catch(e){} }
+  setMicUI(false);
+  $("micMsg").textContent="";
+}
+document.getElementById("micBtn").addEventListener("click",()=>{
+  listening ? stopMic() : startMic();
+});
+
+/* ---------- wiring ---------- */
+$("startBtn").addEventListener("click",()=>{
+  state.myName=$("myName").value.trim()||"Me";
+  state.idx=0; persist();
+  show("scr-quiz"); renderQuiz();
+});
+$("skipToResults").addEventListener("click",()=>{
+  state.myName=$("myName").value.trim()||state.myName||"Me";
+  state.done=true; persist();
+  show("scr-results"); renderResults();
+});
+$("nextBtn").addEventListener("click",()=>{
+  const st=STAGES[state.idx];
+  mine(st.id).t=$("quizText").value;
+  if(state.idx<STAGES.length-1){
+    state.idx++; persist(); renderQuiz();
+  }else{
+    state.done=true; persist();
+    show("scr-results"); renderResults();
+  }
+});
+$("backBtn").addEventListener("click",()=>{
+  mine(STAGES[state.idx].id).t=$("quizText").value;
+  if(state.idx>0){ state.idx--; persist(); renderQuiz(); }
+});
+$("quizText").addEventListener("input",()=>{
+  mine(STAGES[state.idx].id).t=$("quizText").value; persist();
+});
+
+$("showQRBtn").addEventListener("click",openShow);
+$("closeShow").addEventListener("click",()=>$("showModal").classList.remove("open"));
+$("copyCodeBtn").addEventListener("click",async ()=>{
+  const msg=$("showMsg");
+  try{ await navigator.clipboard.writeText($("codeText").textContent); msg.className="msg ok"; msg.textContent="Copied. Send it any way you like."; }
+  catch(e){ msg.className="msg err"; msg.textContent="Copy blocked. Long-press the code text and copy manually."; }
+});
+
+$("scanQRBtn").addEventListener("click",openScan);
+$("closeScan").addEventListener("click",()=>{ stopScan(); $("scanModal").classList.remove("open"); });
+$("pasteLoadBtn").addEventListener("click",()=>{
+  const msg=$("scanMsg");
+  try{
+    const p=decodePayload($("pasteBox").value);
+    stopScan();
+    importPayload(p);
+    $("scanModal").classList.remove("open");
+  }catch(e){
+    msg.className="msg err"; msg.textContent="That code did not read correctly. Make sure the whole code was copied.";
+  }
+});
+
+$("editBtn").addEventListener("click",()=>{ state.idx=0; persist(); show("scr-quiz"); renderQuiz(); });
+$("resetBtn").addEventListener("click",()=>{
+  if(!confirm("Clear all answers on this device? The other person's copy is not affected.")) return;
+  state={myName:"",theirName:"",mine:{},theirs:null,idx:0,done:false,filter:false};
+  $("myName").value="";
+  if(window.storage && window.storage.delete){ try{ window.storage.delete(KEY,false); }catch(e){} }
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  flushNow(); show("scr-intro");
+});
+
+$("filterCheck").addEventListener("change",()=>{
+  state.filter=$("filterCheck").checked;
+  $("filterToggle").classList.toggle("on",state.filter);
+  persist(); renderResults();
+});
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){
+    stopScan();
+    $("showModal").classList.remove("open");
+    $("scanModal").classList.remove("open");
+  }
+});
+
+/* ---------- boot ---------- */
+(async function(){
+  await load();
+  if(state.myName) $("myName").value=state.myName;
+  $("filterCheck").checked=state.filter;
+  $("filterToggle").classList.toggle("on",state.filter);
+  if(state.done){ show("scr-results"); renderResults(); }
+  else if(state.idx>0){ show("scr-quiz"); renderQuiz(); }
+})();
+</script>
+</body>
+</html>
