@@ -268,6 +268,7 @@
       <span class="stagetag" id="quizKicker">Stage 01</span>
       <p class="question" id="quizQ"></p>
       <div class="chips" id="quizChips"></div>
+      <div class="msg" id="stepMsg"></div>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px">
         <label class="flabel" for="quizText" style="margin-bottom:7px">Your reasoning</label>
         <button class="btn quiet micbtn" id="micBtn" type="button" aria-pressed="false" style="display:none">Speak</button>
@@ -482,7 +483,8 @@ function renderQuiz(){
   $("micMsg").textContent="";
   $("backBtn").style.visibility = state.idx===0 ? "hidden":"visible";
   $("nextBtn").textContent = state.idx===STAGES.length-1 ? "Finish" : "Next";
-  $("nextBtn").disabled = !!st.opts && !a.v;
+  $("nextBtn").disabled = false;
+  $("stepMsg").textContent="";
 }
 
 /* ---------- results ---------- */
@@ -720,6 +722,12 @@ $("skipToResults").addEventListener("click",()=>{
 $("nextBtn").addEventListener("click",()=>{
   const st=STAGES[state.idx];
   mine(st.id).t=$("quizText").value;
+  if(st.opts && !mine(st.id).v){
+    const m=$("stepMsg"); m.className="msg err";
+    m.textContent="Pick one of the options above first, then tap Next.";
+    persist();
+    return;
+  }
   if(state.idx<STAGES.length-1){
     state.idx++; persist(); renderQuiz();
   }else{
